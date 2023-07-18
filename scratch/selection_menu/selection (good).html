@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Programming Examples</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Programming Examples</h1>
+    
+    <label for="groups">Select groups:</label>
+    <div id="groupCheckboxes">
+        <input type="checkbox" id="groupAll" value="all" checked>
+        <label for="groupAll">All</label>
+        <br>
+        <input type="checkbox" id="groupBeginner" value="beginner">
+        <label for="groupBeginner">Beginner</label>
+        <br>
+        <input type="checkbox" id="groupIntermediate" value="intermediate">
+        <label for="groupIntermediate">Intermediate</label>
+        <br>
+        <input type="checkbox" id="groupAdvanced" value="advanced">
+        <label for="groupAdvanced">Advanced</label>
+        <!-- Add more groups here -->
+    </div>
+    
+    <select id="groupSelect" multiple>
+        <option value="all" selected>All</option>
+        <option value="beginner">Beginner</option>
+        <option value="intermediate">Intermediate</option>
+        <option value="advanced">Advanced</option>
+        <!-- Add more groups here -->
+    </select>
+    
+    <table id="exampleTable">
+        <thead>
+            <tr>
+                <th>Example</th>
+                <th data-language="python">Python</th>
+                <th data-language="javascript">JavaScript</th>
+                <th data-language="java">Java</th>
+                <!-- Add more programming languages here -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-groups="beginner">
+                <td>Hello, World!</td>
+                <td data-language="python">print("Hello, World!")</td>
+                <td data-language="javascript">console.log("Hello, World!");</td>
+                <td data-language="java">System.out.println("Hello, World!");</td>
+                <!-- Add more rows here -->
+            </tr>
+            <tr data-groups="beginner">
+                <td>Hello, World!</td>
+                <td data-language="python">print("Hello, World!")</td>
+                <td data-language="javascript">console.log("Hello, World!");</td>
+                <td data-language="java">System.out.println("Hello, World!");</td>
+            </tr>
+            <tr data-groups="intermediate">
+                <td>Hello, World!</td>
+                <td data-language="python">print("Hello, World!")</td>
+                <td data-language="javascript">console.log("Hello, World!");</td>
+                <td data-language="java">System.out.println("Hello, World!");</td>
+            </tr>
+            <tr data-groups="intermediate">
+                <td>Hello, World!</td>
+                <td data-language="python">print("Hello, World!")</td>
+                <td data-language="javascript">console.log("Hello, World!");</td>
+                <td data-language="java">System.out.println("Hello, World!");</td>
+            </tr>
+            <tr data-groups="advanced">
+                <td>Hello, World!</td>
+                <td data-language="python">print("Hello, World!")</td>
+                <td data-language="javascript">console.log("Hello, World!");</td>
+                <td data-language="java">System.out.println("Hello, World!");</td>
+            </tr>
+            <tr data-groups="advanced">
+                <td>Hello, World!</td>
+                <td data-language="python">print("Hello, World!")</td>
+                <td data-language="javascript">console.log("Hello, World!");</td>
+                <td data-language="java">System.out.println("Hello, World!");</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <script>
+        // Get reference to the group checkboxes, group select element, and the example table
+        var groupCheckboxes = document.querySelectorAll('#groupCheckboxes input[type="checkbox"]');
+        var groupSelect = document.getElementById('groupSelect');
+        var table = document.getElementById('exampleTable');
+        
+        // Add event listeners to the group checkboxes and group select element
+        groupCheckboxes.forEach(function(checkbox) {
+            checkbox.addEventListener('change', filterExamples);
+        });
+        
+        groupSelect.addEventListener('change', filterExamples);
+        
+        // Function to filter the examples based on the selected groups
+        function filterExamples() {
+            // Get the selected groups
+            var selectedGroups = Array.from(groupSelect.selectedOptions, option => option.value);
+            
+            // Show or hide table rows based on the selected groups
+            Array.from(table.tBodies[0].rows).forEach(function(row) {
+                var groups = row.getAttribute('data-groups').toLowerCase().split(' ');
+                
+                var shouldShow = selectedGroups.includes('all') || groups.some(function(group) {
+                    return selectedGroups.includes(group);
+                });
+                
+                row.style.display = shouldShow ? 'table-row' : 'none';
+            });
+            
+            // Update the group checkboxes based on the selected groups in the dropdown
+            groupCheckboxes.forEach(function(checkbox) {
+                checkbox.checked = selectedGroups.includes(checkbox.value) || selectedGroups.includes('all');
+            });
+        }
+    </script>
+</body>
+</html>

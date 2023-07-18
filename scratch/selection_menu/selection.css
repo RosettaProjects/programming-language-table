@@ -1,0 +1,32 @@
+.multipleSelect {
+  width: 130px;
+}
+
+.selectBox {
+  position: relative;
+}
+
+.selectBox select {
+  width: auto;
+}
+
+.selectionBox {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+#multipleCheckbox {
+  display: none;
+  border: 1px solid;
+}
+
+#multipleCheckbox label {
+  display: block;
+}
+
+#multipleCheckbox label:hover {
+  background-color: #42ecf5;
+}

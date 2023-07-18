@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Table with Hidden Columns and Groups</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        .hidden-column {
+            display: none;
+        }
+
+        .hidden-group {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Table with Hidden Columns and Groups</h1>
+
+    <label for="columnDropdown">Select columns:</label>
+    <select id="columnDropdown" multiple>
+        <option value="1">Column 1</option>
+        <option value="2">Column 2</option>
+        <option value="3">Column 3</option>
+        <option value="4">Column 4</option>
+        <option value="5">Column 5</option>
+    </select>
+
+    <label for="groupDropdown">Select groups:</label>
+    <select id="groupDropdown" multiple>
+        <option value="1">Group 1</option>
+        <option value="2">Group 2</option>
+        <option value="3">Group 3</option>
+        <option value="4">Group 4</option>
+        <option value="5">Group 5</option>
+    </select>
+
+    <table id="exampleTable">
+        <thead>
+            <tr>
+                <th>Groups / Columns</th>
+                <th data-column="1">Column 1</th>
+                <th data-column="2">Column 2</th>
+                <th data-column="3">Column 3</th>
+                <th data-column="4">Column 4</th>
+                <th data-column="5">Column 5</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="group-header">
+                <th>Group 1</th>
+                <td data-column="1">Row 1, Col 1</td>
+                <td data-column="2">Row 1, Col 2</td>
+                <td data-column="3">Row 1, Col 3</td>
+                <td data-column="4">Row 1, Col 4</td>
+                <td data-column="5">Row 1, Col 5</td>
+            </tr>
+            <tr class="group-row">
+                <td data-group="1">Row 2, Group 1</td>
+                <td data-column="1">Data 1</td>
+                <td data-column="2">Data 2</td>
+                <td data-column="3">Data 3</td>
+                <td data-column="4">Data 4</td>
+                <td data-column="5">Data 5</td>
+            </tr>
+            <tr class="group-row">
+                <td data-group="1">Row 3, Group 1</td>
+                <td data-column="1">Data 6</td>
+                <td data-column="2">Data 7</td>
+                <td data-column="3">Data 8</td>
+                <td data-column="4">Data 9</td>
+                <td data-column="5">Data 10</td>
+            </tr>
+            <tr class="group-row">
+                <td data-group="1">Row 4, Group 1</td>
+                <td data-column="1">Data 11</td>
+                <td data-column="2">Data 12</td>
+                <td data-column="3">Data 13</td>
+                <td data-column="4">Data 14</td>
+                <td data-column="5">Data 15</td>
+            </tr>
+
+            <!-- Repeat the above pattern for the remaining groups and rows -->
+            
+            <!-- Group 2 and its rows -->
+            
+            <tr class="group-header">
+                <th>Group 2</th>
+                <td data-column="1">Row 1, Col 1</td>
+                <td data-column="2">Row 1, Col 2</td>
+                <td data-column="3">Row 1, Col 3</td>
+                <td data-column="4">Row 1, Col 4</td>
+                <td data-column="5">Row 1, Col 5</td>
+            </tr>
+            <tr class="group-row">
+                <td data-group="2">Row 2, Group 2</td>
+                <td data-column="1">Data 16</td>
+                <td data-column="2">Data 17</td>
+                <td data-column="3">Data 18</td>
+                <td data-column="4">Data 19</td>
+                <td data-column="5">Data 20</td>
+            </tr>
+            <tr class="group-row">
+                <td data-group="2">Row 3, Group 2</td>
+                <td data-column="1">Data 21</td>
+                <td data-column="2">Data 22</td>
+                <td data-column="3">Data 23</td>
+                <td data-column="4">Data 24</td>
+                <td data-column="5">Data 25</td>
+            </tr>
+            <tr class="group-row">
+                <td data-group="2">Row 4, Group 2</td>
+                <td data-column="1">Data 26</td>
+                <td data-column="2">Data 27</td>
+                <td data-column="3">Data 28</td>
+                <td data-column="4">Data 29</td>
+                <td data-column="5">Data 30</td>
+            </tr>
+
+            <!-- Repeat the above pattern for the remaining groups and rows -->
+
+            <tr class="group-header">
+                <th>Group 3</th>
+                <td data-column="1">Row 1, Col 1</td>
+                <td data-column="2">Row 1, Col 2</td>
+                <td data-column="3">Row 1, Col 3</td>
+                <td data-column="4">Row 1, Col 4</td>
+                <td data-column="5">Row 1, Col 5</td>
+            </tr>
+            <tr class="group-row">
+                <td data-group="3">Row 2, Group 2</td>
+                <td data-column="1">Data 16</td>
+                <td data-column="2">Data 17</td>
+                <td data-column="3">Data 18</td>
+                <td data-column="4">Data 19</td>
+                <td data-column="5">Data 20</td>
+            </tr>
+            <tr class="group-row">
+                <td data-group="3">Row 3, Group 2</td>
+                <td data-column="1">Data 21</td>
+                <td data-column="2">Data 22</td>
+                <td data-column="3">Data 23</td>
+                <td data-column="4">Data 24</td>
+                <td data-column="5">Data 25</td>
+            </tr>
+            <tr class="group-row">
+                <td data-group="3">Row 4, Group 2</td>
+                <td data-column="1">Data 26</td>
+                <td data-column="2">Data 27</td>
+                <td data-column="3">Data 28</td>
+                <td data-column="4">Data 29</td>
+                <td data-column="5">Data 30</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        // Get references to the dropdown menus and the example table
+        var columnDropdown = document.getElementById('columnDropdown');
+        var groupDropdown = document.getElementById('groupDropdown');
+        var table = document.getElementById('exampleTable');
+
+        // Add event listener to the column dropdown menu
+        columnDropdown.addEventListener('change', toggleColumns);
+
+        // Add event listener to the group dropdown menu
+        groupDropdown.addEventListener('change', toggleGroups);
+
+        // Function to toggle the visibility of columns
+        function toggleColumns() {
+            var selectedColumns = Array.from(columnDropdown.selectedOptions, option => option.value);
+
+            Array.from(table.querySelectorAll('th, td')).forEach(function(cell) {
+                var column = cell.getAttribute('data-column');
+                cell.classList.toggle('hidden-column', !selectedColumns.includes(column));
+            });
+        }
+
+        // Function to toggle the visibility of groups of rows
+        function toggleGroups() {
+            var selectedGroups = Array.from(groupDropdown.selectedOptions, option => option.value);
+
+            Array.from(table.querySelectorAll('.group-header, .group-row')).forEach(function(row) {
+                var group = row.querySelector('td[data-group]');
+                row.classList.toggle('hidden-group', !selectedGroups.includes(group.getAttribute('data-group')));
+            });
+        }
+    </script>
+</body>
+</html>

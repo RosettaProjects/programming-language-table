@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Programming Examples</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Programming Examples</h1>
+    
+    <label for="groups">Select groups:</label>
+    <select id="groups">
+        <option value="all">All</option>
+        <option value="beginner">Beginner</option>
+        <option value="intermediate">Intermediate</option>
+        <option value="advanced">Advanced</option>
+        <!-- Add more groups here -->
+    </select>
+    
+    <table id="exampleTable">
+        <thead>
+            <tr>
+                <th>Example</th>
+                <th data-language="python">Python</th>
+                <th data-language="javascript">JavaScript</th>
+                <th data-language="java">Java</th>
+                <!-- Add more programming languages here -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td data-group="beginner">Hello, World!</td>
+                <td data-language="python">print("Hello, World!")</td>
+                <td data-language="javascript">console.log("Hello, World!");</td>
+                <td data-language="java">System.out.println("Hello, World!");</td>
+                <!-- Add more rows here -->
+            </tr>
+            <tr>
+                <td data-group="beginner">Hello, World!</td>
+                <td data-language="python">print("Hello, World!")</td>
+                <td data-language="javascript">console.log("Hello, World!");</td>
+                <td data-language="java">System.out.println("Hello, World!");</td>
+                <!-- Add more rows here -->
+            </tr>
+            <tr>
+                <td data-group="intermediate">Hello, World!</td>
+                <td data-language="python">print("Hello, World!")</td>
+                <td data-language="javascript">console.log("Hello, World!");</td>
+                <td data-language="java">System.out.println("Hello, World!");</td>
+                <!-- Add more rows here -->
+            </tr>
+            <tr>
+                <td data-group="intermediate">Hello, World!</td>
+                <td data-language="python">print("Hello, World!")</td>
+                <td data-language="javascript">console.log("Hello, World!");</td>
+                <td data-language="java">System.out.println("Hello, World!");</td>
+                <!-- Add more rows here -->
+            </tr>
+            <tr>
+                <td data-group="advanced">Hello, World!</td>
+                <td data-language="python">print("Hello, World!")</td>
+                <td data-language="javascript">console.log("Hello, World!");</td>
+                <td data-language="java">System.out.println("Hello, World!");</td>
+                <!-- Add more rows here -->
+            </tr>
+            <tr>
+                <td data-group="advanced">Hello, World!</td>
+                <td data-language="python">print("Hello, World!")</td>
+                <td data-language="javascript">console.log("Hello, World!");</td>
+                <td data-language="java">System.out.println("Hello, World!");</td>
+                <!-- Add more rows here -->
+            </tr>
+        </tbody>
+    </table>
+    
+    <script>
+        // Get reference to the group select element and the example table
+        var groupSelect = document.getElementById('groups');
+        var table = document.getElementById('exampleTable');
+        
+        // Add event listener to the group select element
+        groupSelect.addEventListener('change', filterExamples);
+        
+        // Function to filter the examples based on the selected group
+        function filterExamples() {
+            var selectedGroup = groupSelect.value;
+            
+            // Show or hide table cells based on the selected group
+            Array.from(table.tBodies[0].rows).forEach(row => {
+                var group = row.cells[0].getAttribute('data-group').toLowerCase();
+                var cells = row.cells;
+                
+                for (var i = 1; i < cells.length; i++) {
+                    var language = cells[i].getAttribute('data-language');
+                    
+                    var shouldShow = selectedGroup === 'all' || group === selectedGroup;
+                    
+                    cells[i].style.display = shouldShow ? 'table-cell' : 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

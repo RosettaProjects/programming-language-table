@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Programming Examples</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        /* CSS class to hide columns */
+        .hidden-column {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Programming Examples</h1>
+    
+    <label for="groups">Select groups:</label>
+    <div id="groupCheckboxes">
+        <input type="checkbox" id="groupAll" value="all" checked>
+        <label for="groupAll">All</label>
+        <br>
+        <input type="checkbox" id="groupBeginner" value="beginner">
+        <label for="groupBeginner">Beginner</label>
+        <br>
+        <input type="checkbox" id="groupIntermediate" value="intermediate">
+        <label for="groupIntermediate">Intermediate</label>
+        <br>
+        <input type="checkbox" id="groupAdvanced" value="advanced">
+        <label for="groupAdvanced">Advanced</label>
+        <!-- Add more groups here -->
+    </div>
+    
+    <select id="groupSelect" multiple>
+        <option value="all" selected>All</option>
+        <option value="beginner">Beginner</option>
+        <option value="intermediate">Intermediate</option>
+        <option value="advanced">Advanced</option>
+        <!-- Add more groups here -->
+    </select>
+    
+    <table id="exampleTable">
+        <thead>
+            <tr>
+                <th>Example</th>
+                <th data-language="python">Python</th>
+                <th data-language="javascript">JavaScript</th>
+                <th data-language="java">Java</th>
+                <!-- Add more programming languages here -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="group-header">
+                <th>Group 1</th>
+                <td data-column="1">Row 1, Col 1</td>
+                <td data-column="2">Row 1, Col 2</td>
+                <td data-column="3">Row 1, Col 3</td>
+                <td data-column="4">Row 1, Col 4</td>
+                <td data-column="5">Row 1, Col 5</td>
+            </tr>
+            <tr class="group-row">
+                <td data-group="1">Row 2, Group 1</td>
+                <td data-column="1">Data 1</td>
+                <td data-column="2">Data 2</td>
+                <td data-column="3">Data 3</td>
+                <td data-column="4">Data 4</td>
+                <td data-column="5">Data 5</td>
+            </tr>
+            <tr class="group-row">
+                <td data-group="1">Row 3, Group 1</td>
+                <td data-column="1">Data 6</td>
+                <td data-column="2">Data 7</td>
+                <td data-column="3">Data 8</td>
+                <td data-column="4">Data 9</td>
+                <td data-column="5">Data 10</td>
+            </tr>
+            <tr class="group-row">
+                <td data-group="1">Row 4, Group 1</td>
+                <td data-column="1">Data 11</td>
+                <td data-column="2">Data 12</td>
+                <td data-column="3">Data 13</td>
+                <td data-column="4">Data 14</td>
+                <td data-column="5">Data 15</td>
+            </tr>
+
+            <!-- Repeat the above pattern for the remaining groups and rows -->
+            
+            <!-- Group 2 and its rows -->
+            
+            <tr class="group-header">
+                <th>Group 2</th>
+                <td data-column="1">Row 1, Col 1</td>
+                <td data-column="2">Row 1, Col 2</td>
+                <td data-column="3">Row 1, Col 3</td>
+                <td data-column="4">Row 1, Col 4</td>
+                <td data-column="5">Row 1, Col 5</td>
+            </tr>
+            <tr class="group-row">
+                <td data-group="2">Row 2, Group 2</td>
+                <td data-column="1">Data 16</td>
+                <td data-column="2">Data 17</td>
+                <td data-column="3">Data 18</td>
+                <td data-column="4">Data 19</td>
+                <td data-column="5">Data 20</td>
+            </tr>
+            <tr class="group-row">
+                <td data-group="2">Row 3, Group 2</td>
+                <td data-column="1">Data 21</td>
+                <td data-column="2">Data 22</td>
+                <td data-column="3">Data 23</td>
+                <td data-column="4">Data 24</td>
+                <td data-column="5">Data 25</td>
+            </tr>
+            <tr class="group-row">
+                <td data-group="2">Row 4, Group 2</td>
+                <td data-column="1">Data 26</td>
+                <td data-column="2">Data 27</td>
+                <td data-column="3">Data 28</td>
+                <td data-column="4">Data 29</td>
+                <td data-column="5">Data 30</td>
+            </tr>
+
+            <!-- Repeat the above pattern for the remaining groups and rows -->
+
+            <tr class="group-header">
+                <th>Group 3</th>
+                <td data-column="1">Row 1, Col 1</td>
+                <td data-column="2">Row 1, Col 2</td>
+                <td data-column="3">Row 1, Col 3</td>
+                <td data-column="4">Row 1, Col 4</td>
+                <td data-column="5">Row 1, Col 5</td>
+            </tr>
+            <tr class="group-row">
+                <td data-group="3">Row 2, Group 2</td>
+                <td data-column="1">Data 16</td>
+                <td data-column="2">Data 17</td>
+                <td data-column="3">Data 18</td>
+                <td data-column="4">Data 19</td>
+                <td data-column="5">Data 20</td>
+            </tr>
+            <tr class="group-row">
+                <td data-group="3">Row 3, Group 2</td>
+                <td data-column="1">Data 21</td>
+                <td data-column="2">Data 22</td>
+                <td data-column="3">Data 23</td>
+                <td data-column="4">Data 24</td>
+                <td data-column="5">Data 25</td>
+            </tr>
+            <tr class="group-row">
+                <td data-group="3">Row 4, Group 2</td>
+                <td data-column="1">Data 26</td>
+                <td data-column="2">Data 27</td>
+                <td data-column="3">Data 28</td>
+                <td data-column="4">Data 29</td>
+                <td data-column="5">Data 30</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <script>
+        // Get reference to the group checkboxes, group select element, and the example table
+        var groupCheckboxes = document.querySelectorAll('#groupCheckboxes input[type="checkbox"]');
+        var groupSelect = document.getElementById('groupSelect');
+        var table = document.getElementById('exampleTable');
+        var headers = document.querySelectorAll('#exampleTable th[data-language]');
+        
+        // Add event listeners to the group checkboxes and group select element
+        groupCheckboxes.forEach(function (checkbox) {
+            checkbox.addEventListener('change', filterExamples);
+        });
+        
+        groupSelect.addEventListener('change', filterExamples);
+        
+        // Add click event listener to each header cell
+        headers.forEach(function (header) {
+            header.addEventListener('click', toggleColumn);
+        });
+        
+        // Function to filter the examples based on the selected groups
+        function filterExamples() {
+            // Get the selected groups
+            var selectedGroups = Array.from(groupSelect.selectedOptions, option => option.value);
+            
+            // Show or hide table rows based on the selected groups
+            Array.from(table.tBodies[0].rows).forEach(function (row) {
+                var groups = row.getAttribute('data-groups').toLowerCase().split(' ');
+                
+                var shouldShow = selectedGroups.includes('all') || groups.some(function (group) {
+                    return selectedGroups.includes(group);
+                });
+                
+                row.style.display = shouldShow ? 'table-row' : 'none';
+            });
+            
+            // Update the group checkboxes based on the selected groups in the dropdown
+            groupCheckboxes.forEach(function (checkbox) {
+                checkbox.checked = selectedGroups.includes(checkbox.value) || selectedGroups.includes('all');
+            });
+        }
+        
+        // Function to toggle the visibility of the column
+        function toggleColumn() {
+            var language = this.getAttribute('data-language');
+            
+            // Get references to the corresponding cells in the column
+            var cells = document.querySelectorAll('#exampleTable td[data-language="' + language + '"], th[data-language="' + language + '"]');
+            
+            // Toggle the CSS class on each cell
+            cells.forEach(function (cell) {
+                cell.classList.toggle('hidden-column');
+            });
+        }
+    </script>
+</body>
+</html>
