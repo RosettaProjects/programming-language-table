@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Programming Examples</title>
     <style>
         table {
             border-collapse: collapse;
         }
-        th, td {
+
+        th,
+        td {
             border: 1px solid black;
             padding: 8px;
         }
     </style>
 </head>
+
 <body>
     <h1>Programming Examples</h1>
-    
+
     <label for="groups">Select groups:</label>
     <div id="groupCheckboxes">
         <input type="checkbox" id="groupAll" value="all" checked>
@@ -30,7 +34,7 @@
         <label for="groupAdvanced">Advanced</label>
         <!-- Add more groups here -->
     </div>
-    
+
     <table id="exampleTable">
         <thead>
             <tr>
@@ -81,35 +85,36 @@
             </tr>
         </tbody>
     </table>
-    
+
     <script>
         // Get reference to the group checkboxes and the example table
         var groupCheckboxes = document.querySelectorAll('#groupCheckboxes input[type="checkbox"]');
         var table = document.getElementById('exampleTable');
-        
+
         // Add event listener to each group checkbox
-        groupCheckboxes.forEach(function(checkbox) {
+        groupCheckboxes.forEach(function (checkbox) {
             checkbox.addEventListener('change', filterExamples);
         });
-        
+
         // Function to filter the examples based on the selected groups
         function filterExamples() {
             // Get the selected groups
-            var selectedGroups = Array.from(document.querySelectorAll('#groupCheckboxes input[type="checkbox"]:checked')).map(function(checkbox) {
+            var selectedGroups = Array.from(document.querySelectorAll('#groupCheckboxes input[type="checkbox"]:checked')).map(function (checkbox) {
                 return checkbox.value;
             });
-            
+
             // Show or hide table rows based on the selected groups
-            Array.from(table.tBodies[0].rows).forEach(function(row) {
+            Array.from(table.tBodies[0].rows).forEach(function (row) {
                 var groups = row.getAttribute('data-groups').toLowerCase().split(' ');
-                
-                var shouldShow = selectedGroups.includes('all') || groups.some(function(group) {
+
+                var shouldShow = selectedGroups.includes('all') || groups.some(function (group) {
                     return selectedGroups.includes(group);
                 });
-                
+
                 row.style.display = shouldShow ? 'table-row' : 'none';
             });
         }
     </script>
 </body>
+
 </html>

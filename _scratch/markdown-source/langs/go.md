@@ -1,4 +1,4 @@
-# Go
+# go (golang)
 
 ## Language Characteristics
 
@@ -51,6 +51,7 @@ continue  for          import  return     var
 ## First Steps
 
 ### Hello, world!
+
 ```go
 package main
 

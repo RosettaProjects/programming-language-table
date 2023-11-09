@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Programming Examples</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Programming Examples</h1>
+
+    <label for="groups">Select groups:</label>
+    <div id="groupCheckboxes">
+        <input type="checkbox" id="groupAll" value="all" checked>
+        <label for="groupAll">All</label>
+        <br>
+        <input type="checkbox" id="groupBeginner" value="beginner">
+        <label for="groupBeginner">Beginner</label>
+        <br>
+        <input type="checkbox" id="groupIntermediate" value="intermediate">
+        <label for="groupIntermediate">Intermediate</label>
+        <br>
+        <input type="checkbox" id="groupAdvanced" value="advanced">
+        <label for="groupAdvanced">Advanced</label>
+        <!-- Add more groups here -->
+    </div>
+
+{{table:4}}
+
+{{script:4}}
+</body>
+
+</html>
