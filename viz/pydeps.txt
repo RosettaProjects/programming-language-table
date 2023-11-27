@@ -1,0 +1,292 @@
+{
+    "__main__": {
+        "bacon": 0,
+        "imports": [
+            "plt_generator",
+            "plt_generator.__main__",
+            "plt_generator.cli",
+            "plt_generator.data",
+            "plt_generator.data.featview",
+            "plt_generator.data.illustration",
+            "plt_generator.data.langview",
+            "plt_generator.highlighting",
+            "plt_generator.highlighting.highlighter",
+            "plt_generator.html",
+            "plt_generator.html.builder",
+            "plt_generator.master_table",
+            "plt_generator.sync",
+            "plt_generator.sync.bidirectional_sync",
+            "plt_generator.sync.conflict_handler",
+            "plt_generator.utils",
+            "plt_generator.utils.language",
+            "plt_generator.utils.path_manager",
+            "plt_generator.validation",
+            "plt_generator.validation.validator"
+        ],
+        "name": "__main__",
+        "path": null
+    },
+    "markdown_to_json": {
+        "bacon": 2,
+        "imported_by": [
+            "plt_generator.data.featview",
+            "plt_generator.data.langview"
+        ],
+        "name": "markdown_to_json",
+        "path": "/home/isaac/Learning/programming-language-table/.venv/lib/python3.11/site-packages/markdown_to_json/__init__.py"
+    },
+    "pandas": {
+        "bacon": 2,
+        "imported_by": [
+            "pandas",
+            "plt_generator.master_table"
+        ],
+        "imports": [
+            "pandas"
+        ],
+        "name": "pandas",
+        "path": "/home/isaac/Learning/programming-language-table/.venv/lib/python3.11/site-packages/pandas/__init__.py"
+    },
+    "plt_generator": {
+        "bacon": 1,
+        "imported_by": [
+            "__main__"
+        ],
+        "name": "plt_generator",
+        "path": "/home/isaac/Learning/programming-language-table/src/plt_generator/__init__.py"
+    },
+    "plt_generator.__main__": {
+        "bacon": 1,
+        "imported_by": [
+            "__main__"
+        ],
+        "name": "plt_generator.__main__",
+        "path": "/home/isaac/Learning/programming-language-table/src/plt_generator/__main__.py"
+    },
+    "plt_generator.cli": {
+        "bacon": 1,
+        "imported_by": [
+            "__main__"
+        ],
+        "imports": [
+            "plt_generator.html",
+            "plt_generator.master_table"
+        ],
+        "name": "plt_generator.cli",
+        "path": "/home/isaac/Learning/programming-language-table/src/plt_generator/cli.py"
+    },
+    "plt_generator.data": {
+        "bacon": 1,
+        "imported_by": [
+            "__main__",
+            "plt_generator.master_table",
+            "plt_generator.sync.bidirectional_sync",
+            "plt_generator.validation.validator"
+        ],
+        "imports": [
+            "plt_generator.data.featview",
+            "plt_generator.data.langview"
+        ],
+        "name": "plt_generator.data",
+        "path": "/home/isaac/Learning/programming-language-table/src/plt_generator/data/__init__.py"
+    },
+    "plt_generator.data.featview": {
+        "bacon": 1,
+        "imported_by": [
+            "__main__",
+            "plt_generator.data"
+        ],
+        "imports": [
+            "markdown_to_json",
+            "plt_generator.data.illustration"
+        ],
+        "name": "plt_generator.data.featview",
+        "path": "/home/isaac/Learning/programming-language-table/src/plt_generator/data/featview.py"
+    },
+    "plt_generator.data.illustration": {
+        "bacon": 1,
+        "imported_by": [
+            "__main__",
+            "plt_generator.data.featview",
+            "plt_generator.data.langview",
+            "plt_generator.master_table"
+        ],
+        "name": "plt_generator.data.illustration",
+        "path": "/home/isaac/Learning/programming-language-table/src/plt_generator/data/illustration.py"
+    },
+    "plt_generator.data.langview": {
+        "bacon": 1,
+        "imported_by": [
+            "__main__",
+            "plt_generator.data"
+        ],
+        "imports": [
+            "markdown_to_json",
+            "plt_generator.data.illustration"
+        ],
+        "name": "plt_generator.data.langview",
+        "path": "/home/isaac/Learning/programming-language-table/src/plt_generator/data/langview.py"
+    },
+    "plt_generator.highlighting": {
+        "bacon": 1,
+        "imported_by": [
+            "__main__",
+            "plt_generator.html.builder"
+        ],
+        "imports": [
+            "plt_generator.highlighting.highlighter"
+        ],
+        "name": "plt_generator.highlighting",
+        "path": "/home/isaac/Learning/programming-language-table/src/plt_generator/highlighting/__init__.py"
+    },
+    "plt_generator.highlighting.highlighter": {
+        "bacon": 1,
+        "imported_by": [
+            "__main__",
+            "plt_generator.highlighting"
+        ],
+        "imports": [
+            "pygments"
+        ],
+        "name": "plt_generator.highlighting.highlighter",
+        "path": "/home/isaac/Learning/programming-language-table/src/plt_generator/highlighting/highlighter.py"
+    },
+    "plt_generator.html": {
+        "bacon": 1,
+        "imported_by": [
+            "__main__",
+            "plt_generator.cli"
+        ],
+        "imports": [
+            "plt_generator.html.builder"
+        ],
+        "name": "plt_generator.html",
+        "path": "/home/isaac/Learning/programming-language-table/src/plt_generator/html/__init__.py"
+    },
+    "plt_generator.html.builder": {
+        "bacon": 1,
+        "imported_by": [
+            "__main__",
+            "plt_generator.html"
+        ],
+        "imports": [
+            "plt_generator.highlighting",
+            "plt_generator.master_table"
+        ],
+        "name": "plt_generator.html.builder",
+        "path": "/home/isaac/Learning/programming-language-table/src/plt_generator/html/builder.py"
+    },
+    "plt_generator.master_table": {
+        "bacon": 1,
+        "imported_by": [
+            "__main__",
+            "plt_generator.cli",
+            "plt_generator.html.builder"
+        ],
+        "imports": [
+            "pandas",
+            "plt_generator.data",
+            "plt_generator.data.illustration",
+            "plt_generator.sync",
+            "plt_generator.validation"
+        ],
+        "name": "plt_generator.master_table",
+        "path": "/home/isaac/Learning/programming-language-table/src/plt_generator/master_table.py"
+    },
+    "plt_generator.sync": {
+        "bacon": 1,
+        "imported_by": [
+            "__main__",
+            "plt_generator.master_table"
+        ],
+        "imports": [
+            "plt_generator.sync.bidirectional_sync"
+        ],
+        "name": "plt_generator.sync",
+        "path": "/home/isaac/Learning/programming-language-table/src/plt_generator/sync/__init__.py"
+    },
+    "plt_generator.sync.bidirectional_sync": {
+        "bacon": 1,
+        "imported_by": [
+            "__main__",
+            "plt_generator.sync"
+        ],
+        "imports": [
+            "plt_generator.data"
+        ],
+        "name": "plt_generator.sync.bidirectional_sync",
+        "path": "/home/isaac/Learning/programming-language-table/src/plt_generator/sync/bidirectional_sync.py"
+    },
+    "plt_generator.sync.conflict_handler": {
+        "bacon": 1,
+        "imported_by": [
+            "__main__"
+        ],
+        "name": "plt_generator.sync.conflict_handler",
+        "path": "/home/isaac/Learning/programming-language-table/src/plt_generator/sync/conflict_handler.py"
+    },
+    "plt_generator.utils": {
+        "bacon": 1,
+        "imported_by": [
+            "__main__"
+        ],
+        "imports": [
+            "plt_generator.utils.path_manager"
+        ],
+        "name": "plt_generator.utils",
+        "path": "/home/isaac/Learning/programming-language-table/src/plt_generator/utils/__init__.py"
+    },
+    "plt_generator.utils.language": {
+        "bacon": 1,
+        "imported_by": [
+            "__main__"
+        ],
+        "name": "plt_generator.utils.language",
+        "path": "/home/isaac/Learning/programming-language-table/src/plt_generator/utils/language.py"
+    },
+    "plt_generator.utils.path_manager": {
+        "bacon": 1,
+        "imported_by": [
+            "__main__",
+            "plt_generator.utils"
+        ],
+        "name": "plt_generator.utils.path_manager",
+        "path": "/home/isaac/Learning/programming-language-table/src/plt_generator/utils/path_manager.py"
+    },
+    "plt_generator.validation": {
+        "bacon": 1,
+        "imported_by": [
+            "__main__",
+            "plt_generator.master_table"
+        ],
+        "imports": [
+            "plt_generator.validation.validator"
+        ],
+        "name": "plt_generator.validation",
+        "path": "/home/isaac/Learning/programming-language-table/src/plt_generator/validation/__init__.py"
+    },
+    "plt_generator.validation.validator": {
+        "bacon": 1,
+        "imported_by": [
+            "__main__",
+            "plt_generator.validation"
+        ],
+        "imports": [
+            "plt_generator.data"
+        ],
+        "name": "plt_generator.validation.validator",
+        "path": "/home/isaac/Learning/programming-language-table/src/plt_generator/validation/validator.py"
+    },
+    "pygments": {
+        "bacon": 2,
+        "imported_by": [
+            "plt_generator.highlighting.highlighter",
+            "pygments"
+        ],
+        "imports": [
+            "pygments"
+        ],
+        "name": "pygments",
+        "path": "/home/isaac/Learning/programming-language-table/.venv/lib/python3.11/site-packages/pygments/__init__.py"
+    }
+}

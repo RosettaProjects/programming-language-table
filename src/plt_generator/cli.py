@@ -1,9 +1,14 @@
+from .html import HTMLBuilder
+from .master_table import MasterTable
+
+
 def sync() -> None:
     """
     Ensures that the language-view and the feature-view markdown files are in a consistent state,
       updating one from the other as needed.
     """
     ...
+
 
 def generate() -> None:
     """
@@ -14,5 +19,5 @@ def generate() -> None:
 
 def dryrun() -> None:
     """
-    Demonstrates what would 
+    Demonstrates what would
     """

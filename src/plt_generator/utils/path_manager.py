@@ -2,7 +2,8 @@ from dataclasses import dataclass
 from pathlib import Path
 
 
-class PathManager(dataclass):
+@dataclass
+class PathManager:
     root = Path(__file__).parent
     feat_view_dir = root / "markdown_feat_view"
     lang_view_dir = root / "markdown_lang_view"

@@ -1,7 +1,6 @@
 from enum import Enum
 
-
-language_info = {
+language_info: dict[str, dict[str, str]] = {
     "python": {},
     "javascript": {},
     "c": {},
