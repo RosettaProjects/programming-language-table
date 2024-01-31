@@ -6,6 +6,11 @@ Design goals: Groups of programming languages, and each group or individual lang
 by clicking. Same for the rows, each of which illustrates a specific feature, with analogous groups
 for categories of features.
 
+The source for the website is itself written in readable Markdown, which comes in both a feature
+view and a language view, which are kept in sync and updated from each other courtesy of the same
+in-house Python package that generates the html+js+css for the website.
+
+
 ## Design Goals
 
 The motivation for this project is the desire for a thorough side-by-side comparison of programming

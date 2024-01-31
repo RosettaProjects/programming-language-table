@@ -1,5 +1,6 @@
-from .html import HTMLBuilder
 from .master_table import MasterTable
+from .html import HTMLBuilder
+from .utils import path_manager
 
 
 def sync() -> None:
@@ -14,10 +15,10 @@ def generate() -> None:
     """
     Creates the .html file, with embedded CSS and JavaScript.
     """
-    # check_consistency()
+    
 
 
 def dryrun() -> None:
-    """
+    """ 
     Demonstrates what would
     """

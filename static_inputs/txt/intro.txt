@@ -1,0 +1,9 @@
+This is intended as a side-by-side table of programming languages, organized by features. It is 
+designed as an educational tool and as a fun project for me.
+
+Please note that the table unavoidably contains my subjective opinions. I generally find that since
+everyone is biased, it is more helpful to hear the honest opinion of someone who is open about their
+biases, as opposed to someone pretending to be perfectly objective. This is the approach I have
+taken - I have tried to be fair and soft-spoken, but if my characterization of your favorite or
+least favorite language rubs you the wrong way, please open an issue, make a pull request, post an
+angry video on the video-sharing platform of your choice, or get in touch with me in some other way.
