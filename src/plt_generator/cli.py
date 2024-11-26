@@ -15,10 +15,9 @@ def generate() -> None:
     """
     Creates the .html file, with embedded CSS and JavaScript.
     """
-    
 
 
 def dryrun() -> None:
-    """ 
+    """
     Demonstrates what would
     """

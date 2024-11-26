@@ -1,6 +1,8 @@
-# Python Language Features
+# Python
 
 ## 0. Information, Help, etc.
+
+Main site: python.org
 
 ### 0.0 Current versions at the time of writing
 
@@ -52,8 +54,6 @@ Guido van Rossum is the creator and BDFL (benevolent dictator) for life.
 
 1991 (version 0.9)
 
-#### 
-
 ### 0.2 Main areas
 
 Popular most notably for data science, machine, scripting, "glue code", prototyping, and introductory programming courses. 
@@ -91,7 +91,7 @@ Some people hate that whitespace is significant in Python, as opposed to "curly 
 
 ### 0.8 Recommended editors
 
-Either of the [GOAT editors](), VSCode/VSCodium, JupyterLab / Jupyter Notebook, PyCharm
+Either of the [GOAT editors](), VSCode/VSCodium, JupyterLab / Jupyter Notebook, PyCharm, Spyder
 
 ### 0.9 Installation
 
@@ -115,7 +115,7 @@ Either of the [GOAT editors](), VSCode/VSCodium, JupyterLab / Jupyter Notebook, 
 
 ### 2.0 Entering the REPL
 
-> Enter the read-eval-print-looop (i.e. interactive mode) from the command-line.
+> Enter the read-eval-print-loop (i.e. interactive mode) from the command-line.
 
 ```py
 
@@ -125,12 +125,12 @@ Either of the [GOAT editors](), VSCode/VSCodium, JupyterLab / Jupyter Notebook, 
 
 ##### Test here
 
-### 2.1 Printing "Hello, World!" in the REPL
+### 2.1 Printing "Hello, world!" in the REPL
 
 > 
 
 ```py
-
+print("Hello, world!")
 ```
 
 ## 3. Arithmetic
@@ -146,7 +146,6 @@ Either of the [GOAT editors](), VSCode/VSCodium, JupyterLab / Jupyter Notebook, 
 ```py
 float_a = 0.06
 float_b = .4
-
 ```
 
 ### 3.2 Integers
@@ -161,7 +160,7 @@ float_b = .4
 ### 3.4 Addition
 
 ```py
-
+3 + 4
 ```
 
 ### 3.5 Subtraction
@@ -187,8 +186,6 @@ float_b = .4
 ```py
 
 ```
-
-### 
 
 ## 4. File IO
 
