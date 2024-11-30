@@ -131,8 +131,8 @@ def as_dict(parse_tuple: tuple[str, tuple]) -> dict[str, dict]:
     return process_section(parse_tuple)
 
 
-def extract_paths(subdict: dict, prefix: str = "") -> list[str]:
-        new_prefix = subdict["TITLE"] if not prefix else "<>".join((prefix, subdict["TITLE"]))
+def extract_paths(subdict: dict, prefix: list[str] = []) -> list[list[str]]:
+        new_prefix = [subdict["TITLE"]] if not prefix else (prefix + [subdict["TITLE"]])
         new_paths = [new_prefix]
         for subsection in subdict.get("SUBSECTIONS", []):
             new_paths.extend(extract_paths(subsection, prefix=new_prefix))
@@ -150,4 +150,4 @@ def extract_paths(subdict: dict, prefix: str = "") -> list[str]:
 #     print(tup)
 #     d = as_dict(tup)
 #     print(d)
-#     e = extract_paths()
+#     e = extract_paths(d)
