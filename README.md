@@ -52,4 +52,4 @@ Quelle surprise.
 
 - [ ] small examples for Markdown with 
 - [ ] MVP Python package for html generation
-- [ ] 
+- [ ] add optional snippet in addition to MWE

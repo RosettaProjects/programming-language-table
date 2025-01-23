@@ -31,6 +31,7 @@ conda, pyenv, venv, pip, pipx, pyenv, poetry, nix + poetry2nix
 
 ___
 
+* uv
 * conda
 * pyenv
 * venv
@@ -46,7 +47,7 @@ ___
 
 #### 0.1.4 Creator(s) and leader(s)
 
-Guido van Rossum is the creator and BDFL (benevolent dictator) for life.
+Guido van Rossum is the creator and BDFL (benevolent dictator for life).
 
 ### 0.1 History and geneology
 
@@ -117,17 +118,15 @@ Either of the [GOAT editors](), VSCode/VSCodium, JupyterLab / Jupyter Notebook, 
 
 > Enter the read-eval-print-loop (i.e. interactive mode) from the command-line.
 
-```py
-
+```sh
+$ python
 ```
 
 #### Test
 
 ##### Test here
 
-### 2.1 Printing "Hello, world!" in the REPL
-
-> 
+### 2.1 Printing "Hello, world!" in the REPL 
 
 ```py
 print("Hello, world!")
@@ -138,7 +137,8 @@ print("Hello, world!")
 ### 3.0 Integer
 
 ```py
-
+int_a = 4
+int_b = -6
 ```
 
 ### 3.1 Floating-point numbers ('floats') 
@@ -156,6 +156,12 @@ float_b = .4
 
 ### 3.3 Conversion between floats and integers
 
+```py
+
+float_a = float(integer_a)
+integer_b = int(float_a)
+```
+
 
 ### 3.4 Addition
 
@@ -166,7 +172,7 @@ float_b = .4
 ### 3.5 Subtraction
 
 ```py
-
+3 -4
 ```
 
 ### 3.6 Integer division
