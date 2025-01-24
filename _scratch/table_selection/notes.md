@@ -1,3 +1,79 @@
+Yes, you can use JavaScript to dynamically change CSS variables. CSS variables (also known as custom properties) are defined in stylesheets or inline styles using the -- prefix and can be accessed and modified with JavaScript through the style property or the setProperty method of the style object.
+
+Example of Changing CSS Variables with JavaScript
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change CSS Variables</title>
+    <style>
+        :root {
+            --primary-color: blue;
+            --secondary-color: orange;
+        }
+
+        body {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <button id="change-theme">Change Theme</button>
+
+    <script>
+        // JavaScript to dynamically change CSS variables
+        const button = document.getElementById("change-theme");
+
+        button.addEventListener("click", () => {
+            // Access the root element (the :root pseudo-class)
+            const root = document.documentElement;
+
+            // Change CSS variables
+            root.style.setProperty("--primary-color", "black");
+            root.style.setProperty("--secondary-color", "white");
+        });
+    </script>
+</body>
+</html>
+```
+
+How It Works:
+Define CSS Variables:
+
+CSS variables are defined inside the :root pseudo-class or any selector.
+Example: --primary-color and --secondary-color.
+Modify CSS Variables with JS:
+
+Use document.documentElement.style.setProperty() to modify variables globally.
+Syntax: element.style.setProperty('--variable-name', 'value').
+Dynamic Styling:
+
+When you update the CSS variable, all elements using that variable automatically update.
+Accessing CSS Variables in JavaScript
+You can also retrieve the current value of a CSS variable using getComputedStyle:
+
+javascript
+Copy
+Edit
+const root = document.documentElement;
+const primaryColor = getComputedStyle(root).getPropertyValue('--primary-color').trim();
+console.log(primaryColor); // Logs the current value of --primary-color
+Use Cases:
+Theming: Easily switch between light/dark mode.
+Dynamic Layouts: Adjust spacings, sizes, or colors based on user interaction.
+Animations: Update variables during animations for smooth transitions.
+Let me know if you'd like an example for a specific use case!
+
+----
 
 Here's a solution using JavaScript to filter an HTML table so only certain rows and columns are displayed, based on categories selected via a dropdown menu.
 

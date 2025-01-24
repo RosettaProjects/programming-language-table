@@ -4,146 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Table Filter</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th,
-        td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: left;
-        }
-
-        .code {
-            font-family: monospace;
-        }
-
-        .hidden {
-            margin: 0;
-            padding: 0;
-            font-size: 0;
-            line-height: 0;
-            overflow: hidden;
-        }
-
-        .boilerplate {
-            color: #666;
-        }
-
-        select {
-            width: 200px;
-            padding: 8px;
-            font-size: 14px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            background-color: #fff;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            appearance: none;
-            /* Removes the default arrow styling */
-            cursor: pointer;
-            margin-right: 10px;
-            /* Add some spacing between menus */
-        }
-
-        /* Add a custom arrow for the dropdown */
-        select::after {
-            content: '▼';
-            position: absolute;
-            right: 10px;
-            pointer-events: none;
-            /* Ensure the arrow does not block clicks */
-        }
-
-        /* Adjust the dropdown when focused */
-        select:focus {
-            border-color: #0078d7;
-            /* Change border color on focus */
-            box-shadow: 0 0 5px rgba(0, 120, 215, 0.5);
-            /* Subtle glow */
-            outline: none;
-            /* Remove default outline */
-        }
-
-        /* Add spacing between dropdown menus */
-        select+select {
-            margin-left: 15px;
-        }
-
-        .dropdown {
-            position: relative;
-            display: inline-block;
-            width: 200px;
-        }
-
-        /* Dropdown button (the visible part) */
-        .dropdown button {
-            width: 100%;
-            padding: 10px;
-            font-size: 14px;
-            text-align: left;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            cursor: pointer;
-            position: relative;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* Add a custom arrow to the button */
-        .dropdown button::after {
-            content: '▼';
-            margin-left: 10px;
-            font-size: 10px;
-            color: #666;
-        }
-
-        /* Dropdown content (the expanded menu) */
-        .dropdown .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            z-index: 10;
-        }
-
-        /* Dropdown items */
-        .dropdown .dropdown-menu label {
-            display: block;
-            padding: 8px 10px;
-            font-size: 14px;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-
-        /* Highlight on hover */
-        .dropdown .dropdown-menu label:hover {
-            background-color: #f1f1f1;
-        }
-
-        /* Show the menu when the dropdown is active */
-        .dropdown.open .dropdown-menu {
-            display: block;
-        }
-
-        .buttons {
-            display: flex;
-            gap: 20px;
-            position: absolute;
-            right: 1.0rem;
-            top: 1.0rem;
-        }
-    </style>
+    <title>ProgLang Table</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 
 <body>
@@ -172,25 +34,9 @@
             <button>Display Options</button>
             <div class="dropdown-menu display_menu">
                 <label><input id="boilerplateToggle" type="checkbox" value="showBoilerplate">Show boilerplate</label>
-                <!-- <label><input type="checkbox" value="type_inspection">Type Inspection</label>
-                <label><input type="checkbox" value="boolean"> Boolean</label> -->
             </div>
         </div>
     </div>
-
-    <!-- <label for="rowFilter">Select Row Categories:</label>
-    <select id="rowFilter" multiple>
-        <option value="console_output">Console Output</option>
-        <option value="type_inspection">Type Inspection</option>
-        <option value="boolean">Boolean</option>
-    </select>
-
-    <label for="columnFilter">Select Column Categories:</label>
-    <select id="columnFilter" multiple>
-        <option value="python">Python</option>
-        <option value="rust">Rust</option>
-        <option value="haskell">Haskell</option>
-    </select> -->
 
     <table id="categoryTable">
         <thead>
@@ -203,139 +49,71 @@
         </thead>
         <tbody>
             <tr data-category="console_output">
-                <td>Console Output</td>
+                <td class="row_name">Console Output</td>
                 <td data-category="python">
                     <div class="code">print("Hello, world!")</div>
                 </td>
                 <td data-category="rust">
                     <div class="code">
-                        <span class="boilerplate" data-original="fn main() {<br>"></span>
-                            <span class="boilerplate" data-original="&nbsp;&nbsp;&nbsp;&nbsp;"></span>println!("Hello World!");
-                        <span class="boilerplate" data-original="<br>}"></span>
+                        <div class="sandwich">
+                            <div class="pre">
+                                <span class="boilerplate" data-original="fn main() {"></span>
+                            </div>
+                            <div class="substance indent_if_bp">
+                                <span class="function">println!</span><span class="structural">(</span>
+                                <span class="string">"Hello World!"</span>
+                                <span class="structural">);</span>
+                            </div>
+                            <div class="post">
+                                <span class="boilerplate" data-original="}"></span>
+                            </div>
+                        </div>
                     </div>
 
                 </td>
                 <td data-category="haskell">
                     <div class="code">
-                    <span class="boilerplate" data-original="main :: IO ()<br>"></span>
-                    main = putStrLn "Hello, World!"
-                </div>
+                        <div class="sandwich">
+                            <div class="pre">
+                                <span class="boilerplate" data-original="main :: IO ()"></span>
+                            </div>
+                            <div class="substance">main = putStrLn "Hello, World!"</div>
+                        </div>
+
+                    </div>
                 </td>
             </tr>
             <tr data-category="type_inspection">
-                <td>Type Inspection</td>
-                <td data-category="python"><div class="code">COMING SOON</div></td>
-                <td data-category="rust"><div class="code">COMING SOON</div></td>
-                <td data-category="haskell"><div class="code">COMING SOON</div></td>
+                <td class="row_name">Type Inspection</td>
+                <td data-category="python">
+                    <div class="code">COMING SOON</div>
+                </td>
+                <td data-category="rust">
+                    <div class="code">COMING SOON</div>
+                </td>
+                <td data-category="haskell">
+                    <div class="code">COMING SOON</div>
+                </td>
             </tr>
             <tr data-category="boolean">
-                <td>Boolean</td>
-                <td data-category="python"><div class="code">COMING SOON</div></td>
-                <td data-category="rust"><div class="code">COMING SOON</div></td>
-                <td data-category="haskell"><div class="code">COMING SOON</div></td>
+                <td class="row_name">Boolean</td>
+                <td data-category="python">
+                    <div class="code">COMING SOON</div>
+                </td>
+                <td data-category="rust">
+                    <div class="code">COMING SOON</div>
+                </td>
+                <td data-category="haskell">
+                    <div class="code">COMING SOON</div>
+                </td>
             </tr>
         </tbody>
     </table>
 
 
-    <script>
-        const table = document.getElementById("categoryTable");
-        const rowNames = Object.freeze(Array.from(document.querySelectorAll('.row_menu input[type="checkbox"]')).map(input => input.value));
-        const colNames = Object.freeze(Array.from(document.querySelectorAll('.col_menu input[type="checkbox"]')).map(input => input.value));
-        console.log("rowNames", rowNames);
-        console.log("colNames", colNames);
+    <script src="main.js">
 
-        function toggleBoilerplate() {
-            // const displayOptions = Array.from(document.querySelectorAll('.display_menu input[type="checkbox"]'))
-            //     .filter(input => input.checked)
-            //     .map(input => input.value);
-            // console.log("displayOptions", displayOptions)
-            // showBoilerplate = displayOptions.includes("showBoilerplate");
-            // console.log("showBoilerplate", showBoilerplate)
-            // document.querySelectorAll('.boilerplate').forEach(el => {
-            //     el.classList.toggle('hidden'); // Add/remove the "hidden" class
-            // });
 
-            document.querySelectorAll('.boilerplate').forEach(el => {
-                if (el.textContent === '') {
-                    // If text is cleared, restore it from the data-original attribute
-                    el.innerHTML = el.getAttribute('data-original');
-                } else {
-                    // Otherwise, clear the text and store the original in data-original
-                    el.setAttribute('data-original', el.innerHTML);
-                    el.innerHTML = '';
-                }
-            });
-
-        }
-
-        function filterTableRows() {
-            const selectedRows = Array.from(document.querySelectorAll('.row_menu input[type="checkbox"]'))
-                .filter(input => input.checked && input.closest('.dropdown').querySelector('button').textContent.includes('Row'))
-                .map(input => input.value);
-
-            table.querySelectorAll("tbody tr").forEach(row => {
-                const rowCategory = row.dataset.category; // Get the category from the row's data attribute
-                row.classList.toggle("hidden", !selectedRows.includes(rowCategory)); // Toggle visibility of the row
-            });
-
-            console.log("selectedRows:", selectedRows);
-        }
-
-        function filterTableColumns() {
-            const selectedColumns = Array.from(document.querySelectorAll('.col_menu input[type="checkbox"]'))
-                .filter(input => input.checked && input.closest('.dropdown').querySelector('button').textContent.includes('Languages'))
-                .map(input => input.value);
-            const columnIndexesToHide = [];
-
-            table.querySelectorAll("thead th").forEach((th, colIndex) => {
-                if (colIndex > 0) { // Skip the first column (row labels)
-                    const colCategory = th.dataset.category; // Get the category from the column header
-                    const shouldHide = !selectedColumns.includes(colCategory); // Determine if the column should be hidden
-                    if (shouldHide) {
-                        columnIndexesToHide.push(colIndex); // Add column index to hide list
-                    }
-                    th.classList.toggle("hidden", shouldHide); // Hide/show the column header
-                }
-            });
-
-            table.querySelectorAll("tbody tr").forEach(row => {
-                row.querySelectorAll("td").forEach((td, colIndex) => {
-                    if (colIndex > 0) { // Skip the first column (row labels)
-                        const shouldHide = columnIndexesToHide.includes(colIndex); // Check if column index is in the hide list
-                        td.classList.toggle("hidden", shouldHide); // Toggle visibility of the cell
-                    }
-                });
-            });
-
-            console.log("selectedColumns:", selectedColumns);
-        }
-
-        document.querySelectorAll('.row_menu input[type="checkbox"]').forEach(checkbox => {
-            checkbox.addEventListener('change', filterTableRows);
-        });
-
-        document.querySelectorAll('.col_menu input[type="checkbox"]').forEach(checkbox => {
-            checkbox.addEventListener('change', filterTableColumns);
-        });
-
-        document.getElementById('boilerplateToggle')
-            .addEventListener('change', toggleBoilerplate);
-
-        document.querySelectorAll('.dropdown button').forEach(button => {
-            button.addEventListener('click', () => {
-                const dropdown = button.parentElement;
-                dropdown.classList.toggle('open');
-            });
-        });
-
-        document.addEventListener('click', (e) => {
-            document.querySelectorAll('.dropdown').forEach(dropdown => {
-                if (!dropdown.contains(e.target)) {
-                    dropdown.classList.remove('open');
-                }
-            });
-        });
     </script>
 </body>
 
