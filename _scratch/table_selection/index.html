@@ -15,11 +15,23 @@
         td {
             border: 1px solid #ccc;
             padding: 8px;
-            text-align: center;
+            text-align: left;
+        }
+
+        .code {
+            font-family: monospace;
         }
 
         .hidden {
-            display: none;
+            margin: 0;
+            padding: 0;
+            font-size: 0;
+            line-height: 0;
+            overflow: hidden;
+        }
+
+        .boilerplate {
+            color: #666;
         }
 
         select {
@@ -123,27 +135,46 @@
         .dropdown.open .dropdown-menu {
             display: block;
         }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            position: absolute;
+            right: 1.0rem;
+            top: 1.0rem;
+        }
     </style>
 </head>
 
 <body>
     <h1>Programming Language Table</h1>
 
-    <div id="rowFilter" class="dropdown">
-        <button>Select Row Categories</button>
-        <div class="dropdown-menu">
-            <label><input type="checkbox" value="console_output">Console Output</label>
-            <label><input type="checkbox" value="type_inspection">Type Inspection</label>
-            <label><input type="checkbox" value="boolean"> Boolean</label>
+    <div class="buttons">
+        <div id="rowFilter" class="dropdown">
+            <button>Features (Rows)</button>
+            <div class="dropdown-menu selection row_menu">
+                <label><input type="checkbox" value="console_output">Console Output</label>
+                <label><input type="checkbox" value="type_inspection">Type Inspection</label>
+                <label><input type="checkbox" value="boolean"> Boolean</label>
+            </div>
         </div>
-    </div>
 
-    <div id="columnFilter" class="dropdown">
-        <button>Select Column Categories</button>
-        <div class="dropdown-menu">
-            <label><input type="checkbox" value="python">Python</label>
-            <label><input type="checkbox" value="rust">Rust</label>
-            <label><input type="checkbox" value="haskell">Haskell</label>
+        <div id="columnFilter" class="dropdown">
+            <button>Programming Languages</button>
+            <div class="dropdown-menu selection col_menu">
+                <label><input type="checkbox" value="python">Python</label>
+                <label><input type="checkbox" value="rust">Rust</label>
+                <label><input type="checkbox" value="haskell">Haskell</label>
+            </div>
+        </div>
+
+        <div id="displayOptions" class="dropdown">
+            <button>Display Options</button>
+            <div class="dropdown-menu display_menu">
+                <label><input id="boilerplateToggle" type="checkbox" value="showBoilerplate">Show boilerplate</label>
+                <!-- <label><input type="checkbox" value="type_inspection">Type Inspection</label>
+                <label><input type="checkbox" value="boolean"> Boolean</label> -->
+            </div>
         </div>
     </div>
 
@@ -173,116 +204,131 @@
         <tbody>
             <tr data-category="console_output">
                 <td>Console Output</td>
-                <td>print("Hello, world!")</td>
-                <td>line 1<br>line 2</td>
-                <td>3</td>
+                <td data-category="python">
+                    <div class="code">print("Hello, world!")</div>
+                </td>
+                <td data-category="rust">
+                    <div class="code">
+                        <span class="boilerplate" data-original="fn main() {<br>"></span>
+                            <span class="boilerplate" data-original="&nbsp;&nbsp;&nbsp;&nbsp;"></span>println!("Hello World!");
+                        <span class="boilerplate" data-original="<br>}"></span>
+                    </div>
+
+                </td>
+                <td data-category="haskell">
+                    <div class="code">
+                    <span class="boilerplate" data-original="main :: IO ()<br>"></span>
+                    main = putStrLn "Hello, World!"
+                </div>
+                </td>
             </tr>
             <tr data-category="type_inspection">
                 <td>Type Inspection</td>
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
+                <td data-category="python"><div class="code">COMING SOON</div></td>
+                <td data-category="rust"><div class="code">COMING SOON</div></td>
+                <td data-category="haskell"><div class="code">COMING SOON</div></td>
             </tr>
             <tr data-category="boolean">
                 <td>Boolean</td>
-                <td>7</td>
-                <td>8</td>
-                <td>9</td>
+                <td data-category="python"><div class="code">COMING SOON</div></td>
+                <td data-category="rust"><div class="code">COMING SOON</div></td>
+                <td data-category="haskell"><div class="code">COMING SOON</div></td>
             </tr>
         </tbody>
     </table>
 
+
     <script>
-        function filterTable() {
-            const selectedRows = Array.from(document.querySelectorAll('.dropdown-menu input[type="checkbox"]'))
+        const table = document.getElementById("categoryTable");
+        const rowNames = Object.freeze(Array.from(document.querySelectorAll('.row_menu input[type="checkbox"]')).map(input => input.value));
+        const colNames = Object.freeze(Array.from(document.querySelectorAll('.col_menu input[type="checkbox"]')).map(input => input.value));
+        console.log("rowNames", rowNames);
+        console.log("colNames", colNames);
+
+        function toggleBoilerplate() {
+            // const displayOptions = Array.from(document.querySelectorAll('.display_menu input[type="checkbox"]'))
+            //     .filter(input => input.checked)
+            //     .map(input => input.value);
+            // console.log("displayOptions", displayOptions)
+            // showBoilerplate = displayOptions.includes("showBoilerplate");
+            // console.log("showBoilerplate", showBoilerplate)
+            // document.querySelectorAll('.boilerplate').forEach(el => {
+            //     el.classList.toggle('hidden'); // Add/remove the "hidden" class
+            // });
+
+            document.querySelectorAll('.boilerplate').forEach(el => {
+                if (el.textContent === '') {
+                    // If text is cleared, restore it from the data-original attribute
+                    el.innerHTML = el.getAttribute('data-original');
+                } else {
+                    // Otherwise, clear the text and store the original in data-original
+                    el.setAttribute('data-original', el.innerHTML);
+                    el.innerHTML = '';
+                }
+            });
+
+        }
+
+        function filterTableRows() {
+            const selectedRows = Array.from(document.querySelectorAll('.row_menu input[type="checkbox"]'))
                 .filter(input => input.checked && input.closest('.dropdown').querySelector('button').textContent.includes('Row'))
                 .map(input => input.value);
 
-            const selectedColumns = Array.from(document.querySelectorAll('.dropdown-menu input[type="checkbox"]'))
-                .filter(input => input.checked && input.closest('.dropdown').querySelector('button').textContent.includes('Column'))
-                .map(input => input.value);
-
-            const table = document.getElementById("categoryTable");
-
-            // Filter rows
             table.querySelectorAll("tbody tr").forEach(row => {
-                const rowCategory = row.dataset.category;
-                row.classList.toggle("hidden", !selectedRows.includes(rowCategory));
+                const rowCategory = row.dataset.category; // Get the category from the row's data attribute
+                row.classList.toggle("hidden", !selectedRows.includes(rowCategory)); // Toggle visibility of the row
             });
 
-            // Filter columns
+            console.log("selectedRows:", selectedRows);
+        }
+
+        function filterTableColumns() {
+            const selectedColumns = Array.from(document.querySelectorAll('.col_menu input[type="checkbox"]'))
+                .filter(input => input.checked && input.closest('.dropdown').querySelector('button').textContent.includes('Languages'))
+                .map(input => input.value);
             const columnIndexesToHide = [];
+
             table.querySelectorAll("thead th").forEach((th, colIndex) => {
-                if (colIndex > 0) { // Skip the first column header (Row/Col)
-                    const colCategory = th.dataset.category;
-                    const shouldHide = !selectedColumns.includes(colCategory);
-                    columnIndexesToHide.push(shouldHide ? colIndex : null);
-                    th.classList.toggle("hidden", shouldHide);
+                if (colIndex > 0) { // Skip the first column (row labels)
+                    const colCategory = th.dataset.category; // Get the category from the column header
+                    const shouldHide = !selectedColumns.includes(colCategory); // Determine if the column should be hidden
+                    if (shouldHide) {
+                        columnIndexesToHide.push(colIndex); // Add column index to hide list
+                    }
+                    th.classList.toggle("hidden", shouldHide); // Hide/show the column header
                 }
             });
 
             table.querySelectorAll("tbody tr").forEach(row => {
                 row.querySelectorAll("td").forEach((td, colIndex) => {
-                    td.classList.toggle("hidden", columnIndexesToHide.includes(colIndex));
+                    if (colIndex > 0) { // Skip the first column (row labels)
+                        const shouldHide = columnIndexesToHide.includes(colIndex); // Check if column index is in the hide list
+                        td.classList.toggle("hidden", shouldHide); // Toggle visibility of the cell
+                    }
                 });
             });
+
+            console.log("selectedColumns:", selectedColumns);
         }
 
-        // Add event listeners to checkboxes
-        document.querySelectorAll('.dropdown-menu input[type="checkbox"]').forEach(checkbox => {
-            checkbox.addEventListener('change', filterTable);
+        document.querySelectorAll('.row_menu input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', filterTableRows);
         });
 
-        // Initialize filter
-        // filterTable();
+        document.querySelectorAll('.col_menu input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', filterTableColumns);
+        });
 
-        // const rowFilter = document.getElementById("rowFilter");
-        // const columnFilter = document.getElementById("columnFilter");
-        // const table = document.getElementById("categoryTable");
-
-        // function filterTable() {
-        //     const selectedRows = Array.from(rowFilter.selectedOptions).map(option => option.value);
-        //     const selectedColumns = Array.from(columnFilter.selectedOptions).map(option => option.value);
-
-        //     // Filter rows
-        //     table.querySelectorAll("tbody tr").forEach(row => {
-        //         const rowCategory = row.dataset.category;
-        //         row.classList.toggle("hidden", !selectedRows.includes(rowCategory));
-        //     });
-
-        //     // Filter columns
-        //     const columnIndexesToHide = [];
-        //     table.querySelectorAll("thead th").forEach((th, colIndex) => {
-        //         if (colIndex > 0) { // Skip first column header (Row/Col)
-        //             const colCategory = th.dataset.category;
-        //             const shouldHide = !selectedColumns.includes(colCategory);
-        //             columnIndexesToHide.push(shouldHide ? colIndex : null);
-        //             th.classList.toggle("hidden", shouldHide);
-        //         }
-        //     });
-
-        //     table.querySelectorAll("tbody tr").forEach(row => {
-        //         row.querySelectorAll("td").forEach((td, colIndex) => {
-        //             td.classList.toggle("hidden", columnIndexesToHide.includes(colIndex));
-        //         });
-        //     });
-        // }
-
-        // // Attach event listeners
-        // rowFilter.addEventListener("change", filterTable);
-        // columnFilter.addEventListener("change", filterTable);
-
-        // // Initialize filter
-        // // filterTable();
+        document.getElementById('boilerplateToggle')
+            .addEventListener('change', toggleBoilerplate);
 
         document.querySelectorAll('.dropdown button').forEach(button => {
             button.addEventListener('click', () => {
                 const dropdown = button.parentElement;
-                dropdown.classList.toggle('open'); // Toggle the 'open' class
+                dropdown.classList.toggle('open');
             });
         });
 
-        // Close dropdowns when clicking outside
         document.addEventListener('click', (e) => {
             document.querySelectorAll('.dropdown').forEach(dropdown => {
                 if (!dropdown.contains(e.target)) {
