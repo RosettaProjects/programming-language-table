@@ -4,6 +4,21 @@ const colNames = Object.freeze(Array.from(document.querySelectorAll('.col_menu i
 console.log("rowNames", rowNames);
 console.log("colNames", colNames);
 
+function toggleOutput() {
+    document.querySelectorAll('.output').forEach(el => {
+        if (el.textContent === '') {
+            text = el.getAttribute('data-original');
+            el.innerHTML = `<br><span class="output_prefix">&gt;&gt;&gt;&nbsp;</span><span class="output_substance">${text}</span>`;
+        } else {
+            el.setAttribute('data-original', el.innerHTML
+                .replace(/^<br><span class="output_prefix">&gt;&gt;&gt;&nbsp;<\/span><span class="output_substance">/g, '')
+                .replace(/^<\/span>/g, '')
+            );
+            el.textContent = '';
+        }
+    });
+}
+
 function toggleBoilerplate() {
     document.querySelectorAll('.boilerplate').forEach(el => {
         if (el.textContent === '') {
@@ -78,6 +93,9 @@ document.querySelectorAll('.col_menu input[type="checkbox"]').forEach(checkbox =
 
 document.getElementById('boilerplateToggle')
     .addEventListener('change', toggleBoilerplate);
+
+document.getElementById('outputToggle')
+    .addEventListener('change', toggleOutput);
 
 document.querySelectorAll('.dropdown button').forEach(button => {
     button.addEventListener('click', () => {

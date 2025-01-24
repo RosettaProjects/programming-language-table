@@ -34,6 +34,7 @@
             <button>Display Options</button>
             <div class="dropdown-menu display_menu">
                 <label><input id="boilerplateToggle" type="checkbox" value="showBoilerplate">Show boilerplate</label>
+                <label><input id="outputToggle" type="checkbox" value="showOutput">Show output</label>
             </div>
         </div>
     </div>
@@ -51,7 +52,13 @@
             <tr data-category="console_output">
                 <td class="row_name">Console Output</td>
                 <td data-category="python">
-                    <div class="code">print("Hello, world!")</div>
+                    <div class="code">
+                        <div class="substance">
+                            <span class="function">print</span>
+                            <span class="structural">(</span>
+                            <span class="string">"Hello, world!"</span>
+                            <span class="structural">)</span>
+                        </div></div>
                 </td>
                 <td data-category="rust">
                     <div class="code">
@@ -61,11 +68,14 @@
                             </div>
                             <div class="substance indent_if_bp">
                                 <span class="function">println!</span><span class="structural">(</span>
-                                <span class="string">"Hello World!"</span>
+                                <span class="string">"Hello, world!"</span>
                                 <span class="structural">);</span>
                             </div>
                             <div class="post">
                                 <span class="boilerplate" data-original="}"></span>
+                            </div>
+                            <div>
+                                <span class="output" data-original="Hello, world!"></span>
                             </div>
                         </div>
                     </div>
@@ -77,7 +87,13 @@
                             <div class="pre">
                                 <span class="boilerplate" data-original="main :: IO ()"></span>
                             </div>
-                            <div class="substance">main = putStrLn "Hello, World!"</div>
+                            <div class="substance">
+                                <span class="function">main</span>
+                                <span class="structural">&nbsp;=&nbsp;</span>
+                                <span class="function">putStrLn&nbsp;</span>
+                                <span class="string">"Hello, world!"</span>
+                                <span></span>
+                            </div>
                         </div>
 
                     </div>

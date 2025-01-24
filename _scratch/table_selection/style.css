@@ -1,7 +1,7 @@
 :root {
     /* Default theme variables */
     --background-color: #001200;
-    --text-color: #99AA99;
+    --text-color: #485848;
     --mellow: #112211;
     --subtle: #334433;
 }
@@ -17,13 +17,14 @@ body {
 table {
     width: 80%;
     border-collapse: collapse;
+    empty-cells: hide;
     margin: auto;
 }
 
 th,
 td {
     border: 1px solid var(--mellow);
-    padding: 8px;
+    /* padding: 8px; */
     text-align: left;
 }
 
@@ -47,6 +48,7 @@ span {
 }
 
 .hidden {
+    display: none;
     margin: 0;
     padding: 0;
     font-size: 0;
@@ -76,6 +78,14 @@ span {
 
 .other {
     color: red;
+}
+
+.output_prefix {
+    color: #374231
+}
+
+.output_substance {
+    color: #314a50;
 }
 
 select {
