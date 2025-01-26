@@ -4,6 +4,22 @@ const colNames = Object.freeze(Array.from(document.querySelectorAll('.col_menu i
 console.log("rowNames", rowNames);
 console.log("colNames", colNames);
 
+
+async function loadJSON() {
+    try {
+        const response = await fetch('./language-classes.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const langClasses = await response.json();
+        console.log('Loaded JSON:', langClasses);
+    } catch (error) {
+        console.error('Error loading JSON:', error);
+    }
+}
+
+loadJSON();
+
 function toggleOutput() {
     document.querySelectorAll('.output').forEach(el => {
         if (el.textContent === '') {

@@ -1,0 +1,4 @@
+{
+    "interpreted": ["python", "haskell"],
+    "compiled": ["rust", "haskell"]
+}

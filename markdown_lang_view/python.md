@@ -6,7 +6,7 @@ Main site: python.org
 
 ### 0.0 Current versions at the time of writing
 
-3.8 - 3.12
+3.9 - 3.13
 
 ### 0.1 Short language profile
 
