@@ -1,6 +1,6 @@
 from pathlib import Path
 
-# import markdown_to_json
+import markdown_to_json as md2j
 
 from .illustration import Illustration
 
@@ -37,8 +37,8 @@ class FeatView:
 
     @classmethod
     def from_file(cls, featview_root: Path, feat_name: str) -> "FeatView":
-        with open(featview_root, encoding="utf-8") as f:
-            raw_dict = markdown_to_json.dictify(f.read())
+        with open(featview_root / f"{feat_name}.json", encoding="utf-8") as f:
+            raw_dict = md2j.dictify(f.read())
 
         return cls("")
 

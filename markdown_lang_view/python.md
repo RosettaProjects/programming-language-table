@@ -109,7 +109,10 @@ Either of the [GOAT editors](), VSCode/VSCodium, JupyterLab / Jupyter Notebook, 
 > Print the words "Hello, World!" to the console.
 
 ```py
-
+print("Hello, world!")
+```
+```txt
+❯ Hello, world!
 ```
 
 ## 2. REPL
@@ -126,10 +129,26 @@ $ python
 
 ##### Test here
 
-### 2.1 Printing "Hello, world!" in the REPL 
+### 2.1 Printing "Hello, world!" in the REPL
+
+> Note here
+
+##### Snippet:
 
 ```py
 print("Hello, world!")
+```
+
+##### Full:
+
+```py
+print("Hello, world!")
+```
+
+##### Output:
+
+```txt
+Hello, world!
 ```
 
 ## 3. Arithmetic

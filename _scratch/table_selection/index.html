@@ -15,15 +15,18 @@
         <div id="rowFilter" class="dropdown">
             <button>Features (Rows)</button>
             <div class="dropdown-menu selection row_menu">
-                <label><input type="checkbox" value="console_output">Console Output</label>
-                <label><input type="checkbox" value="type_inspection">Type Inspection</label>
-                <label><input type="checkbox" value="boolean"> Boolean</label>
+                <label><input type="checkbox" value="console_output"><b>Console Output</b></label>
+                <label><input type="checkbox" value="prim_types"><b>Primitive Types</b></label>
+                <label><input type="checkbox" value="integer">&nbsp;&nbsp;&nbsp;&nbsp;Integer</label>
+                <label><input type="checkbox" value="boolean">&nbsp;&nbsp;&nbsp;&nbsp;Boolean</label>
             </div>
         </div>
 
         <div id="columnFilter" class="dropdown">
             <button>Programming Languages</button>
             <div class="dropdown-menu selection col_menu">
+                <label><input type="checkbox" value="interpreted"><b>Interpreted</b></label>
+                <label><input type="checkbox" value="compiled"><b>Compiled</b></label>
                 <label><input type="checkbox" value="python">Python</label>
                 <label><input type="checkbox" value="rust">Rust</label>
                 <label><input type="checkbox" value="haskell">Haskell</label>
@@ -43,25 +46,32 @@
         <thead>
             <tr>
                 <th></th>
-                <th data-category="python">Python</th>
+                <th data-category="python interpreted">Python</th>
                 <th data-category="rust">Rust</th>
-                <th data-category="haskell">Haskell</th>
+                <th data-category="haskell compiled interpreted">Haskell</th>
             </tr>
         </thead>
         <tbody>
             <tr data-category="console_output">
-                <td class="row_name">Console Output</td>
-                <td data-category="python">
-                    <div class="code">
-                        <div class="substance">
-                            <span class="function">print</span>
-                            <span class="structural">(</span>
-                            <span class="string">"Hello, world!"</span>
-                            <span class="structural">)</span>
-                        </div></div>
+                <td class="row_name level2">0.0&nbsp;&nbsp;&nbsp;Console Output</td>
+                <td data-category="python interpreted">
+                    <div class="cell">
+                        <div class="sandwich">
+                            <div class="substance">
+                                <span class="function">print</span>
+                                <span class="structural">(</span>
+                                <span class="string">"Hello, world!"</span>
+                                <span class="structural">)</span>
+                            </div>
+                        </div>
+                        <div class="output_box">
+                            <span class="output" data-original="Hello, world!"></span>
+                        </div>
+                    </div>
+
                 </td>
-                <td data-category="rust">
-                    <div class="code">
+                <td class="code_cell" data-category="rust">
+                    <div class="cell">
                         <div class="sandwich">
                             <div class="pre">
                                 <span class="boilerplate" data-original="fn main() {"></span>
@@ -74,15 +84,16 @@
                             <div class="post">
                                 <span class="boilerplate" data-original="}"></span>
                             </div>
-                            <div>
-                                <span class="output" data-original="Hello, world!"></span>
-                            </div>
+
+                        </div>
+                        <div class="output_box">
+                            <span class="output" data-original="Hello, world!"></span>
                         </div>
                     </div>
 
                 </td>
-                <td data-category="haskell">
-                    <div class="code">
+                <td class="code_cell" data-category="haskell compiled interpreted">
+                    <div class="cell">
                         <div class="sandwich">
                             <div class="pre">
                                 <span class="boilerplate" data-original="main :: IO ()"></span>
@@ -95,32 +106,137 @@
                                 <span></span>
                             </div>
                         </div>
+                        <div class="output_box">
+                            <span class="output" data-original="Hello, world!"></span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr data-category="prim_types">
+                <td class="row_name level2">0.1&nbsp;&nbsp;&nbsp;Primitive Types</td>
+                <td class="header_cell" data-category="python interpreted"></td>
+                <td class="header_cell" data-category="rust"></td>
+                <td class="header_cell" data-category="haskell compiled interpreted"></td>
+            </tr>
+
+
+            <tr data-category="prim_types integer">
+                <td class="row_name level3">&nbsp;&nbsp;0.1.0 Integer</td>
+                <td class="code_cell" data-category="python interpreted">
+                    <div class="cell">
+                        <div class="sandwich">
+                            <div class="substance">
+                                <span class="function">print</span>
+                                <span class="structural">(</span>
+                                <span class="string">"Hello, world!"</span>
+                                <span class="structural">)</span>
+                            </div>
+                        </div>
+                        <div class="output_box">
+                            <span class="output" data-original="Hello, world!"></span>
+                        </div>
+                    </div>
+                </td>
+                <td class="code_cell" data-category="rust">
+                    <div class="cell">
+                        <div class="sandwich">
+                            <div class="pre">
+                                <span class="boilerplate" data-original="fn main() {"></span>
+                            </div>
+                            <div class="substance indent_if_bp">
+                                <span class="function">println!</span><span class="structural">(</span>
+                                <span class="string">"Hello, world!"</span>
+                                <span class="structural">);</span>
+                            </div>
+                            <div class="post">
+                                <span class="boilerplate" data-original="}"></span>
+                            </div>
+                        </div>
+                        <div class="output_box">
+                            <span class="output" data-original="Hello, world!"></span>
+                        </div>
+                    </div>
+                </td>
+                <td class="code_cell" data-category="haskell compiled interpreted">
+                    <div class="cell">
+                        <div class="sandwich">
+                            <div class="pre">
+                                <span class="boilerplate" data-original="main :: IO ()"></span>
+                            </div>
+                            <div class="substance">
+                                <span class="function">main</span>
+                                <span class="structural">&nbsp;=&nbsp;</span>
+                                <span class="function">putStrLn&nbsp;</span>
+                                <span class="string">"Hello, world!"</span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="output_box">
+                            <span class="output" data-original="Hello, world!"></span>
+                        </div>
 
                     </div>
                 </td>
             </tr>
-            <tr data-category="prim_types integers">
-                <td class="row_name">Type Inspection</td>
-                <td data-category="python">
-                    <div class="code">COMING SOON</div>
-                </td>
-                <td data-category="rust">
-                    <div class="code">COMING SOON</div>
-                </td>
-                <td data-category="haskell">
-                    <div class="code">COMING SOON</div>
-                </td>
-            </tr>
+
+
             <tr data-category="prim_types boolean">
-                <td class="row_name">Boolean</td>
-                <td data-category="python">
-                    <div class="code">COMING SOON</div>
+                <td class="row_name level3">&nbsp;&nbsp;0.1.1 Boolean</td>
+                <td class="code_cell" data-category="python interpreted">
+                    <div class="cell">
+                        <div class="sandwich">
+                            <div class="substance">
+                                <span class="function">print</span>
+                                <span class="structural">(</span>
+                                <span class="string">"Hello, world!"</span>
+                                <span class="structural">)</span>
+                            </div>
+
+                        </div>
+                        <div class="output_box">
+                            <span class="output" data-original="Hello, world!"></span>
+                        </div>
+                    </div>
                 </td>
-                <td data-category="rust">
-                    <div class="code">COMING SOON</div>
+                <td class="code_cell" data-category="rust">
+                    <div class="cell">
+                        <div class="sandwich">
+                            <div class="pre">
+                                <span class="boilerplate" data-original="fn main() {"></span>
+                            </div>
+                            <div class="substance indent_if_bp">
+                                <span class="function">println!</span><span class="structural">(</span>
+                                <span class="string">"Hello, world!"</span>
+                                <span class="structural">);</span>
+                            </div>
+                            <div class="post">
+                                <span class="boilerplate" data-original="}"></span>
+                            </div>
+                        </div>
+                        <div class="output_box">
+                            <span class="output" data-original="Hello, world!"></span>
+                        </div>
+                    </div>
                 </td>
-                <td data-category="haskell">
-                    <div class="code">COMING SOON</div>
+                <td class="code_cell" data-category="haskell compiled interpreted">
+                    <div class="cell">
+                        <div class="sandwich">
+                            <div class="pre">
+                                <span class="boilerplate" data-original="main :: IO ()"></span>
+                            </div>
+                            <div class="substance">
+                                <span class="function">main</span>
+                                <span class="structural">&nbsp;=&nbsp;</span>
+                                <span class="function">putStrLn&nbsp;</span>
+                                <span class="string">"Hello, world!"</span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="output_box">
+                            <span class="output" data-original="Hello, world!"></span>
+                        </div>
+
+                    </div>
                 </td>
             </tr>
         </tbody>
