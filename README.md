@@ -50,6 +50,8 @@ Quelle surprise.
 
 ## Roadmap
 
+- [ ] separate language classes and languages (either separate menus or just different html classes) to allow individual languages to override classes if unselected after classes (maybe do the same for rows, but less important)
+- [ ] add colorscheme selection and editable custom colorscheme values
 - [ ] minimal markdown to generate minimal HTML example
 - [ ] MVP Python package for html generation
-- [ ] add optional snippet in addition to MWE
+- [ ] make everything keyboard-controllable
