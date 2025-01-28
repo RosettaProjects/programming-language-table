@@ -4,53 +4,81 @@ const colNames = Object.freeze(Array.from(document.querySelectorAll('.col_menu i
 console.log("rowNames", rowNames);
 console.log("colNames", colNames);
 
-const categoryHierarchy = {
+const langClasses = {
     compiled: ['rust', 'haskell'],
     interpreted: ['python', 'haskell'],
+};
+const subsections = {
+    '0': ['0.0'],
+    '0.1': ['0.1.0', '0.1.1']
+};
+
+const categoryHierarchy = {
     prim_types: ['integer', 'boolean'],
 };
 
-// Function to handle subcategory selection
-function handleRowSubcategorySelection() {
-    const checkboxes = document.querySelectorAll('.row_menu input[type="checkbox"]');
+// // Function to handle subcategory selection
+// function handleRowSubcategorySelection() {
+//     const checkboxes = document.querySelectorAll('.row_menu input[type="checkbox"]');
     
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', () => {
-            const category = checkbox.value;
-            if (categoryHierarchy[category]) { // If it's a supercategory
-                const subcategories = categoryHierarchy[category];
-                subcategories.forEach(subcategory => {
-                    const subCheckbox = Array.from(checkboxes).find(cb => cb.value === subcategory);
-                    if (subCheckbox) {
-                        subCheckbox.checked = checkbox.checked; // Sync subcategory with supercategory
-                    }
-                });
-            }
-            filterTableRows(); // Reapply column filtering
-        });
-    });
-}
-function handleColumnSubcategorySelection() {
-    const checkboxes = document.querySelectorAll('.col_menu input[type="checkbox"]');
+//     checkboxes.forEach(checkbox => {
+//         checkbox.addEventListener('change', () => {
+//             const category = checkbox.value;
+//             if (categoryHierarchy[category]) { // If it's a supercategory
+//                 const subcategories = categoryHierarchy[category];
+//                 subcategories.forEach(subcategory => {
+//                     const subCheckbox = Array.from(checkboxes).find(cb => cb.value === subcategory);
+//                     if (subCheckbox) {
+//                         subCheckbox.checked = checkbox.checked; // Sync subcategory with supercategory
+//                     }
+//                 });
+//             }
+//             filterTableRows(); // Reapply column filtering
+//         });
+//     });
+// }
+// function handleColumnSubcategorySelection() {
+//     const checkboxes = document.querySelectorAll('.col_menu input[type="checkbox"]');
     
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', () => {
-            const category = checkbox.value;
-            if (categoryHierarchy[category]) { // If it's a supercategory
-                const subcategories = categoryHierarchy[category];
-                subcategories.forEach(subcategory => {
-                    const subCheckbox = Array.from(checkboxes).find(cb => cb.value === subcategory);
-                    if (subCheckbox) {
-                        subCheckbox.checked = checkbox.checked; // Sync subcategory with supercategory
-                    }
-                });
-            }
-            filterTableColumns(); // Reapply column filtering
-        });
-    });
+//     checkboxes.forEach(checkbox => {
+//         checkbox.addEventListener('change', () => {
+//             const category = checkbox.value;
+//             if (categoryHierarchy[category]) { // If it's a supercategory
+//                 const subcategories = categoryHierarchy[category];
+//                 subcategories.forEach(subcategory => {
+//                     const subCheckbox = Array.from(checkboxes).find(cb => cb.value === subcategory);
+//                     if (subCheckbox) {
+//                         subCheckbox.checked = checkbox.checked; // Sync subcategory with supercategory
+//                     }
+//                 });
+//             }
+//             filterTableColumns(); // Reapply column filtering
+//         });
+//     });
+// }
+// handleRowSubcategorySelection();
+// handleColumnSubcategorySelection();
+
+function getCheckboxValues(className) {
+    return Array.from(document.querySelectorAll(`.${className} input[type="checkbox"]`))
+        .filter(input => input.checked)
+        .map(input => input.value);
 }
-handleRowSubcategorySelection();
-handleColumnSubcategorySelection();
+
+function computeLanguages() {
+    const selectedItems = getCheckboxValues('col_menu')
+    console.log('selectedColumns', selectedItems)
+
+    return [...new Set(selectedItems.flatMap(item => langClasses[item] || item))];
+
+}
+
+function computeRows() {
+    const selectedItems = getCheckboxValues('row_menu')
+    console.log('selectedRows', selectedItems)
+
+    return [...new Set(selectedItems.flatMap(item => [item].concat(subsections[item] || [item])))];
+}
 
 /*
 function invertMapping(obj) {
@@ -132,13 +160,50 @@ function toggleBoilerplate() {
             el.innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;' + el.innerHTML;
         }
     });
+}
 
+function updateChildColumns(selectedLangs) {
+    document.querySelectorAll('.col_menu input[type="checkbox"]').forEach(checkbox => {
+        if (selectedLangs.includes(checkbox.value)) {
+            checkbox.checked = true;
+        }
+    });
+}
+
+function updateChildRows(selectedRows) {
+    document.querySelectorAll('.row_menu input[type="checkbox"]').forEach(checkbox => {
+        if (selectedRows.includes(checkbox.value)) {
+            checkbox.checked = true;
+        }
+    });
+}
+
+function deselectChildRows(rowID) {
+    if (rowID in subsections) {
+        const toDeselect = subsections[rowID];
+        document.querySelectorAll('.row_menu input[type="checkbox"]').forEach(checkbox => {
+            if (toDeselect.includes(checkbox.value)) {
+                checkbox.checked = false;
+            }
+        });
+    }
+}
+
+function deselectChildColumns(colID) {
+    if (colID in langClasses) {
+        const toDeselect = langClasses[colID];
+        document.querySelectorAll('.col_menu input[type="checkbox"]').forEach(checkbox => {
+            if (toDeselect.includes(checkbox.value)) {
+                checkbox.checked = false;
+            }
+        });
+    }
 }
 
 function filterTableRows() {
-    const selectedRows = Array.from(document.querySelectorAll('.row_menu input[type="checkbox"]'))
-        .filter(input => input.checked && input.closest('.dropdown').querySelector('button').textContent.includes('Row'))
-        .map(input => input.value);
+    const selectedRows = computeRows();
+    console.log('selectedRows', selectedRows);
+    updateChildRows(selectedRows);
 
     // table.querySelectorAll("tbody tr").forEach(row => {
     //     const rowCategory = row.dataset.category; // Get the category from the row's data attribute
@@ -154,17 +219,20 @@ function filterTableRows() {
     console.log("selectedRows:", selectedRows);
 }
 
+
 // Updated filterTableColumns function
 function filterTableColumns() {
-    const selectedColumns = Array.from(document.querySelectorAll('.col_menu input[type="checkbox"]'))
-        .filter(input => input.checked && input.closest('.dropdown').querySelector('button').textContent.includes('Languages'))
-        .map(input => input.value);
+    selectedLanguages = computeLanguages();
+    console.log(selectedLanguages);
+    updateChildColumns(selectedLanguages);
     const columnIndexesToHide = [];
+
+    
 
     table.querySelectorAll("thead th").forEach((th, colIndex) => {
         if (colIndex > 0) { // Skip the first column (row labels)
             const colCategory = th.dataset.category; // Get the category from the column header
-            const shouldHide = !selectedColumns.includes(colCategory); // Determine if the column should be hidden
+            const shouldHide = !selectedLanguages.includes(colCategory); // Determine if the column should be hidden
             if (shouldHide) {
                 columnIndexesToHide.push(colIndex); // Add column index to hide list
             }
@@ -180,13 +248,11 @@ function filterTableColumns() {
             }
         });
     });
-
-    console.log("selectedColumns:", selectedColumns);
 }
 
 // function filterTableColumns() {
 //     const selectedColumns = Array.from(document.querySelectorAll('.col_menu input[type="checkbox"]'))
-//         .filter(input => input.checked && input.closest('.dropdown').querySelector('button').textContent.includes('Languages'))
+//         .filter(input => input.checked && input.closest('.dropdown').querySelector('button'))
 //         .map(input => input.value);
 //     const columnIndexesToHide = [];
 
@@ -214,11 +280,29 @@ function filterTableColumns() {
 // }
 
 document.querySelectorAll('.row_menu input[type="checkbox"]').forEach(checkbox => {
-    checkbox.addEventListener('change', filterTableRows);
+    checkbox.addEventListener("change", (event) => {
+        if (event.target.checked) {
+            console.log("Checkbox is checked!");
+            filterTableRows();
+        } else {
+            console.log("Checkbox is unchecked!");
+            deselectChildRows(event.target.value);
+            filterTableRows();
+        }
+    })
 });
 
 document.querySelectorAll('.col_menu input[type="checkbox"]').forEach(checkbox => {
-    checkbox.addEventListener('change', filterTableColumns);
+    checkbox.addEventListener("change", (event) => {
+        if (event.target.checked) {
+            console.log("Checkbox is checked!");
+            filterTableColumns();
+        } else {
+            console.log("Checkbox is unchecked!");
+            deselectChildColumns(event.target.value);
+            filterTableColumns();
+        }
+    })
 });
 
 document.getElementById('boilerplateToggle')
