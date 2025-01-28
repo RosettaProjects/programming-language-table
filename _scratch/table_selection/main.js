@@ -60,6 +60,32 @@ function toggleOutput(isSelected) {
     }
 }
 
+function toggleOutputPrefix(isSelected) {
+    if (isSelected) {
+        document.querySelectorAll('.output_prefix').forEach(cell => {
+            cell.classList.remove("hidden");
+        });
+    }
+    else {
+        document.querySelectorAll('.output_prefix').forEach(cell => {
+            cell.classList.add("hidden");
+        });
+    }
+}
+
+function toggleTitle(isSelected) {
+    const titleBlock = document.getElementById('title');
+    const tableBlock = document.getElementById('table-container');
+    if (isSelected) {
+        titleBlock.classList.add("hidden");
+        tableBlock.style.top = '4rem';
+    }
+    else {
+        titleBlock.classList.remove("hidden");
+        tableBlock.style.top = '8rem';
+    }
+}
+
 function toggleBoilerplate() {
     document.querySelectorAll('.boilerplate').forEach(el => {
         if (el.textContent === '') {
@@ -136,25 +162,30 @@ function filterLanguages() {
     selectedLanguages = computeLanguages();
     console.log(selectedLanguages);
     updateChildLanguages(selectedLanguages);
-    const columnIndexesToHide = [];
 
-    table.querySelectorAll("thead th").forEach((th, colIndex) => {
-        if (colIndex > 0) {
-            const colCategory = th.dataset.category;
-            const shouldHide = !selectedLanguages.includes(colCategory);
-            if (shouldHide) {
-                columnIndexesToHide.push(colIndex);
+    table.querySelectorAll("thead th").forEach(th => {
+        if (!th.classList.contains('row_name')) {
+            if (selectedLanguages.includes(th.dataset.category)) {
+                th.classList.remove("hidden");
             }
-            th.classList.toggle("hidden", shouldHide);
+            else {
+                th.classList.add("hidden");
+            }
         }
     });
 
     table.querySelectorAll("tbody tr").forEach(row => {
-        row.querySelectorAll("td").forEach((td, colIndex) => {
-            if (colIndex > 0) {
-                const shouldHide = columnIndexesToHide.includes(colIndex);
-                td.classList.toggle("hidden", shouldHide);
+        row.querySelectorAll("td").forEach(td => {
+            console.log(td)
+            if (!td.classList.contains('row_name')) {
+                if (selectedLanguages.includes(td.dataset.category)) {
+                    td.classList.remove("hidden");
+                }
+                else {
+                    td.classList.add("hidden");
+                }
             }
+            else { console.log("nothing");}
         });
     });
 }
@@ -189,6 +220,14 @@ document.getElementById('outputToggle').addEventListener('change', (event) => {
     toggleOutput(event.target.checked);
 });
 
+document.getElementById('outputPrefixToggle').addEventListener('change', (event) => {
+    toggleOutputPrefix(event.target.checked);
+});
+
+document.getElementById('titleToggle').addEventListener('change', (event) => {
+    toggleTitle(event.target.checked);
+});
+
 document.querySelectorAll('.dropdown button').forEach(button => {
     button.addEventListener('click', () => {
         const dropdown = button.parentElement;
@@ -206,6 +245,5 @@ document.addEventListener('click', (e) => {
 
 // INITIALIZATION =====================================================================================================
 
-document.querySelectorAll('.output_cell').forEach(cell => {
-    cell.classList.add("hidden");
-});
+toggleOutput(false);
+toggleOutputPrefix(false);
