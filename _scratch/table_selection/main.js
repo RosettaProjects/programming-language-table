@@ -47,19 +47,17 @@ function computeRows() {
     return [...new Set(selectedRows.flatMap(item => [item].concat(subsections[item] || [item])))];
 }
 
-function toggleOutput() {
-    document.querySelectorAll('.output').forEach(el => {
-        if (el.textContent === '') {
-            text = el.getAttribute('data-original');
-            el.innerHTML = `<br><span class="output_prefix">❯&nbsp;</span><span class="output_substance">${text}</span>`;
-        } else {
-            el.setAttribute('data-original', el.innerHTML
-                .replace(/^<br><span class="output_prefix">❯&nbsp;<\/span><span class="output_substance">/g, '')
-                .replace(/^<\/span>/g, '')
-            );
-            el.textContent = '';
-        }
-    });
+function toggleOutput(isSelected) {
+    if (isSelected) {
+        document.querySelectorAll('.output_cell').forEach(cell => {
+            cell.classList.remove("hidden");
+        });
+    }
+    else {
+        document.querySelectorAll('.output_cell').forEach(cell => {
+            cell.classList.add("hidden");
+        });
+    }
 }
 
 function toggleBoilerplate() {
@@ -187,7 +185,9 @@ document.querySelectorAll('.col_menu input[type="checkbox"]').forEach(checkbox =
 
 document.getElementById('boilerplateToggle').addEventListener('change', toggleBoilerplate);
 
-document.getElementById('outputToggle').addEventListener('change', toggleOutput);
+document.getElementById('outputToggle').addEventListener('change', (event) => {
+    toggleOutput(event.target.checked);
+});
 
 document.querySelectorAll('.dropdown button').forEach(button => {
     button.addEventListener('click', () => {
@@ -205,3 +205,7 @@ document.addEventListener('click', (e) => {
 });
 
 // INITIALIZATION =====================================================================================================
+
+document.querySelectorAll('.output_cell').forEach(cell => {
+    cell.classList.add("hidden");
+});

@@ -1,6 +1,7 @@
 :root {
     /* Default theme variables */
     --background-color: #001200;
+    --background-color-lighter: #002400;
     --text-color: #485848;
     --mellow: #112211;
     --subtle: #334433;
@@ -15,17 +16,27 @@ body {
 }
 
 table {
-    width: 80%;
     border-collapse: collapse;
     empty-cells: hide;
     margin: auto;
+    width: max-content;
+    border: 3px solid var(--mellow);
 }
 
-th,
+th {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 10px;
+    min-width: 15.0rem;
+    border-left: 1px solid var(--mellow);
+    border-right: 1px solid var(--mellow);
+    height: max-content;
+    box-sizing: border-box;
+}
 td {
-    border: 1px solid var(--mellow);
-    /* padding: 8px; */
-    /* text-align: left; */
+    border-left: 1px solid var(--mellow);
+    border-right: 1px solid var(--mellow);
     height: max-content;
     box-sizing: border-box;
 }
@@ -38,29 +49,14 @@ span {
     margin: 0;
 }
 
-/* function toggleBoilerplate() {
-    const setBP = true;
-    document.querySelectorAll('.boilerplate').forEach(el => {
-        if (el.textContent === '') {
-            text = el.getAttribute('data-original');
-            el.innerHTML = `${text}<br>`;
-        } else {
-            el.setAttribute('data-original', el.textContent);
-            el.textContent = '';
-            setBP = false;
-        }
-    });
-    if (setBP) {
-        const newHeight = 40;
-    } else {
-        const newHeight = 80;
-    }
-    document.querySelectorAll('.cell').forEach(el => {
-        el.style.minHeight = `'${newHeight}'`;
-    });
-} */
+.table-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    max-width: 100%;
+}
 
-.code_cell {
+
+.code_cell, .output_cell {
     font-family: monospace;
     /* height: 100%;
     min-height: 100px;
@@ -71,42 +67,59 @@ span {
     padding-left: 5px; */
 }
 
+.code_cell {
+    border-top: 1px solid var(--mellow);
+    vertical-align: top;
+}
+
+.output_cell {
+    border-top: 3px green;
+}
+
+/* .output_row {
+    border-top: none;
+}
+
+.main_row {
+    border-bottom: none;
+} */
+
 .cell {
     font-family: monospace;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 80px;
+    /* flex-direction: column; */
+    /* justify-content: space-between; */
     height: 100%;
     padding-top: 5px;
     padding-bottom: 5px;
     padding-left: 5px;
-
+    padding-right: 10px;
+    min-width: 15.0rem;
 }
 
-.sandwich {
+.code_lines {
     flex-direction: column;
     align-self: flex-start;
     vertical-align: top;
-    justify-content: space-between;
+    /* justify-content: top; */
 }
-/* 
+
 .substance, .pre, .post {
     text-align: top;
     vertical-align: top;
 }
 
-.output_box {
+/* .output_box {
     display: flex;
     flex-direction: column;
     text-align: bottom;
     vertical-align: bottom;
-}
+} */
 
 .output {
     text-align: bottom;
-     align-self: flex-end;
+    align-self: flex-end;
     vertical-align: bottom;
-} */
+}
 
 .hidden {
     display: none;
@@ -125,7 +138,15 @@ span {
     color: green;
 }
 
+.identifier {
+    color: rgb(60, 60, 165);
+}
+
 .keyword {
+    color: rgb(82, 61, 38);
+}
+
+.boolean {
     color: #652020
 }
 
@@ -135,6 +156,14 @@ span {
 
 .string {
     color: #775555;
+}
+
+.string_bright {
+    color: rgb(128, 63, 75);
+}
+
+.type {
+    color: rgb(122, 66, 122);
 }
 
 .other {
@@ -157,7 +186,7 @@ span {
     font-size: 1.0rem;
 }
 
-select {
+/* select {
     width: 200px;
     padding: 8px;
     font-size: 14px;
@@ -166,26 +195,25 @@ select {
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     appearance: none;
-    /* Removes the default arrow styling */
+    Removes the default arrow styling
     cursor: pointer;
     margin-right: 10px;
-    /* Add some spacing between menus */
-}
+    Add some spacing between menus
+} */
 
 /* Add a custom arrow for the dropdown */
-select::after {
+/* select::after {
     content: '▼';
     position: absolute;
     right: 10px;
     pointer-events: none;
-    /* Ensure the arrow does not block clicks */
-}
+} */
 
 /* Adjust the dropdown when focused */
 select:focus {
     border-color: #0078d7;
     /* Change border color on focus */
-    box-shadow: 0 0 5px rgba(0, 120, 215, 0.5);
+    /* box-shadow: 0 0 5px rgba(0, 120, 215, 0.5); */
     /* Subtle glow */
     outline: none;
     /* Remove default outline */
@@ -196,7 +224,11 @@ select+select {
     margin-left: 15px;
 }
 
-.dropdown {
+.foldout {
+    background-color: var(--background-color-lighter);
+}
+
+.dropdown, dropdown-menu {
     position: relative;
     display: inline-block;
     width: 200px;
@@ -208,9 +240,9 @@ select+select {
     padding: 10px;
     font-size: 14px;
     text-align: left;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    background-color: var(--background-color-lighter);
+    /* border: 1px solid #ccc; */
+    /* border-radius: 4px; */
     cursor: pointer;
     position: relative;
     display: flex;
@@ -230,21 +262,21 @@ select+select {
 .dropdown .dropdown-menu {
     display: none;
     position: absolute;
-    top: 100%;
-    left: 0;
+    /* top: 100%; */
+    /* left: 0; */
     width: 100%;
     background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 10;
+    /* border: 1px solid #ccc; */
+    /* border-radius: 4px; */
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+    /* z-index: 10; */
 }
 
 /* Dropdown items */
 .dropdown .dropdown-menu label {
     display: block;
-    padding: 8px 10px;
-    font-size: 14px;
+    padding: 4px 5px;
+    font-size: 12px;
     cursor: pointer;
     white-space: nowrap;
 }
@@ -269,4 +301,12 @@ select+select {
 
 .row_name {
     font-weight: bold;
+    vertical-align: top;
+    border-top: 1px solid var(--mellow);
+    border-right: 2px solid var(--mellow);
+    padding: 5px;
+}
+
+.header_cell {
+    border-top: 1px solid var(--mellow);
 }

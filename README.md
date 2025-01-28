@@ -50,6 +50,6 @@ Quelle surprise.
 
 ## Roadmap
 
-- [ ] small examples for Markdown with 
+- [ ] minimal markdown to generate minimal HTML example
 - [ ] MVP Python package for html generation
 - [ ] add optional snippet in addition to MWE
