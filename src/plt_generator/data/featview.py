@@ -2,7 +2,7 @@ from pathlib import Path
 
 import markdown_to_json as md2j
 
-from .illustration import Illustration
+from .datamodels import Illustration
 
 
 class ParsedFeatureFile:

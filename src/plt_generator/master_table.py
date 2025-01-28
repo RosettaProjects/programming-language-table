@@ -1,6 +1,6 @@
 import pandas as pd
 
-from .data import FeatView, LangView, illustration
+from .data import FeatView, LangView, datamodels
 from .sync import sync_bidirectional
 from .validation import validate_view_objects
 

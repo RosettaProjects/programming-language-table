@@ -241,3 +241,11 @@ document.addEventListener('click', (e) => {
         }
     });
 });
+
+/* Desired behavior: 
+- default languages shown at start
+- category selected: all included languages selected (OR logic)
+- category unselected: all included languages selected if not still covered by other selected categories
+- language/row selected/unselected: no side effect; categories unchanged (i.e. language/row un-/selection overrides category selections)
+
+*/
