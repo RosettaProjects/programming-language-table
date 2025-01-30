@@ -21,7 +21,8 @@ const langClasses = {
     interpreted: ['python', 'haskell'],
 };
 const subsections = {
-    '0': ['0.0'],
+    '0': ['0.0', '0.0.0', '0.1', '0.1.0', '0.1.1'],
+    '0.0': ['0.0.0'],
     '0.1': ['0.1.0', '0.1.1']
 };
 
@@ -155,8 +156,8 @@ function filterTableRows() {
     updateChildRows(selectedRows);
 
     table.querySelectorAll("tbody tr").forEach(row => {
-        const rowCategories = row.dataset.category.split(" ");
-        const hasMatch = rowCategories.some(category => selectedRows.includes(category));
+        const rowCategory = row.dataset.category;
+        const hasMatch = selectedRows.includes(rowCategory);
         row.classList.toggle("hidden", !hasMatch);
     });
 }
