@@ -8,9 +8,17 @@
     --mellow: #112211;
     --subtle: #334433;
     --subtler: #162416;
-    --faint: #001200;
+    --faint: #041604;
+    --fainter: #041204;
+    --faintest: #021002;
 
     --body-font: 'Raleway', sans-serif;
+    --font-size-1: 1.2rem;
+    --font-size-2: 0.9rem;
+    --font-size-3: 0.75rem;
+    --font-size-code: 0.75rem;
+
+    --button-width: auto;
 }
 
 #title {
@@ -18,7 +26,7 @@
     top: 3.5rem;
     left: 50%;
     transform: translateX(-50%);
-    
+
 }
 
 h1 {
@@ -36,19 +44,19 @@ body {
 table {
     border-collapse: collapse;
     empty-cells: hide;
-    margin: auto;
+    /* margin: auto; */
     width: max-content;
     border: 3px solid var(--mellow);
-    
-    
+
+
 }
 
 th {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 10px;
-    min-width: 15.0rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 1rem;
+    /* min-width: 15.0rem; */
     border-left: 1px solid var(--mellow);
     border-right: 1px solid var(--mellow);
     height: max-content;
@@ -59,6 +67,7 @@ td {
     border-left: 1px solid var(--mellow);
     border-right: 1px solid var(--mellow);
     height: max-content;
+    width: max-content;
     box-sizing: border-box;
 }
 
@@ -82,10 +91,64 @@ span {
     max-height: 100%;
 }
 
+.row_name {
+    border-top: 1px solid var(--mellow);
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+}
+
+.row_id {
+    border-top: 1px solid var(--mellow);
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+    text-align: left;
+    min-width: 2.5rem;
+}
+
+.row_id.level1,
+.row_name.level1 {
+    font-size: var(--font-size-1);
+}
+
+.row_id.level2,
+.row_name.level2 {
+    font-size: var(--font-size-2);
+}
+
+.row_id.level2 {
+    padding-left: 1rem;
+}
+
+.row_id.level3 {
+    padding-left: 2rem;
+}
+
+.row_id.level3,
+.row_name.level3 {
+    font-size: var(--font-size-3);
+    vertical-align: top;
+}
+
+.level1 {
+    background-color: var(--faint);
+}
+
+.level2 {
+    background-color: var(--faintest);
+}
+
+/* .level3 {} */
+
+.keyName {
+    font-family: monospace;
+}
 
 .code_cell,
 .output_cell {
     font-family: monospace;
+    font-size: var(--font-size-code);
     /* height: 100%;
     min-height: 100px;
     display: flex;
@@ -107,10 +170,11 @@ span {
 /* .output_row {
     border-top: none;
 }
+    */
 
 .main_row {
-    border-bottom: none;
-} */
+    border-top: 1px solid var(--mellow);
+}
 
 .cell {
     font-family: monospace;
@@ -122,8 +186,6 @@ span {
     padding-left: 5px;
     padding-right: 10px;
     min-width: 15.0rem;
-    
-    
 }
 
 .code_lines {
@@ -212,13 +274,7 @@ span {
     color: #444444;
 }
 
-.level2 {
-    font-size: 1.2rem;
-}
 
-.level3 {
-    font-size: 1.0rem;
-}
 
 /* select {
     width: 200px;
@@ -270,7 +326,7 @@ dropdown-menu {
     display: inline-block;
     box-shadow: none !important;
     outline: none;
-    width: 200px;
+    width: var(--button-width);
 }
 
 /* Dropdown button (the visible part) */
@@ -341,6 +397,37 @@ dropdown-menu {
     display: block;
 }
 
+.dropdown.open .dropdown-menu {
+    display: block;
+}
+
+.dropdown .dropdown-menu.text_field {
+    display: none;
+    position: absolute;
+    /* top: 100%; */
+    /* left: 0; */
+    width: 400%;
+    background-color: var(--background-color);
+    box-shadow: none !important;
+    outline: none;
+    /* border: 1px solid #ccc; */
+    /* border-radius: 4px; */
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+    z-index: 10;
+    border: 3px solid var(--mellow);
+}
+
+.dropdown.open .text_field {
+    box-shadow: none !important;
+    outline: none;
+    display: block;
+    padding: 1rem;
+    font-size: 12px;
+    cursor: pointer;
+    transform: translateX(-37.5%);
+    background-color: var(--faint);
+}
+
 button {
     color: var(--text-color);
     font-weight: bold;
@@ -381,31 +468,35 @@ button:active {
     border-top: 1px solid var(--mellow);
 }
 
-
 /* SCROLLBAR */
 
 /* Scrollbar Track (Background) */
 ::-webkit-scrollbar {
-    height: 10px; /* Adjust scrollbar height */
+    height: 10px;
+    /* Adjust scrollbar height */
 }
 
 /* Scrollbar Track */
 ::-webkit-scrollbar-track {
-    background: var(--mellow); /* Change background color */
+    background: var(--mellow);
+    /* Change background color */
 }
 
 /* Scrollbar Thumb (Draggable part) */
 ::-webkit-scrollbar-thumb {
-    background: var(--faint); /* Change thumb color */
+    background: var(--faint);
+    /* Change thumb color */
     border-radius: 4px;
 }
 
 /* Scrollbar Thumb on Hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--subtle); /* Darker color when hovered */
+    background: var(--subtle);
+    /* Darker color when hovered */
 }
 
 /* Firefox scrollbar */
 * {
-    scrollbar-color: var(--faint) var(--mellow); /* Thumb and track */
+    scrollbar-color: var(--faint) var(--mellow);
+    /* Thumb and track */
 }

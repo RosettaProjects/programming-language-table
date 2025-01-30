@@ -9,6 +9,10 @@
 const table = document.getElementById("categoryTable");
 const rowNames = Object.freeze(Array.from(document.querySelectorAll('.row_menu input[type="checkbox"]')).map(input => input.value));
 const colNames = Object.freeze(Array.from(document.querySelectorAll('.col_menu input[type="checkbox"]')).map(input => input.value));
+const instructionsToggle = document.getElementById("instructionsToggle");
+const outputToggle = document.getElementById("outputToggle");
+const outputPrefixToggle = document.getElementById('outputPrefixToggle');
+const titleToggle = document.getElementById('titleToggle');
 // console.log("rowNames", rowNames);
 // console.log("colNames", colNames);
 
@@ -190,7 +194,7 @@ function filterLanguages() {
     });
 }
 
-// EVENT LISTENERS ====================================================================================================
+// EVENT LISTENERS FOR CLICKS ====================================================================================================
 
 document.querySelectorAll('.row_menu input[type="checkbox"]').forEach(checkbox => {
     checkbox.addEventListener("change", (event) => {
@@ -216,15 +220,15 @@ document.querySelectorAll('.col_menu input[type="checkbox"]').forEach(checkbox =
 
 document.getElementById('boilerplateToggle').addEventListener('change', toggleBoilerplate);
 
-document.getElementById('outputToggle').addEventListener('change', (event) => {
+outputToggle.addEventListener('change', (event) => {
     toggleOutput(event.target.checked);
 });
 
-document.getElementById('outputPrefixToggle').addEventListener('change', (event) => {
+outputPrefixToggle.addEventListener('change', (event) => {
     toggleOutputPrefix(event.target.checked);
 });
 
-document.getElementById('titleToggle').addEventListener('change', (event) => {
+titleToggle.addEventListener('change', (event) => {
     toggleTitle(event.target.checked);
 });
 
@@ -241,6 +245,25 @@ document.addEventListener('click', (e) => {
             dropdown.classList.remove('open');
         }
     });
+});
+
+// EVENT LISTENERS FOR KEYS ================================================================================================
+
+function setKeybind(event, keyName, element) {
+    if (event.key === keyName && !event.ctrlKey && !event.altKey && !event.metaKey) { 
+        event.preventDefault();
+        if (element) {
+            element.click();
+        }
+    }
+}
+
+document.addEventListener("keydown", (event) => {
+    setKeybind(event, 'b', boilerplateToggle);
+    setKeybind(event, 'i', instructionsToggle);
+    setKeybind(event, 'o', outputToggle);
+    setKeybind(event, 'p', outputPrefixToggle);
+    setKeybind(event, 't', titleToggle);
 });
 
 // INITIALIZATION =====================================================================================================

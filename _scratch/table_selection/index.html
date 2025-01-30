@@ -12,13 +12,25 @@
 
 
     <div class="buttons">
+        <div class="dropdown">
+            <button id="instructionsToggle" class="foldout">Instructions</button>
+            <div class="dropdown-menu selection text_field">
+                <b>Keyboard shortcuts</b>:<br><br>
+                &nbsp;&nbsp;<span class="keyName"><b>b&nbsp;</b></span> toggle boilerplate<br>
+                &nbsp;&nbsp;<span class="keyName"><b>i&nbsp;</b></span> show instructions<br>
+                &nbsp;&nbsp;<span class="keyName"><b>o&nbsp;</b></span> toggle output<br>
+                &nbsp;&nbsp;<span class="keyName"><b>p&nbsp;</b></span> toggle output prefix<br>
+                &nbsp;&nbsp;<span class="keyName"><b>t&nbsp;</b></span> toggle title<br>
+            </div>
+        </div>
+        
         <div id="rowFilter" class="dropdown">
-            <button>Features (Rows)</button>
+            <button class="foldout">Features (Rows)</button>
             <div class="dropdown-menu selection row_menu">
                 <label><input type="checkbox" checked="true" value="0.0"><b>Console Output</b></label>
                 <label><input type="checkbox" checked="true" value="0.1"><b>Primitive Types</b></label>
-                <label><input type="checkbox" checked="true" value="0.1.0">&nbsp;&nbsp;&nbsp;&nbsp;Boolean</label>
-                <label><input type="checkbox" checked="true" value="0.1.1">&nbsp;&nbsp;&nbsp;&nbsp;Integer</label>
+                <label><input type="checkbox" checked="true" value="0.1.0">&nbsp;&nbsp;Boolean</label>
+                <label><input type="checkbox" checked="true" value="0.1.1">&nbsp;&nbsp;Integer</label>
             </div>
         </div>
 
@@ -38,7 +50,8 @@
             <div class="dropdown-menu display_menu">
                 <label><input id="boilerplateToggle" type="checkbox" value="showBoilerplate">Show boilerplate</label>
                 <label><input id="outputToggle" type="checkbox" value="showOutput">Show output</label>
-                <label><input id="outputPrefixToggle" type="checkbox" value="showOutputPrefix">Show output prefix</label>
+                <label><input id="outputPrefixToggle" type="checkbox" value="showOutputPrefix">Show output
+                    prefix</label>
                 <label><input id="titleToggle" type="checkbox" value="hideTitle">Hide title</label>
             </div>
         </div>
@@ -53,6 +66,7 @@
         <table id="categoryTable">
             <thead>
                 <tr>
+                    <th class="row_id"></th>
                     <th class="row_name"></th>
                     <th data-category="python">Python</th>
                     <th data-category="rust">Rust</th>
@@ -60,62 +74,76 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="main_row" data-category="0.0">
-                    <td class="row_name spans_output level2" rowspan="2">0.0&nbsp;&nbsp;&nbsp;Console Output</td>
-                    <td class="code_cell" data-category="python">
-                        <div class="cell">
-                            <div class="code_lines">
-                                <div class="substance">
-                                    <span class="function">print</span>
-                                    <span class="structural">(</span>
-                                    <span class="string">"Hello, world!"</span>
-                                    <span class="structural">)</span>
-                                </div>
+                <tr class="main_row level1">
+                    <td class="row_id level1">0</td>
+                    <td class="row_name level1">Basics</td>
+                    <td data-category="python"></td>
+                    <td data-category="rust"></td>
+                    <td data-category="haskell"></td>
+                </tr>
+                <tr class="main_row level2" data-category="0.0">
+                    <td class="row_id level2">0.0</td>
+                    <td class="row_name level2">Console Output</td>
+                    <td data-category="python"></td>
+                    <td data-category="rust"></td>
+                    <td data-category="haskell"></td>
+                </tr>
+                <td class="row_id level3 spans_output"  rowspan="2">0.0.0</td>
+                <td class="row_name level3 spans_output"  rowspan="2">Hello, world!</td>
+                <td class="code_cell" data-category="python">
+                    <div class="cell">
+                        <div class="code_lines">
+                            <div class="substance">
+                                <span class="function">print</span>
+                                <span class="structural">(</span>
+                                <span class="string">"Hello, world!"</span>
+                                <span class="structural">)</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </td>
+                <td class="code_cell" data-category="rust">
+                    <div class="cell">
+                        <div class="code_lines">
+                            <div class="pre">
+                                <span class="boilerplate" data-original="fn main() {"></span>
+                            </div>
+                            <div class="substance indent_if_bp">
+                                <span class="function">println!</span><span class="structural">(</span>
+                                <span class="string">"Hello, world!"</span>
+                                <span class="structural">);</span>
+                            </div>
+                            <div class="post">
+                                <span class="boilerplate" data-original="}"></span>
                             </div>
 
                         </div>
 
-                    </td>
-                    <td class="code_cell" data-category="rust">
-                        <div class="cell">
-                            <div class="code_lines">
-                                <div class="pre">
-                                    <span class="boilerplate" data-original="fn main() {"></span>
-                                </div>
-                                <div class="substance indent_if_bp">
-                                    <span class="function">println!</span><span class="structural">(</span>
-                                    <span class="string">"Hello, world!"</span>
-                                    <span class="structural">);</span>
-                                </div>
-                                <div class="post">
-                                    <span class="boilerplate" data-original="}"></span>
-                                </div>
+                    </div>
 
+                </td>
+                <td class="code_cell" data-category="haskell">
+                    <div class="cell">
+                        <div class="code_lines">
+                            <div class="pre">
+                                <span class="boilerplate" data-original="main :: IO ()"></span>
                             </div>
-
+                            <div class="substance">
+                                <span class="function">main</span>
+                                <span class="structural">&nbsp;=&nbsp;</span>
+                                <span class="function">putStrLn&nbsp;</span>
+                                <span class="string">"Hello, world!"</span>
+                                <span></span>
+                            </div>
                         </div>
 
-                    </td>
-                    <td class="code_cell" data-category="haskell">
-                        <div class="cell">
-                            <div class="code_lines">
-                                <div class="pre">
-                                    <span class="boilerplate" data-original="main :: IO ()"></span>
-                                </div>
-                                <div class="substance">
-                                    <span class="function">main</span>
-                                    <span class="structural">&nbsp;=&nbsp;</span>
-                                    <span class="function">putStrLn&nbsp;</span>
-                                    <span class="string">"Hello, world!"</span>
-                                    <span></span>
-                                </div>
-                            </div>
-
-                        </div>
-                    </td>
+                    </div>
+                </td>
                 </tr>
 
-                <tr class="output_row" data-category="0.1">
+                <tr class="output_row level3" data-category="0.1">
                     <td class="output_cell" data-category="python">
                         <div class="cell">
                             <span class="output_prefix">❯&nbsp;</span>
@@ -136,16 +164,18 @@
                     </td>
                 </tr>
 
-                <tr data-category="0.1">
-                    <td class="row_name level2">0.1&nbsp;&nbsp;&nbsp;Primitive Types</td>
+                <tr class="main_row level2" data-category="0.1">
+                    <td class="row_id level2">0.1</td>
+                    <td class="row_name level2">Primitive Types</td>
                     <td class="header_cell" data-category="python"></td>
                     <td class="header_cell" data-category="rust"></td>
                     <td class="header_cell" data-category="haskell"></td>
                 </tr>
 
 
-                <tr data-category="0.1.0">
-                    <td class="row_name spans_output level3" rowspan="2">&nbsp;&nbsp;0.1.0 Boolean</td>
+                <tr class="main_row level3" data-category="0.1.0">
+                    <td class="row_id level3 spans_output"  rowspan="2">0.1.0</td>
+                    <td class="row_name level3 spans_output"  rowspan="2">Boolean</td>
                     <td class="code_cell" data-category="python">
                         <div class="cell">
                             <div class="code_lines">
@@ -274,7 +304,7 @@
                         </div>
                     </td>
                 </tr>
-                <tr class="output_row" data-category="0.1.0">
+                <tr class="output_row level3" data-category="0.1.0">
                     <td class="output_cell" data-category="python">
                         <div class="cell">
                             <span class="output_prefix">❯&nbsp;</span>
@@ -299,7 +329,9 @@
 
 
                 <tr data-category="0.1.1">
-                    <td class="row_name spans_output level3" rowspan="2">&nbsp;&nbsp;0.1.1 Integer</td>
+
+                    <td class="row_id level3 spans_output"  rowspan="2">0.1.1</td>
+                    <td class="row_name level3 spans_output"  rowspan="2">Integer</td>
                     <td class="code_cell" data-category="python">
                         <div class="cell">
                             <div class="code_lines">
@@ -420,7 +452,6 @@
                                     <span class="function">++&nbsp;</span>
                                     <span class="function">show&nbsp;</span>
                                     <span class="identifier">bool2</span>
-                                    <span></span>
                                 </div>
                             </div>
 
