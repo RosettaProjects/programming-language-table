@@ -9,7 +9,10 @@
 const table = document.getElementById("categoryTable");
 const rowNames = Object.freeze(Array.from(document.querySelectorAll('.row_menu input[type="checkbox"]')).map(input => input.value));
 const colNames = Object.freeze(Array.from(document.querySelectorAll('.col_menu input[type="checkbox"]')).map(input => input.value));
-const instructionsToggle = document.getElementById("instructionsToggle");
+const helpButton = document.getElementById("helpButton");
+const rowsButton = document.getElementById('rowsButton');
+const columnsButton = document.getElementById('columnsButton');
+const displayButton = document.getElementById('displayButton');
 const outputToggle = document.getElementById("outputToggle");
 const outputPrefixToggle = document.getElementById('outputPrefixToggle');
 const titleToggle = document.getElementById('titleToggle');
@@ -190,10 +193,62 @@ function filterLanguages() {
                     td.classList.add("hidden");
                 }
             }
-            else { console.log("nothing");}
+            else { console.log("nothing"); }
         });
     });
 }
+
+function getOpenDropdown() {
+    const openDropdowns = document.querySelectorAll('.dropdown.open');
+
+    // Return the first open dropdown, or null if none are open
+    return openDropdowns.length > 0 ? openDropdowns[0] : null;
+}
+
+function closeDropdowns() {
+    document.querySelectorAll('.dropdown').forEach(dropdown => {
+        dropdown.classList.remove('open');
+    });
+    console.log("open dropdown:", getOpenDropdown());
+}
+
+// function getSelectedLabel(dropdown) {
+//     const labels = Array.from(dropdown.querySelectorAll("label"));
+//     const selectedLabelIndex = labels.findIndex(el => el.classList.contains("selected"));
+
+//     if (selectedLabelIndex !== -1) {
+//         return { label: labels[selectedLabelIndex], index: selectedLabelIndex };
+//     }
+
+//     return null;
+// }
+
+function getSelectedLabel(dropdown) {
+    const labels = Array.from(dropdown.querySelectorAll("label"));
+    const selectedLabelIndex = labels.findIndex(el => el.classList.contains("selected"));
+
+    if (selectedLabelIndex !== -1) {
+        return { label: labels[selectedLabelIndex], index: selectedLabelIndex };
+    }
+
+    return null;
+}
+
+function selectItem(index) {
+    const openDropdown = getOpenDropdown();
+    if (openDropdown) {
+        const selectedLabelAndIndex = getSelectedLabel(openDropdown);
+        if (!selectedLabelAndIndex) {
+            console.log(openDropdown);
+            console.log(selectedLabelAndIndex);
+            const options = openDropdown.querySelectorAll("label");
+            options.forEach((opt, i) => {
+                opt.classList.toggle("selected", i === index);
+            });
+        }
+    }
+}
+
 
 // EVENT LISTENERS FOR CLICKS ====================================================================================================
 
@@ -251,20 +306,84 @@ document.addEventListener('click', (e) => {
 // EVENT LISTENERS FOR KEYS ================================================================================================
 
 function setKeybind(event, keyName, element) {
-    if (event.key === keyName && !event.ctrlKey && !event.altKey && !event.metaKey) { 
+    if (event.key === keyName && !event.ctrlKey && !event.altKey && !event.metaKey) {
         event.preventDefault();
         if (element) {
             element.click();
         }
+        selectItem(0);
     }
 }
 
 document.addEventListener("keydown", (event) => {
     setKeybind(event, 'b', boilerplateToggle);
-    setKeybind(event, 'i', instructionsToggle);
+    setKeybind(event, 'c', columnsButton);
+    setKeybind(event, 'd', displayButton);
+    setKeybind(event, 'i', helpButton);
     setKeybind(event, 'o', outputToggle);
     setKeybind(event, 'p', outputPrefixToggle);
+    setKeybind(event, 'r', rowsButton);
     setKeybind(event, 't', titleToggle);
+    if (event.key === 'Escape' && !event.ctrlKey && !event.altKey && !event.metaKey) {
+        event.preventDefault();
+        closeDropdowns();
+    }
+    if ((event.key === 'j' || event.key === 'k') && !event.ctrlKey && !event.altKey && !event.metaKey) {
+        event.preventDefault();
+
+        const openDropdown = getOpenDropdown();
+        if (openDropdown) {
+            const options = openDropdown.querySelectorAll("label");
+            const lastIndex = options.length - 1;
+            const selectedLabelAndIndex = getSelectedLabel(openDropdown);
+            if (!selectedLabelAndIndex) {
+                let selectedIndex = 0;
+            }
+            else {
+                selectedIndex = selectedLabelAndIndex.index;
+            }
+            
+            if (event.key === 'j') {
+                selectedIndex++;
+            }
+            else {
+                selectedIndex--;
+            }
+
+            selectedIndex = Math.max(0, Math.min(selectedIndex, lastIndex));
+            console.log(selectedIndex);
+
+            function updateSelection() {
+                options.forEach((opt, i) => {
+                    opt.classList.toggle("selected", i === selectedIndex);
+                });
+            }
+
+            updateSelection();
+            console.log(openDropdown);
+
+        }
+    }
+    if (event.code === 'Space' && !event.ctrlKey && !event.altKey && !event.metaKey) {
+        event.preventDefault();
+
+        const openDropdown = getOpenDropdown();
+        if (openDropdown) {
+            const selectedLabelAndIndex = getSelectedLabel(openDropdown);
+            if (selectedLabelAndIndex) {
+                const selectedLabel = selectedLabelAndIndex.label;
+                const checkbox = selectedLabel.querySelector("input");
+                console.log(selectedLabel);
+
+                if (checkbox) {
+                    checkbox.checked = !checkbox.checked;
+                }
+
+                const changeEvent = new Event('change');
+                checkbox.dispatchEvent(changeEvent);
+            }
+        }
+    }
 });
 
 // INITIALIZATION =====================================================================================================
