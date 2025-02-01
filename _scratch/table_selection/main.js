@@ -87,10 +87,12 @@ function toggleTitle(isSelected) {
     if (isSelected) {
         titleBlock.classList.add("hidden");
         tableBlock.style.top = '4rem';
+        tableBlock.style.maxHeight = 'calc(100vh - 4rem)';
     }
     else {
         titleBlock.classList.remove("hidden");
         tableBlock.style.top = '8rem';
+        tableBlock.style.maxHeight = 'calc(100vh - 8rem)';
     }
 }
 
