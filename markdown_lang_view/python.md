@@ -1,104 +1,61 @@
 # Python
 
-## 0
+## 0. Basics
 
-### 0.0
+### 0.0 Console Output
 
-### 0.1
+#### 0.0.0 Hello, world!
 
-### 2.1 Printing "Hello, world!" to the Console 
+> Note
 
-> Note here
-
-##### Snippet:
+Snippet:
 
 ```py
-print("Hello, world!")
+
 ```
 
-##### Full:
+Full:
 
 ```py
-print("Hello, world!")
+
 ```
 
-##### Output:
+Output:
 
 ```txt
-Hello, world!
+❯ Hello, world!
 ```
 
-## 3. Arithmetic
+### 0.1. Primitive Types
 
-### 3.0 Integer
+#### 0.1.0 Boolean
 
-```py
-int_a = 4
-int_b = -6
-```
+> Note
 
-### 3.1 Floating-point numbers ('floats') 
-
-```py
-float_a = 0.06
-float_b = .4
-```
-
-### 3.2 Integers
+Full:
 
 ```py
 
 ```
 
-### 3.3 Conversion between floats and integers
+Output:
 
-```py
-
-float_a = float(integer_a)
-integer_b = int(float_a)
+```txt
+bool1=true, bool2=false
 ```
 
+#### 0.1.1 Integer
 
-### 3.4 Addition
+> Note
 
-```py
-3 + 4
-```
-
-### 3.5 Subtraction
-
-```py
-3 -4
-```
-
-### 3.6 Integer division
+Full:
 
 ```py
 
 ```
 
-### 3.7 Float Division
+Output:
 
-```py
-
-```
-
-### 3.6 Mixed Division
-
-```py
-
-```
-
-## 4. File IO
-
-### 4.1 Read a file
-
-```py
-
-```
-
-### 4.2 Write a file
-
-```py
+```txt
 
 ```

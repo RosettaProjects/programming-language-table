@@ -29,8 +29,16 @@
     top: 3.5rem;
     left: 50%;
     transform: translateX(-50%);
-
+    overflow: hidden;
+    white-space: nowrap;
 }
+
+html, body {
+    overflow: hidden; /* Disables scrolling for the entire page */
+}
+
+
+
 
 h1 {
     text-align: center;
@@ -99,7 +107,7 @@ label {
     top: 8rem;
     left: 50%;
     transform: translateX(-50%);
-    overflow-x: auto;
+    overflow: auto;
     white-space: nowrap;
     max-width: 100%;
     max-height: 100%;
