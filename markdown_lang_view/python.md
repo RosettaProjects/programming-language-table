@@ -14,6 +14,12 @@ Snippet:
 
 ```
 
+Output:
+
+```txt
+
+```
+
 Full:
 
 ```py

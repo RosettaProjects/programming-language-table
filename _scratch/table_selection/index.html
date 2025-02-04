@@ -32,7 +32,7 @@
 
                 <br><br><b>Note</b>: For the menus, either use the mouse, or use the keyboard navigation, but not both.
                 It doesn't work well to mix them, and I don't see a compelling reason to prioritize fixing this.
-                
+
 
             </div>
         </div>
@@ -73,11 +73,11 @@
                 <label class="checkbox_label">
                     <input type="checkbox" checked="true" value="interpreted">
                     <span class="checkbox_text"><b>Interpreted</b></span>
-                    </label>
+                </label>
                 <label class="checkbox_label">
                     <input type="checkbox" checked="true" value="compiled">
                     <span class="checkbox_text"><b>Compiled</b></span>
-                    </label>
+                </label>
                 <label class="checkbox_label">
                     <input type="checkbox" checked="true" value="python">
                     <span class="checkbox_text">Python</span>
@@ -170,7 +170,8 @@
                                 <div class="pre">
                                     <span class="boilerplate" data-original="fn main() {"></span>
                                 </div>
-                                <div class="substance indent_if_bp">
+                                <div class="substance">
+                                    <span class="boilerplate_indent hidden">&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                     <span class="function">println!</span><span class="structural">(</span>
                                     <span class="string">"Hello, world!"</span>
                                     <span class="structural">);</span>
@@ -273,21 +274,24 @@
                                 <div class="pre">
                                     <span class="boilerplate" data-original="fn main() {"></span>
                                 </div>
-                                <div class="substance indent_if_bp">
+                                <div class="substance">
+                                    <span class="boilerplate_indent hidden">&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                     <span class="keyword">let&nbsp;</span>
                                     <span class="identifier">bool1</span>
                                     <span class="structural">&nbsp;=&nbsp;</span>
                                     <span class="boolean">true</span>
                                     <span class="strctural">;</span>
                                 </div>
-                                <div class="substance indent_if_bp">
+                                <div class="substance">
+                                    <span class="boilerplate_indent hidden">&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                     <span class="keyword">let&nbsp;</span>
                                     <span class="identifier">bool2</span>
                                     <span class="structural">&nbsp;=&nbsp;</span>
                                     <span class="boolean">false</span>
                                     <span class="strctural">;</span>
                                 </div>
-                                <div class="substance indent_if_bp">
+                                <div class="substance">
+                                    <span class="boilerplate_indent hidden">&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                     <span class="function">println!</span>
                                     <span class="structural">(</span>
                                     <span class="string">"bool1=</span>
@@ -311,6 +315,10 @@
                     <td class="code_cell" data-category="haskell">
                         <div class="cell">
                             <div class="code_lines">
+                                <div class="substance">
+                                    <span>................................................................................&nbsp;</span>
+                                </div>
+
                                 <div class="substance">
                                     <span class="function">bool1&nbsp;</span>
                                     <span class="structural">::&nbsp;</span>
@@ -428,9 +436,53 @@
                         <div class="cell">
                             <div class="code_lines">
                                 <div class="pre">
+                                    <span class="boilerplate" data-original="use std::any::type_name;"></span>
+                                </div>
+                                <div class="pre">
+                                    <span class="boilerplate" data-original="use std::fmt::Binary;"></span>
+                                </div>
+                                <div class="pre">
+                                    <span class="boilerplate" data-original="use std::fmt::Display;"></span>
+                                </div>
+                                <div class="pre">
+                                    <span class="boilerplate" data-original="use std::mem::size_of;"></span>
+                                </div>
+                                <div class="pre">
+                                    <span class="boilerplate" data-original="&nbsp;"></span>
+                                </div>
+
+                                <div class="pre">
+                                    <span class="boilerplate"
+                                        data-original="fn print_info&lt;T: Binary + Copy + Display&gt;(varname: &str, variable: T) {"></span>
+                                </div>
+                                <div class="pre">
+                                    <span class="boilerplate"
+                                        data-original="&nbsp;&nbsp;&nbsp;&nbsp;let bit_width = size_of::&lt;T&gt;() * 8;"></span>
+                                </div>
+                                <div class="pre">
+                                    <span class="boilerplate"
+                                        data-original="&nbsp;&nbsp;&nbsp;&nbsp;println!(&quot;{varname}: type '{vartype}'&quot;, vartype = get_type(&variable));"></span>
+                                </div>
+                                <div class="pre">
+                                    <span class="boilerplate"
+                                        data-original="&nbsp;&nbsp;&nbsp;&nbsp;println!(&quot;  decimal: {}&quot;, variable);"></span>
+                                </div>
+                                <div class="pre">
+                                    <span class="boilerplate"
+                                        data-original="&nbsp;&nbsp;&nbsp;&nbsp;println!(&quot;  stored as: {:0bit_width$b} binary\n&quot;, variable, bit_width = bit_width);"></span>
+                                </div>
+                                <div class="pre">
+                                    <span class="boilerplate" data-original="}"></span>
+                                </div>
+                                <div class="pre">
+                                    <span class="boilerplate" data-original="&nbsp;"></span>
+                                </div>
+
+                                <div class="pre">
                                     <span class="boilerplate" data-original="fn main() {"></span>
                                 </div>
-                                <div class="substance indent_if_bp">
+                                <div class="substance">
+                                    <span class="boilerplate_indent hidden">&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                     <span class="keyword">let&nbsp;</span>
                                     <span class="identifier">signed_8bit</span>
                                     <span class="structural">:&nbsp;</span>
@@ -439,7 +491,8 @@
                                     <span class="boolean">27</span>
                                     <span class="strctural">;</span>
                                 </div>
-                                <div class="substance indent_if_bp">
+                                <div class="substance">
+                                    <span class="boilerplate_indent hidden">&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                     <span class="keyword">let&nbsp;</span>
                                     <span class="identifier">signed_16bit</span>
                                     <span class="structural">:&nbsp;</span>
@@ -448,7 +501,8 @@
                                     <span class="boolean">27</span>
                                     <span class="strctural">;</span>
                                 </div>
-                                <div class="substance indent_if_bp">
+                                <div class="substance">
+                                    <span class="boilerplate_indent hidden">&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                     <span class="keyword">let&nbsp;</span>
                                     <span class="identifier">signed_32bit</span>
                                     <span class="structural">:&nbsp;</span>
@@ -457,7 +511,8 @@
                                     <span class="boolean">27</span>
                                     <span class="strctural">;</span>
                                 </div>
-                                <div class="substance indent_if_bp">
+                                <div class="substance">
+                                    <span class="boilerplate_indent hidden">&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                     <span class="keyword">let&nbsp;</span>
                                     <span class="identifier">signed_64bit</span>
                                     <span class="structural">:&nbsp;</span>
@@ -466,7 +521,8 @@
                                     <span class="boolean">27</span>
                                     <span class="strctural">;</span>
                                 </div>
-                                <div class="substance indent_if_bp">
+                                <div class="substance">
+                                    <span class="boilerplate_indent hidden">&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                     <span class="keyword">let&nbsp;</span>
                                     <span class="identifier">signed_128bit</span>
                                     <span class="structural">:&nbsp;</span>
@@ -475,7 +531,8 @@
                                     <span class="boolean">27</span>
                                     <span class="strctural">;</span>
                                 </div>
-                                <div class="substance indent_if_bp">
+                                <div class="substance">
+                                    <span class="boilerplate_indent hidden">&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                     <span class="keyword">let&nbsp;</span>
                                     <span class="identifier">unsigned_8bit</span>
                                     <span class="structural">:&nbsp;</span>
@@ -484,7 +541,8 @@
                                     <span class="boolean">27</span>
                                     <span class="strctural">;</span>
                                 </div>
-                                <div class="substance indent_if_bp">
+                                <div class="substance">
+                                    <span class="boilerplate_indent hidden">&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                     <span class="keyword">let&nbsp;</span>
                                     <span class="identifier">unsigned_16bit</span>
                                     <span class="structural">:&nbsp;</span>
@@ -493,7 +551,8 @@
                                     <span class="boolean">27</span>
                                     <span class="strctural">;</span>
                                 </div>
-                                <div class="substance indent_if_bp">
+                                <div class="substance">
+                                    <span class="boilerplate_indent hidden">&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                     <span class="keyword">let&nbsp;</span>
                                     <span class="identifier">unsigned_32bit</span>
                                     <span class="structural">:&nbsp;</span>
@@ -502,7 +561,8 @@
                                     <span class="boolean">27</span>
                                     <span class="strctural">;</span>
                                 </div>
-                                <div class="substance indent_if_bp">
+                                <div class="substance">
+                                    <span class="boilerplate_indent hidden">&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                     <span class="keyword">let&nbsp;</span>
                                     <span class="identifier">unsigned_64bit</span>
                                     <span class="structural">:&nbsp;</span>
@@ -511,7 +571,8 @@
                                     <span class="boolean">27</span>
                                     <span class="strctural">;</span>
                                 </div>
-                                <div class="substance indent_if_bp">
+                                <div class="substance">
+                                    <span class="boilerplate_indent hidden">&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                     <span class="keyword">let&nbsp;</span>
                                     <span class="identifier">unsigned_128bit</span>
                                     <span class="structural">:&nbsp;</span>
@@ -521,217 +582,8 @@
                                     <span class="strctural">;</span>
                                 </div>
                                 <div>&nbsp;</div>
-                                <div class="substance indent_if_bp">
-                                    <span class="function">print!</span>
-                                    <span class="structural">(</span>
-                                    <span class="string">"integer_8bit:&nbsp;</span>
-                                    <span class="string_bright">{</span>
-                                    <span class="identifier">signed_8bit</span>
-                                    <span class="string_bright">}</span>
-                                    <span class="string">&nbsp;decimal"</span>
-                                    <span class="structural">);</span>
-                                </div>
-                                <div class="substance indent_if_bp">
-                                    <span class="function">println!</span>
-                                    <span class="structural">(</span>
-                                    <span class="string">", stored as</span>
-                                    <span class="string_bright">{</span>
-                                    <span class="identifier">signed_8bit</span>
-                                    <span class="string_bright">:b}</span>
-                                    <span class="string">&nbsp;binary"</span>
-                                    <span class="structural">);</span>
-                                </div>
 
-                                <div class="substance indent_if_bp">
-                                    <span class="function">print!</span>
-                                    <span class="structural">(</span>
-                                    <span class="string">"integer_16bit:&nbsp;</span>
-                                    <span class="string_bright">{</span>
-                                    <span class="identifier">signed_16bit</span>
-                                    <span class="string_bright">}</span>
-                                    <span class="string">&nbsp;decimal"</span>
-                                    <span class="structural">);</span>
-                                </div>
-                                <div class="substance indent_if_bp">
-                                    <span class="function">println!</span>
-                                    <span class="structural">(</span>
-                                    <span class="string">", stored as</span>
-                                    <span class="string_bright">{</span>
-                                    <span class="identifier">signed_16bit</span>
-                                    <span class="string_bright">:b}</span>
-                                    <span class="string">&nbsp;binary"</span>
-                                    <span class="structural">);</span>
-                                </div>
 
-                                <div class="substance indent_if_bp">
-                                    <span class="function">print!</span>
-                                    <span class="structural">(</span>
-                                    <span class="string">"integer_32bit:&nbsp;</span>
-                                    <span class="string_bright">{</span>
-                                    <span class="identifier">signed_32bit</span>
-                                    <span class="string_bright">}</span>
-                                    <span class="string">&nbsp;decimal"</span>
-                                    <span class="structural">);</span>
-                                </div>
-                                <div class="substance indent_if_bp">
-                                    <span class="function">println!</span>
-                                    <span class="structural">(</span>
-                                    <span class="string">", stored as</span>
-                                    <span class="string_bright">{</span>
-                                    <span class="identifier">signed_32bit</span>
-                                    <span class="string_bright">:b}</span>
-                                    <span class="string">&nbsp;binary"</span>
-                                    <span class="structural">);</span>
-                                </div>
-
-                                <div class="substance indent_if_bp">
-                                    <span class="function">print!</span>
-                                    <span class="structural">(</span>
-                                    <span class="string">"integer_64bit:&nbsp;</span>
-                                    <span class="string_bright">{</span>
-                                    <span class="identifier">signed_64bit</span>
-                                    <span class="string_bright">}</span>
-                                    <span class="string">&nbsp;decimal"</span>
-                                    <span class="structural">);</span>
-                                </div>
-                                <div class="substance indent_if_bp">
-                                    <span class="function">println!</span>
-                                    <span class="structural">(</span>
-                                    <span class="string">", stored as</span>
-                                    <span class="string_bright">{</span>
-                                    <span class="identifier">signed_64bit</span>
-                                    <span class="string_bright">:b}</span>
-                                    <span class="string">&nbsp;binary"</span>
-                                    <span class="structural">);</span>
-                                </div>
-
-                                <div class="substance indent_if_bp">
-                                    <span class="function">print!</span>
-                                    <span class="structural">(</span>
-                                    <span class="string">"integer_128bit:&nbsp;</span>
-                                    <span class="string_bright">{</span>
-                                    <span class="identifier">signed_128bit</span>
-                                    <span class="string_bright">}</span>
-                                    <span class="string">&nbsp;decimal"</span>
-                                    <span class="structural">);</span>
-                                </div>
-                                <div class="substance indent_if_bp">
-                                    <span class="function">println!</span>
-                                    <span class="structural">(</span>
-                                    <span class="string">", stored as</span>
-                                    <span class="string_bright">{</span>
-                                    <span class="identifier">signed_128bit</span>
-                                    <span class="string_bright">:b}</span>
-                                    <span class="string">&nbsp;binary"</span>
-                                    <span class="structural">);</span>
-                                </div>
-
-                                <div>&nbsp;</div>
-
-                                <div class="substance indent_if_bp">
-                                    <span class="function">print!</span>
-                                    <span class="structural">(</span>
-                                    <span class="string">"unsigned_8bit:&nbsp;</span>
-                                    <span class="string_bright">{</span>
-                                    <span class="identifier">unsigned_8bit</span>
-                                    <span class="string_bright">}</span>
-                                    <span class="string">&nbsp;decimal"</span>
-                                    <span class="structural">);</span>
-                                </div>
-                                <div class="substance indent_if_bp">
-                                    <span class="function">println!</span>
-                                    <span class="structural">(</span>
-                                    <span class="string">", stored as</span>
-                                    <span class="string_bright">{</span>
-                                    <span class="identifier">unsigned_8bit</span>
-                                    <span class="string_bright">:b}</span>
-                                    <span class="string">&nbsp;binary"</span>
-                                    <span class="structural">);</span>
-                                </div>
-                                <div class="substance indent_if_bp">
-                                    <span class="function">print!</span>
-                                    <span class="structural">(</span>
-                                    <span class="string">"unsigned_16bit:&nbsp;</span>
-                                    <span class="string_bright">{</span>
-                                    <span class="identifier">unsigned_16bit</span>
-                                    <span class="string_bright">}</span>
-                                    <span class="string">&nbsp;decimal"</span>
-                                    <span class="structural">);</span>
-                                </div>
-                                <div class="substance indent_if_bp">
-                                    <span class="function">println!</span>
-                                    <span class="structural">(</span>
-                                    <span class="string">", stored as</span>
-                                    <span class="string_bright">{</span>
-                                    <span class="identifier">unsigned_16bit</span>
-                                    <span class="string_bright">:b}</span>
-                                    <span class="string">&nbsp;binary"</span>
-                                    <span class="structural">);</span>
-                                </div>
-
-                                <div class="substance indent_if_bp">
-                                    <span class="function">print!</span>
-                                    <span class="structural">(</span>
-                                    <span class="string">"unsigned_32bit:&nbsp;</span>
-                                    <span class="string_bright">{</span>
-                                    <span class="identifier">unsigned_32bit</span>
-                                    <span class="string_bright">}</span>
-                                    <span class="string">&nbsp;decimal"</span>
-                                    <span class="structural">);</span>
-                                </div>
-                                <div class="substance indent_if_bp">
-                                    <span class="function">println!</span>
-                                    <span class="structural">(</span>
-                                    <span class="string">", stored as</span>
-                                    <span class="string_bright">{</span>
-                                    <span class="identifier">unsigned_32bit</span>
-                                    <span class="string_bright">:b}</span>
-                                    <span class="string">&nbsp;binary"</span>
-                                    <span class="structural">);</span>
-                                </div>
-
-                                <div class="substance indent_if_bp">
-                                    <span class="function">print!</span>
-                                    <span class="structural">(</span>
-                                    <span class="string">"unsigned_64bit:&nbsp;</span>
-                                    <span class="string_bright">{</span>
-                                    <span class="identifier">unsigned_64bit</span>
-                                    <span class="string_bright">}</span>
-                                    <span class="string">&nbsp;decimal"</span>
-                                    <span class="structural">);</span>
-                                </div>
-                                <div class="substance indent_if_bp">
-                                    <span class="function">println!</span>
-                                    <span class="structural">(</span>
-                                    <span class="string">", stored as</span>
-                                    <span class="string_bright">{</span>
-                                    <span class="identifier">unsigned_64bit</span>
-                                    <span class="string_bright">:b}</span>
-                                    <span class="string">&nbsp;binary"</span>
-                                    <span class="structural">);</span>
-                                </div>
-
-                                <div class="substance indent_if_bp">
-                                    <span class="function">print!</span>
-                                    <span class="structural">(</span>
-                                    <span class="string">"unsigned_128bit:&nbsp;</span>
-                                    <span class="string_bright">{</span>
-                                    <span class="identifier">unsigned_128bit</span>
-                                    <span class="string_bright">}</span>
-                                    <span class="string">&nbsp;decimal"</span>
-                                    <span class="structural">);</span>
-                                </div>
-                                <div class="substance indent_if_bp">
-                                    <span class="function">println!</span>
-                                    <span class="structural">(</span>
-                                    <span class="string">", stored as</span>
-                                    <span class="string_bright">{</span>
-                                    <span class="identifier">unsigned_128bit</span>
-                                    <span class="string_bright">:b}</span>
-                                    <span class="string">&nbsp;binary"</span>
-                                    <span class="structural">);</span>
-                                </div>
-                                
                                 <div class="post">
                                     <span class="boilerplate" data-original="}"></span>
                                 </div>
@@ -815,16 +667,20 @@
                         </div>
                     </td>
                 </tr>
+                
 
             </tbody>
         </table>
     </div>
-
+    
+    
 
     <script src="main.js">
 
 
     </script>
+
+
 </body>
 
 </html>

@@ -50,8 +50,11 @@ Quelle surprise.
 
 ## Roadmap
 
+- [ ] change boilerplate to verbose and simply have two sets of content and two sets of output: simple and verbose
+- [ ] add option to highlight boilerplate or not
 - [ ] separate language classes and languages (either separate menus or just different html classes) to allow individual languages to override classes if unselected after classes (maybe do the same for rows, but less important)
 - [ ] add colorscheme selection and editable custom colorscheme values
 - [ ] minimal markdown to generate minimal HTML example
 - [ ] MVP Python package for html generation
 - [ ] make everything keyboard-controllable
+- [ ] add keyboard scrolling side-to-side in cells (and vertically?)

@@ -17,6 +17,7 @@
     --font-size-2: 0.9rem;
     --font-size-3: 0.75rem;
     --font-size-code: 0.75rem;
+    --cell-width-chars: 80;
 
     --button-width: auto;
 
@@ -79,7 +80,15 @@ td {
     border-right: 1px solid var(--mellow);
     height: max-content;
     width: max-content;
+    max-width: calc(0.62 * var(--cell-width-chars) * var(--font-size-code));
+    overflow-x: scroll;
     box-sizing: border-box;
+    -ms-overflow-style: none;  /* Hide scrollbar in IE/Edge */
+    scrollbar-width: none;  /* Hide scrollbar in Firefox */
+}
+
+td::-webkit-scrollbar, th::-webkit-scrollbar {
+    display: none;  /* Hide scrollbar in Chrome, Safari */
 }
 
 div {

@@ -431,7 +431,7 @@ J
 Jinja
 Joy
 Komodo
-Lobster
+Lobster https://www.strlen.com/lobster/
 Make
 Maxima
 Mercury

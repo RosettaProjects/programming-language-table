@@ -33,13 +33,33 @@ const categoryHierarchy = {
     prim_types: ['integer', 'boolean'],
 };
 
-// FUNCTIONS ==========================================================================================================
+// HELPER/GENERIC FUNCTIONS ==========================================================================================================
+
+function hideAll(className) {
+    document.querySelectorAll(`.${className}`).forEach(cell => {
+        cell.classList.add("hidden");
+    });
+}
+
+function unhideAll(className) {
+    document.querySelectorAll(`.${className}`).forEach(cell => {
+        cell.classList.remove("hidden");
+    });
+}
+
+function toggleHidden(className) {
+    document.querySelectorAll(`.${className}`).forEach(cell => {
+        cell.classList.toggle("hidden");
+    });
+}
 
 function getCheckboxValues(className) {
     return Array.from(document.querySelectorAll(`.${className} input[type="checkbox"]`))
         .filter(input => input.checked)
         .map(input => input.value);
 }
+
+// FUNCTIONS ==========================================================================================================
 
 function computeLanguages() {
     const selectedLanguages = getCheckboxValues('col_menu')
@@ -57,27 +77,19 @@ function computeRows() {
 
 function toggleOutput(isSelected) {
     if (isSelected) {
-        document.querySelectorAll('.output_cell').forEach(cell => {
-            cell.classList.remove("hidden");
-        });
+        unhideAll('output_cell');
     }
     else {
-        document.querySelectorAll('.output_cell').forEach(cell => {
-            cell.classList.add("hidden");
-        });
+        hideAll('output_cell');
     }
 }
 
 function toggleOutputPrefix(isSelected) {
     if (isSelected) {
-        document.querySelectorAll('.output_prefix').forEach(cell => {
-            cell.classList.remove("hidden");
-        });
+        unhideAll('output_prefix');
     }
     else {
-        document.querySelectorAll('.output_prefix').forEach(cell => {
-            cell.classList.add("hidden");
-        });
+        hideAll('output_prefix');
     }
 }
 
@@ -100,21 +112,15 @@ function toggleBoilerplate() {
     document.querySelectorAll('.boilerplate').forEach(el => {
         if (el.textContent === '') {
             text = el.getAttribute('data-original');
-            el.innerHTML = `${text}<br>`;
+            console.log(text);
+            el.textContent = text;
+            el.appendChild(document.createElement("br"));
         } else {
             el.setAttribute('data-original', el.textContent);
             el.textContent = '';
         }
     });
-
-    document.querySelectorAll('.indent_if_bp').forEach(el => {
-        if (el.innerHTML.startsWith('&nbsp;&nbsp;&nbsp;&nbsp;')) {
-            el.innerHTML = el.innerHTML.replace(/^&nbsp;&nbsp;&nbsp;&nbsp;/g, '');
-        }
-        else {
-            el.innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;' + el.innerHTML;
-        }
-    });
+    toggleHidden('boilerplate_indent');
 }
 
 function updateChildLanguages(selectedLangs) {
@@ -203,7 +209,6 @@ function filterLanguages() {
 function getOpenDropdown() {
     const openDropdowns = document.querySelectorAll('.dropdown.open');
 
-    // Return the first open dropdown, or null if none are open
     return openDropdowns.length > 0 ? openDropdowns[0] : null;
 }
 
@@ -213,17 +218,6 @@ function closeDropdowns() {
     });
     console.log("open dropdown:", getOpenDropdown());
 }
-
-// function getSelectedLabel(dropdown) {
-//     const labels = Array.from(dropdown.querySelectorAll("label"));
-//     const selectedLabelIndex = labels.findIndex(el => el.classList.contains("selected"));
-
-//     if (selectedLabelIndex !== -1) {
-//         return { label: labels[selectedLabelIndex], index: selectedLabelIndex };
-//     }
-
-//     return null;
-// }
 
 function getSelectedLabel(dropdown) {
     const labels = Array.from(dropdown.querySelectorAll("label"));
@@ -392,3 +386,4 @@ document.addEventListener("keydown", (event) => {
 
 toggleOutput(false);
 toggleOutputPrefix(false);
+document.documentElement.style.setProperty('--cell-width-chars', '40');

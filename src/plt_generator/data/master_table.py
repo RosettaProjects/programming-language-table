@@ -1,8 +1,6 @@
-import pandas as pd
-
-from .data import FeatView, LangView, datamodels
-from .sync import sync_bidirectional
-from .validation import validate_view_objects
+from . import FeatView, LangView, utils
+from ..sync import sync_bidirectional
+from ..validation import validate_view_objects
 
 
 class MasterTable:
@@ -16,6 +14,16 @@ class MasterTable:
         self.featview = featview
         self.langview = langview
         self.composite = self.build_master_table(self.featview, self.langview)
+        self._rows: list[str]
+        self._langs: list[str]
+
+    @property
+    def rows() -> list[str]:
+        ...
+
+    @property
+    def languages() -> list[str]:
+        ...
 
     def sync(self) -> None:
         self.featview, self.langview = sync_bidirectional(self.featview, self.langview)
@@ -25,6 +33,6 @@ class MasterTable:
 
     def build_master_table(
         self, featview: FeatView, langview: LangView
-    ) -> pd.DataFrame:
-        composite = pd.DataFrame()
+    ) -> dict:
+        composite = {}
         return composite
