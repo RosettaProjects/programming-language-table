@@ -1,5 +1,5 @@
-from . import FeatView, LangView, utils
-from ..sync import sync_bidirectional
+from . import FeatView, LangView
+# from ..sync import sync_bidirectional
 from ..validation import validate_view_objects
 
 
@@ -25,8 +25,8 @@ class MasterTable:
     def languages() -> list[str]:
         ...
 
-    def sync(self) -> None:
-        self.featview, self.langview = sync_bidirectional(self.featview, self.langview)
+    # def sync(self) -> None:
+    #     self.featview, self.langview = sync_bidirectional(self.featview, self.langview)
 
     def validate(self) -> None:
         validate_view_objects(self.featview, self.langview)

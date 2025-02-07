@@ -23,7 +23,7 @@ ruff     = ">0.1.6"
 pylint   = ">3.0.2"
 
 [tool.poetry.scripts]
-pltgen = "plt_generator.__main__:main"
+plt = "plt_generator.__main__:main"
 
 [tool.mypy]
 ignore_missing_imports = true

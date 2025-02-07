@@ -63,3 +63,7 @@ class RowID:
     @property
     def level(self) -> Literal[1, 2, 3]:
         return sum(map(lambda val: int(bool(val)), (self.main, self.sub, self.subsub)))
+
+
+def standardize(s: str) -> str:
+    return re.sub("[^a-z_]", "", s.replace(" ", "_").lower().replace(".md", ""))

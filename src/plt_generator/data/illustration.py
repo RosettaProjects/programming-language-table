@@ -2,14 +2,14 @@ from typing import Literal, Self, TypeAlias
 import re
 
 from .constants import LANGUAGE_ABBREVS
-from .utils import Language, Row, RowID
+from .utils import Language, Row, RowID, standardize
 
 ROW_INFO_REGEX: re.Pattern = re.compile(r"^(?P<main>\d+)\.?(?P<sub>\d*)\.?(?P<subsub>\d*) +(?P<text>.+)$")
 section_regex_raw: str = (
-    r"(> (?P<note>.+?)\n\n)?"
-    r"(##### Snippet:\n\n```(?P<lang>[a-z]+)\n(?P<snippet>.+?)\n```\n\n)"
+    r" *\n*(> (?P<note>.+?)\n\n)?"
+    r"(##### Snippet:\n\n```(?P<lang>[a-z]+)\n(?P<snippet>.+?)\n```\n\n)?"
     r"(##### Output:\n\n```txt\n(?P<snippet_output>.+?)\n```\n\n)?"
-    r"(##### Full:\n\n```(?P<lang2>[a-z]+)\n(?P<full>.+?)\n```\n\n)?"
+    r"(##### Full:\n\n```(?P<lang2>[a-z]+)\n(?P<full>.+?)\n```\n\n)"
     r"(##### Output:\n\n```txt\n(?P<full_output>.+?)\n```)?"
 )
 SECTION_BODY_REGEX: re.Pattern = re.compile(r"^\n*" + section_regex_raw, re.DOTALL)
@@ -19,6 +19,11 @@ SECTION_FULL_REGEX: re.Pattern = re.compile(
     r"(?P<title>[^\n]+)\n+"
     f"{section_regex_raw}",
     re.DOTALL
+)
+SECTION_TITLE_REGEX = re.compile(
+    r"^(?P<level>#+) +"
+    r"(?P<number>[\d\.]+) +"
+    r"(?P<title>[^\n]+)\n+"
 )
 '''
 Cases:
@@ -46,6 +51,7 @@ class Illustration:
         snippet_output: str | None,
         full_output: str | None,
         language: str,
+        level: 3,
     ):
         self.row = row
         self.name = name
@@ -55,21 +61,41 @@ class Illustration:
         self.full = full
         self.full_output = full_output
         self.language = language
+        self.level = level
+
+    def __repr__(self):
+        return (
+            f"Illustration: {self.language} <> {self.name} ({self.row})\n"
+            f"    > {self.note}"
+            f"    "
+            f"    "
+            f"    "
+        )
 
     @classmethod
-    def from_langview(cls, raw_md: str) -> Self:
-        d = cls._parse_raw(raw_md, SECTION_FULL_REGEX)
-        info = RowID()
+    def from_langview(cls, raw_md: str, language: str) -> Self:
+        if not raw_md.strip().startswith("#### "):
+            d = re.search(SECTION_TITLE_REGEX, raw_md).groupdict() | dict(
+                note="",
+                snippet="",
+                snippet_output="",
+                full="",
+                full_output="",
+            )
+        
+        else:
+            d = cls._parse_raw(raw_md, SECTION_FULL_REGEX)
 
         return cls(
-            info=info,
+            row=standardize(d["title"]),
             name=d["title"],
             note=d["note"],
             snippet=d["snippet"],
             snippet_output=d["snippet_output"],
             full=d["full"],
             full_output=d["full_output"],
-            language=d["lang"],
+            language=language,
+            level=len(d["level"].strip()),
         )
 
     @classmethod
@@ -77,7 +103,7 @@ class Illustration:
         d = cls._parse_raw(raw_md, SECTION_FULL_REGEX)
 
     @classmethod
-    def from_section_body(cls, raw_md: str, *, row: Row, name: str, language: Language) -> Self:
+    def from_section_body(cls, raw_md: str, *, row: Row, name: str, language: Language, level: int) -> Self:
         d = cls._parse_raw(raw_md, SECTION_BODY_REGEX)
         # assert language == LANGUAGE_ABBREVS[d["lang"]]
         return cls(
@@ -89,9 +115,8 @@ class Illustration:
             snippet_output=d["snippet_output"],
             full=d["full"],
             full_output=d["full_output"],
-            
+            level=level,
         )
-
 
     def for_lang(self) -> str:
         return "\n\n".join(filter(bool,
@@ -115,6 +140,7 @@ class Illustration:
     
     @staticmethod
     def _parse_raw(raw_md: str, reg: re.Pattern) -> dict[str, str]:
+        
         parsed = re.search(reg, raw_md)
         if not parsed:
             raise ValueError(f"Invalid format: {raw_md}")
