@@ -39,6 +39,8 @@ def sync() -> None:
     for key, illustr in aggregate.items():
         print(key)
         print(illustr)
+    aggregate.write_featview(featview_root)
+    aggregate.write_featview(langview_root)
     return
     fv_new.write(featview_root)
     lv_new.write(langview_root)
