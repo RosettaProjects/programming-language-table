@@ -49,6 +49,7 @@ LANGUAGE_ABBREVS: OrderedDict[str, str] = {
         "abbreviation": "hs",
         "categories": [
             "default",
+            "canonical_illustration",
             "popular",
             "functional",
             "pure",
@@ -74,6 +75,7 @@ LANGUAGE_ABBREVS: OrderedDict[str, str] = {
             "core",
             "garbage_collected",
             "",
+            "canonical_illustration"
         ],
     },
     "JavaScript": {

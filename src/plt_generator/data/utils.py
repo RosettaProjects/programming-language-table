@@ -45,6 +45,9 @@ class RowID:
     
     def __repr__(self) -> str:
         return f"RowInfo('{self.main}.{self.sub}.{self.subsub} {self.text}', level={self.level})"
+    
+    def __hash__(self) -> int:
+        return hash((self.main, self.sub, self.subsub))
 
     @property
     def markdown(self) -> str:

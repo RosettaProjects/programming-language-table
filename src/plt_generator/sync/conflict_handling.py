@@ -22,7 +22,7 @@ def ensemble_vote(title_lists: list[Iterable[str]]) -> tuple[list[str], float]:
 
 def get_matching_titles(
     titles1: Iterable[str], titles2: Iterable[str]
-) -> [list[str], list[str]]:
+) -> tuple[list[str], list[str]]:
     """
     As a first step in the alignment process, find the titles that match perfectly.
     """
@@ -32,7 +32,7 @@ def get_matching_titles(
 
 def align_titles(
     titles1: Iterable[str], titles2: Iterable[str]
-) -> [list[str], list[str]]:
+) -> tuple[list[str], list[str]]:
     """
     Given two sequences of titles that do not match, align the titles to their closest matches,
       using fuzzy string matching. Log all operations that are not entirely obvious (e.g. where edit distance > 1), to
