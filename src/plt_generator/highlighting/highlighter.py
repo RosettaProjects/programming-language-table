@@ -2,10 +2,7 @@ import html
 
 from pygments.lexers import get_lexer_by_name
 from pygments.token import Token
-
 from pygments.token import _TokenType as TokenType
-from pygments.token import STANDARD_TYPES
-
 
 mapping = {
     Token.Keyword: "",
@@ -37,7 +34,7 @@ def get_mapping(tok: TokenType) -> str:
     return "structural"
 
 
-t = '''
+t = """
 use std::any::type_name;
 use std::fmt::Binary;
 use std::fmt::Display;
@@ -79,25 +76,25 @@ fn main() {
     print_info("unsigned_64bit", unsigned_64bit);
     print_info("unsigned_128bit", unsigned_128bit);
 }
-'''
+"""
+
 
 def escape_string(s: str) -> str:
     return html.escape(s).replace(" ", "&nbsp;").replace("\n", "<br>")
 
+
 def make_span(toktype: TokenType, tokval: str) -> str:
-    return f"<span class=\"{get_mapping(toktype)}\">{escape_string(tokval)}</span>"
+    return f'<span class="{get_mapping(toktype)}">{escape_string(tokval)}</span>'
+
 
 def make_block(code: str, language: str) -> str:
     lexer = get_lexer_by_name(language)
     return "".join(make_span(*pair) for pair in lexer.get_tokens(t))
 
 
-
 # for :
 #     print(f"{escape_string(tokval):<20} new: {get_mapping(toktype):<20}, orig: {toktype}")
 #     # print()
-
-
 
 
 class SyntaxHighlighter:

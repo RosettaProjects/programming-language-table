@@ -1,11 +1,9 @@
-from itertools import chain
-from typing import TypeAlias, TypeVar
+from typing import TypeVar
 
 T = TypeVar("T")
-NestedDict: TypeAlias = dict[str, dict[str, list[str]]]
-NestedTupleDict: TypeAlias = dict[tuple[str], dict[tuple[str, str], list[tuple[str, str, str]]]]
-DiffDict: TypeAlias = dict
-
+type NestedDict = dict[str, dict[str, list[str]]]
+type NestedTupleDict = dict[tuple[str], dict[tuple[str, str], list[tuple[str, str, str]]]]
+type DiffDict = dict
 
 
 def flatten_dict(d: NestedDict) -> set[tuple[str, ...]]:
@@ -20,11 +18,12 @@ def flatten_dict(d: NestedDict) -> set[tuple[str, ...]]:
 
 
 def get_dictionary_diff(fv: NestedDict, lv: NestedDict) -> DiffDict:
-    flat_fv, flat_lv= map(flatten_dict, (fv, lv))
+    flat_fv, flat_lv = map(flatten_dict, (fv, lv))
     return {
         "featview_missing": flat_fv - flat_lv,
         "langview_missing": flat_lv - flat_fv,
     }
+
 
 def get_list_diff(fv: list[T], lv: list[T]) -> DiffDict:
     set_fv, set_lv = map(set, (fv, lv))
@@ -34,7 +33,7 @@ def get_list_diff(fv: list[T], lv: list[T]) -> DiffDict:
     }
 
 
-'''
+"""
 test1 = {"A": {"AA": ["AAA", "BBB"]}}
 test2 = {"A": {"AA": ["BBB", "CCC"]}, "B": {}}
 
@@ -42,4 +41,4 @@ result = {
     "missing": [("A", "AA", "AAA")],
     "added": [("A", "AA", "CCC"), ("B",)],
 }
-'''
+"""

@@ -1,16 +1,12 @@
-import json
 import os
 from pathlib import Path
 
-from .data.master_table import MasterTable
 from .data.featview import FeatView
 from .data.langview import LangView
-from .html import HTMLBuilder
-from .sync import get_missing, get_recent, aggregate_from_diff
-from .utils.recency import make_timestamp, save_timestamp
-from .utils import path_manager
+from .sync import aggregate_from_diff, get_recent
+from .utils.recency import save_timestamp
 
-root = os.environ.get("PLT_ROOT") or Path(__file__).parent.parent.parent
+root = Path(os.environ.get("PLT_ROOT") or Path(__file__).parent.parent.parent)
 metadata = root / "metadata"
 history = metadata / "history"
 generated = root / "generated"
@@ -26,7 +22,7 @@ def sync() -> None:
     fv = FeatView.from_directory(featview_root)
     print(fv)
     lv = LangView.from_directory(langview_root)
-    print(lv["python"].rows)
+    # print(lv["python"].rows)
     print(lv)
     # print("=======", fv.cells)
     # print("=======", lv.cells)
@@ -36,19 +32,19 @@ def sync() -> None:
     recency = get_recent(fv, lv)
     print(recency)
     aggregate = aggregate_from_diff(fv, lv, recency)
-    for key, illustr in aggregate.items():
-        print(key)
-        print(illustr)
+    # for key, illustr in aggregate.items():
+    #     print(key)
+    #     print(illustr)
     aggregate.write_featview(featview_root)
     aggregate.write_featview(langview_root)
-    return
-    fv_new.write(featview_root)
-    lv_new.write(langview_root)
 
-    with open(history / f"diff_{make_timestamp()}", "w") as f:
-        json.dump(diff, f)
+    # with open(history / f"diff_{make_timestamp()}", "w") as f:
+    #     json.dump(diff, f)
 
     save_timestamp("synced", metadata / "timestamp.json")
+
+    # fv_new.write(featview_root)
+    # lv_new.write(langview_root)
 
 
 def generate() -> None:
@@ -59,11 +55,10 @@ def generate() -> None:
     print(generated)
     print(langview_root)
     print(featview_root)
-    fv = FeatView.from_directory(featview_root)
-    print(fv["0.0.0"])
-    print(fv["0.0.0"]["python"])
+    FeatView.from_directory(featview_root)
+    # print(fv["0.0.0"])
+    # print(fv["0.0.0"]["python"])
     save_timestamp("generated", metadata / "timestamp.json")
-
 
 
 def dryrun() -> None:

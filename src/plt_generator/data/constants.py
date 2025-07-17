@@ -1,6 +1,5 @@
 from collections import OrderedDict
 
-
 # LANGUAGE_ABBREVS: OrderedDict[str, str] = {
 #     "py": "Python",
 #     "rs": "Rust",
@@ -8,238 +7,177 @@ from collections import OrderedDict
 #     "hs": "Haskell",
 # }
 
-LANGUAGE_ABBREVS: OrderedDict[str, str] = {
-    "Python": {
-        "order": 0,
-        "abbreviation": "py",
-        "categories": [
-            "default",
-            "popular",
-            "c_family",
-            "dynamically_typed",
-            "garbage_collected",
-            "interpreted",
-        ],
-    },
-    "Rust": {
-        "order": 0,
-        "abbreviation": "rs",
-        "categories": [
-            "default",
-            "popular",
-            "c_family",
-            "statically_typed",
-            "compiled",
-        ],
-    },
-    "Guile Scheme": {
-        "order": 0,
-        "abbreviation": "scm",
-        "categories": [
-            "default",
-            "popular",
-            "lisp",
-            "dynamically_typed",
-            "garbage_collection",
-            "interpreted",
-        ],
-    },
-    "Haskell": {
-        "order": 0,
-        "abbreviation": "hs",
-        "categories": [
-            "default",
-            "canonical_illustration",
-            "popular",
-            "functional",
-            "pure",
-            "statically_typed"
-            "garbage_collection",
-            "interpreted",
-            "compiled",
-        ],
-    },
-    "C": {
-        "order": 0,
-        "abbreviation": "",
-        "categories": [
-            "core",
-            "",
-            "",
-        ],
-    },
-    "Java": {
-        "order": 0,
-        "abbreviation": "",
-        "categories": [
-            "core",
-            "garbage_collected",
-            "",
-            "canonical_illustration"
-        ],
-    },
-    "JavaScript": {
-        "order": 0,
-        "abbreviation": "",
-        "categories": [
-            "core",
-            "garbage_collected",
-            "",
-        ],
-    },
-    "TypeScript": {
-        "abbreviation": "",
-        "categories": [
-            "core",
-            "garbage_collected",
-            "",
-        ],
-    },
-    "OCaml": {
-        "abbreviation": "",
-        "categories": [
-            "core",
-            "",
-            "",
-        ],
-    },
-    "Common Lisp": {
-        "abbreviation": "",
-        "categories": [
-            "core",
-            "",
-            "",
-        ],
-    },
-    "C++": {
-        "abbreviation": "",
-        "categories": [
-            "core",
-            "",
-            "",
-        ],
-    },
-    "Zig": {
-        "abbreviation": "",
-        "categories": [
-            "core",
-            "",
-            "",
-        ],
-    },
-    "Ruby": {
-        "abbreviation": "",
-        "categories": [
-            "core",
-            "",
-            "",
-        ],
-    },
-    "Scala": {
-        "abbreviation": "",
-        "categories": [
-            "core",
-            "",
-            "",
-        ],
-    },
-    "Go": {
-        "abbreviation": "",
-        "categories": [
-            "core",
-            "",
-            "",
-        ],
-    },
-    "Lua": {
-        "abbreviation": "",
-        "categories": [
-            "core",
-            "",
-            "",
-        ],
-    },
-    "Julia": {
-        "abbreviation": "",
-        "categories": [
-            "core",
-            "",
-            "",
-        ],
-    },
-    "Kotlin": {
-        "abbreviation": "",
-        "categories": [
-            "core",
-            "",
-            "",
-        ],
-    },
-    "Erlang": {
-        "abbreviation": "",
-        "categories": [
-            "core",
-            "",
-            "",
-        ],
-    },
-    "Ada": {
-        "abbreviation": "",
-        "categories": [
-            "extended_core",
-            "",
-            "",
-        ],
-    },
-    "Clojure": {
-        "abbreviation": "",
-        "categories": [
-            "extended_core",
-            "",
-            "",
-        ],
-    },
-    "D": {
-        "abbreviation": "",
-        "categories": [
-            "extended_core",
-            "",
-            "",
-        ],
-    },
-    "Elixir": {
-        "abbreviation": "",
-        "categories": [
-            "core",
-            "",
-            "",
-        ],
-    },
-    "Elm": {
-        "abbreviation": "",
-        "categories": [
-            "extended_core",
-            "",
-            "",
-        ],
-    },
-    "Fortran": {
-        "abbreviation": "",
-        "categories": [
-            "extended_core",
-            "",
-            "",
-        ],
-    },
-    "Gleam": {
-        "abbreviation": "",
-        "categories": [
-            "extended_core",
-            "",
-            "",
-        ],
-    },
-    "Haxe": {
+LANGUAGE_ABBREVS: OrderedDict[str, dict] = OrderedDict(
+    {
+        "Python": {
+            "order": 0,
+            "abbreviation": "py",
+            "categories": [
+                "default",
+                "popular",
+                "c_family",
+                "dynamically_typed",
+                "garbage_collected",
+                "interpreted",
+            ],
+        },
+        "Rust": {
+            "order": 0,
+            "abbreviation": "rs",
+            "categories": [
+                "default",
+                "popular",
+                "c_family",
+                "statically_typed",
+                "compiled",
+            ],
+        },
+        "Guile Scheme": {
+            "order": 0,
+            "abbreviation": "scm",
+            "categories": [
+                "default",
+                "popular",
+                "lisp",
+                "dynamically_typed",
+                "garbage_collection",
+                "interpreted",
+            ],
+        },
+        "Haskell": {
+            "order": 0,
+            "abbreviation": "hs",
+            "categories": [
+                "default",
+                "canonical_illustration",
+                "popular",
+                "functional",
+                "pure",
+                "statically_typedgarbage_collection",
+                "interpreted",
+                "compiled",
+            ],
+        },
+        "C": {
+            "order": 0,
+            "abbreviation": "",
+            "categories": [
+                "core",
+                "",
+                "",
+            ],
+        },
+        "Java": {
+            "order": 0,
+            "abbreviation": "",
+            "categories": ["core", "garbage_collected", "", "canonical_illustration"],
+        },
+        "JavaScript": {
+            "order": 0,
+            "abbreviation": "",
+            "categories": [
+                "core",
+                "garbage_collected",
+                "",
+            ],
+        },
+        "TypeScript": {
+            "abbreviation": "",
+            "categories": [
+                "core",
+                "garbage_collected",
+                "",
+            ],
+        },
+        "OCaml": {
+            "abbreviation": "",
+            "categories": [
+                "core",
+                "",
+                "",
+            ],
+        },
+        "Common Lisp": {
+            "abbreviation": "",
+            "categories": [
+                "core",
+                "",
+                "",
+            ],
+        },
+        "C++": {
+            "abbreviation": "",
+            "categories": [
+                "core",
+                "",
+                "",
+            ],
+        },
+        "Zig": {
+            "abbreviation": "",
+            "categories": [
+                "core",
+                "",
+                "",
+            ],
+        },
+        "Ruby": {
+            "abbreviation": "",
+            "categories": [
+                "core",
+                "",
+                "",
+            ],
+        },
+        "Scala": {
+            "abbreviation": "",
+            "categories": [
+                "core",
+                "",
+                "",
+            ],
+        },
+        "Go": {
+            "abbreviation": "",
+            "categories": [
+                "core",
+                "",
+                "",
+            ],
+        },
+        "Lua": {
+            "abbreviation": "",
+            "categories": [
+                "core",
+                "",
+                "",
+            ],
+        },
+        "Julia": {
+            "abbreviation": "",
+            "categories": [
+                "core",
+                "",
+                "",
+            ],
+        },
+        "Kotlin": {
+            "abbreviation": "",
+            "categories": [
+                "core",
+                "",
+                "",
+            ],
+        },
+        "Erlang": {
+            "abbreviation": "",
+            "categories": [
+                "core",
+                "",
+                "",
+            ],
+        },
+        "Ada": {
             "abbreviation": "",
             "categories": [
                 "extended_core",
@@ -247,7 +185,7 @@ LANGUAGE_ABBREVS: OrderedDict[str, str] = {
                 "",
             ],
         },
-    "Idris": {
+        "Clojure": {
             "abbreviation": "",
             "categories": [
                 "extended_core",
@@ -255,7 +193,7 @@ LANGUAGE_ABBREVS: OrderedDict[str, str] = {
                 "",
             ],
         },
-    "Racket": {
+        "D": {
             "abbreviation": "",
             "categories": [
                 "extended_core",
@@ -263,7 +201,15 @@ LANGUAGE_ABBREVS: OrderedDict[str, str] = {
                 "",
             ],
         },
-    "Raku": {
+        "Elixir": {
+            "abbreviation": "",
+            "categories": [
+                "core",
+                "",
+                "",
+            ],
+        },
+        "Elm": {
             "abbreviation": "",
             "categories": [
                 "extended_core",
@@ -271,7 +217,7 @@ LANGUAGE_ABBREVS: OrderedDict[str, str] = {
                 "",
             ],
         },
-    "PureScript": {
+        "Fortran": {
             "abbreviation": "",
             "categories": [
                 "extended_core",
@@ -279,7 +225,7 @@ LANGUAGE_ABBREVS: OrderedDict[str, str] = {
                 "",
             ],
         },
-    "PHP": {
+        "Gleam": {
             "abbreviation": "",
             "categories": [
                 "extended_core",
@@ -287,7 +233,7 @@ LANGUAGE_ABBREVS: OrderedDict[str, str] = {
                 "",
             ],
         },
-    "Perl": {
+        "Haxe": {
             "abbreviation": "",
             "categories": [
                 "extended_core",
@@ -295,7 +241,7 @@ LANGUAGE_ABBREVS: OrderedDict[str, str] = {
                 "",
             ],
         },
-    "Octave": {
+        "Idris": {
             "abbreviation": "",
             "categories": [
                 "extended_core",
@@ -303,7 +249,7 @@ LANGUAGE_ABBREVS: OrderedDict[str, str] = {
                 "",
             ],
         },
-    "Nim": {
+        "Racket": {
             "abbreviation": "",
             "categories": [
                 "extended_core",
@@ -311,7 +257,7 @@ LANGUAGE_ABBREVS: OrderedDict[str, str] = {
                 "",
             ],
         },
-    "Roc": {
+        "Raku": {
             "abbreviation": "",
             "categories": [
                 "extended_core",
@@ -319,7 +265,7 @@ LANGUAGE_ABBREVS: OrderedDict[str, str] = {
                 "",
             ],
         },
-    "R": {
+        "PureScript": {
             "abbreviation": "",
             "categories": [
                 "extended_core",
@@ -327,7 +273,7 @@ LANGUAGE_ABBREVS: OrderedDict[str, str] = {
                 "",
             ],
         },
-    "F#": {
+        "PHP": {
             "abbreviation": "",
             "categories": [
                 "extended_core",
@@ -335,7 +281,7 @@ LANGUAGE_ABBREVS: OrderedDict[str, str] = {
                 "",
             ],
         },
-    "C#": {
+        "Perl": {
             "abbreviation": "",
             "categories": [
                 "extended_core",
@@ -343,7 +289,7 @@ LANGUAGE_ABBREVS: OrderedDict[str, str] = {
                 "",
             ],
         },
-    "Typed Racket": {
+        "Octave": {
             "abbreviation": "",
             "categories": [
                 "extended_core",
@@ -351,7 +297,7 @@ LANGUAGE_ABBREVS: OrderedDict[str, str] = {
                 "",
             ],
         },
-    "Crystal": {
+        "Nim": {
             "abbreviation": "",
             "categories": [
                 "extended_core",
@@ -359,7 +305,7 @@ LANGUAGE_ABBREVS: OrderedDict[str, str] = {
                 "",
             ],
         },
-    "Dart": {
+        "Roc": {
             "abbreviation": "",
             "categories": [
                 "extended_core",
@@ -367,7 +313,7 @@ LANGUAGE_ABBREVS: OrderedDict[str, str] = {
                 "",
             ],
         },
-    "V (Vlang)": {
+        "R": {
             "abbreviation": "",
             "categories": [
                 "extended_core",
@@ -375,7 +321,7 @@ LANGUAGE_ABBREVS: OrderedDict[str, str] = {
                 "",
             ],
         },
-    "Vala": {
+        "F#": {
             "abbreviation": "",
             "categories": [
                 "extended_core",
@@ -383,7 +329,7 @@ LANGUAGE_ABBREVS: OrderedDict[str, str] = {
                 "",
             ],
         },
-    "Tcl": {
+        "C#": {
             "abbreviation": "",
             "categories": [
                 "extended_core",
@@ -391,7 +337,7 @@ LANGUAGE_ABBREVS: OrderedDict[str, str] = {
                 "",
             ],
         },
-    "Swift": {
+        "Typed Racket": {
             "abbreviation": "",
             "categories": [
                 "extended_core",
@@ -399,9 +345,61 @@ LANGUAGE_ABBREVS: OrderedDict[str, str] = {
                 "",
             ],
         },
-}
+        "Crystal": {
+            "abbreviation": "",
+            "categories": [
+                "extended_core",
+                "",
+                "",
+            ],
+        },
+        "Dart": {
+            "abbreviation": "",
+            "categories": [
+                "extended_core",
+                "",
+                "",
+            ],
+        },
+        "V (Vlang)": {
+            "abbreviation": "",
+            "categories": [
+                "extended_core",
+                "",
+                "",
+            ],
+        },
+        "Vala": {
+            "abbreviation": "",
+            "categories": [
+                "extended_core",
+                "",
+                "",
+            ],
+        },
+        "Tcl": {
+            "abbreviation": "",
+            "categories": [
+                "extended_core",
+                "",
+                "",
+            ],
+        },
+        "Swift": {
+            "abbreviation": "",
+            "categories": [
+                "extended_core",
+                "",
+                "",
+            ],
+        },
+    }
+)
 
-'''
+
+ABBREV2LANG = {v["abbreviation"]: k for k, v in LANGUAGE_ABBREVS.items() if v["abbreviation"]}
+
+"""
 https://rosettacode.org/wiki/Category:Languages_by_Feature
 https://rosettacode.org/wiki/Language_Comparison_Table
 
@@ -544,4 +542,4 @@ GraphQL
 SQL
 Jq
 
-'''
+"""

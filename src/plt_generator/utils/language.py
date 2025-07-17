@@ -1,6 +1,5 @@
-from enum import StrEnum, auto
-from typing import Self
 import re
+from enum import StrEnum, auto
 
 
 class ProgLang(StrEnum):
@@ -27,19 +26,19 @@ class ProgLang(StrEnum):
     APL = auto()
     ZIG = auto()
 
-    @classmethod
-    def _missing_(cls, value: str) -> Self | None:
-        value = re.sub(r"[^A-Z]", "", value.upper())
-        for member in cls:
-            if member.value == value:
-                return member
-        return None
+    # @classmethod
+    # def _missing_(cls, value: str) -> Self | None:
+    #     value = re.sub(r"[^A-Z]", "", value.upper())
+    #     for member in cls:
+    #         if member.value == value:
+    #             return member
+    #     return None
 
     def __repr__(self) -> str:
         return f"ProgLang.{self.name}"
 
 
-language_info: dict[str, dict[str, str]] = {
+language_info: dict[str, dict[str, set[str]]] = {
     ProgLang.PYTHON: dict(
         aliases={"PY"},
     ),
@@ -110,20 +109,17 @@ language_info: dict[str, dict[str, str]] = {
 
 language_lookup = {
     alias: standardized
-    for standardized, alias_set in {
-        k: v["aliases"] | {k.name} for k, v in language_info.items()
-    }.items()
+    for standardized, alias_set in {k: v["aliases"] | {k} for k, v in language_info.items()}.items()
     for alias in alias_set
 }
 
 
 def language_resolver(lang_name: str) -> ProgLang | None:
-
     lookup_result = language_lookup.get(re.sub(r"[^A-Z]", "", lang_name.upper()))
     if not lookup_result:
         return None
 
-    return lookup_result
+    return ProgLang[lookup_result]
 
 
 assert len(ProgLang) == len(language_info)

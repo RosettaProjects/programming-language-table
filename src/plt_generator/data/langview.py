@@ -1,16 +1,13 @@
-from functools import partial
+import re
 from itertools import chain
 from pathlib import Path
-import re
 from typing import Self
-
-import markdown_to_json
 
 from plt_generator.utils.recency import time_modified_readable
 
+from ..utils.diff import NestedDict
 from .illustration import Illustration
-from ..utils.diff import NestedDict, NestedTupleDict
-from .utils import Language, Row, standardize
+from .utils import Language, Row
 
 # class FeatureSubsection:
 #     """
@@ -40,6 +37,7 @@ from .utils import Language, Row, standardize
 #     def __getitem__(self, __id: int) -> "ParsedGroupSection":
 #         return ParsedGroupSection()
 
+
 class SingleLanguage:
     def __init__(self, language: str, raw_md: str, parsed: dict, recency: str):
         self.language: str = language
@@ -49,12 +47,14 @@ class SingleLanguage:
 
     def __repr__(self):
         return f"rows: {', '.join(self.rows)}; last modified {self.recency}"
-    
+
     def __getitem__(self, name: str) -> Illustration:
         return self.parsed.get(name, "NOT_FOUND")
 
     @property
-    def dictionary(self) -> NestedDict: ...
+    def dictionary(self) -> NestedDict:
+        nd: NestedDict = {}
+        return nd
 
     @property
     def rows(self) -> list[tuple[str, ...]]:
@@ -63,33 +63,51 @@ class SingleLanguage:
 
     @classmethod
     def from_markdown(cls, raw_md: str) -> Self:
-        return cls(raw_md)
-    
+        ...  # TODO
+        s = re.search(r"(?<=# )[^\n]+", raw_md)
+        if not s:
+            raise ValueError("Invalid markdown format: missing language name")
+        return cls(
+            language=s.group(0),
+            raw_md=raw_md,
+            parsed=cls.parse_md(raw_md),
+            recency=time_modified_readable(Path("dummy_path")),  # Placeholder
+        )
+
     @classmethod
     def from_file(cls, p: Path) -> Self:
-
         recency = time_modified_readable(p)
         with open(p, encoding="utf-8") as f:
             raw_page = f.read()
             lang_name = p.name.replace(".md", "")
 
         sections = cls.parse_md(raw_page)
-        
+
         return cls(lang_name, raw_page, sections, recency)
-    
+
     @staticmethod
     def parse_md(raw_md: str) -> dict[str, Illustration]:
-        # regex = re.compile(r"(?P<section_type>\n####) (?P<number>[\d\.]+) (?P<title>[^\n]+)\n+(?P<main>[^\n]+)", re.DOTALL)
+        # regex = re.compile(r"(?P<section_type>\n####) (?P<number>[\d\.]+)
+        #     (?P<title>[^\n]+)\n+(?P<main>[^\n]+)", re.DOTALL)
         # sections = re.findall(regex, raw_md)
-        language = re.search(r"(?<=# )[^\n]+", raw_md).group(0)
-        sections = list(map(lambda md: Illustration.from_langview(md, language=language), re.split(r"\n#(?=#{1,3} )", raw_md)[1:]))
-        print(sections)
-        return {illustr.row: illustr for illustr in sections}
+        # s = re.search(r"(?<=# )[^\n]+", raw_md)
+        # if not s:
+        #     raise ValueError("Invalid markdown format: missing language name")
+        # language = s.group(0)
+        # sections = list(
+        #     map(
+        #         lambda md: Illustration.from_langview(md, language=language),
+        #         re.split(r"\n#(?=#{1,3} )", raw_md)[1:],
+        #     )
+        # )
+        # print(sections)
+        # return {illustr.row: illustr for illustr in sections}
+        return {}
 
 
 class LangView:
     """
-    Parsed contents of `markdown_feat_view` folder.
+    Parsed contents of `markdown_lang_view` folder.
     """
 
     def __init__(self, lang_dict: dict[Language, SingleLanguage]) -> None:
@@ -97,16 +115,18 @@ class LangView:
         self.languages: list[Language] = list(lang_dict.keys())
 
     def __repr__(self) -> str:
-        return "\n".join((f"{lang:<10} ::: {lang_item}" for lang, lang_item in self._lang_dict.items()))
+        return "\n".join(
+            (f"{lang:<10} ::: {lang_item}" for lang, lang_item in self._lang_dict.items())
+        )
 
     @property
-    def rows(self) -> list[tuple[str, ...]]:
+    def rows(self) -> list[Language]:
         return self.get_rows(self._lang_dict)
-    
+
     @property
     def recencies(self) -> dict:
         d = {}
-        for (lang, row, recency) in self.cells:
+        for lang, row, recency in self.cells:
             d.update({(lang, row): recency})
         return d
 
@@ -118,7 +138,6 @@ class LangView:
                 cells.append((lang, row, single_feature.recency))
         return cells
 
-
     @classmethod
     def from_directory(cls, langview_root: Path) -> "LangView":
         lang_dict = {}
@@ -126,20 +145,27 @@ class LangView:
             single_feature = SingleLanguage.from_file(md_path)
             lang_dict.update({single_feature.language: single_feature})
         return cls(lang_dict)
-            
-    def __getitem__(self, row_id: Row) -> dict[Language, Illustration]:
+
+    def __getitem__(self, row_id: Language) -> SingleLanguage:
         return self._lang_dict[row_id]
-    
+
     def update_from_diff(self, fv, diff) -> Self:
         for (missing_lang, missing_row), recent in diff.items():
             print(missing_lang, missing_row, recent)
             # self.add_from_featview(fv, missing_lang, missing_row, recency) TODO
         return self
-    
+
     def lookup(self, lang_id: Language, row_id: Row) -> Illustration:
         return self._lang_dict[lang_id][row_id]
-    
+
+    def write(self, langview_root: Path) -> None:
+        for lang, single_lang in self._lang_dict.items():
+            path = langview_root / f"{lang}.md"
+            with path.open("w") as f:
+                f.write(str(single_lang))
+            print(f"Written {path} with recency {single_lang.recency}")
+
     @staticmethod
     def get_rows(row_dict: dict[Language, SingleLanguage]) -> list[Language]:
-        all_rows = list(set(chain.from_iterable(map(lambda sf: sf.rows, row_dict.values()))))
-        return all_rows
+        _all_rows = list(set(chain.from_iterable(map(lambda sf: sf.rows, row_dict.values()))))
+        return list(set(chain.from_iterable(_all_rows)))

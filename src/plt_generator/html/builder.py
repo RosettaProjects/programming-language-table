@@ -1,7 +1,8 @@
-from ..highlighting import SyntaxHighlighter
+# ruff: noqa: E501
 from ..data.master_table import MasterTable
+from ..highlighting import SyntaxHighlighter
 
-header = '''<!DOCTYPE html>
+header = """<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -123,9 +124,9 @@ header = '''<!DOCTYPE html>
         <h1>Programming Language Table</h1>
     </div>
 
-'''
+"""
 
-footer = '''
+footer = """
 
     <script src="main.js">
 
@@ -136,14 +137,13 @@ footer = '''
 </body>
 
 </html>
-'''
+"""
+
 
 class HTMLBuilder:
     def __init__(self, highlighter: SyntaxHighlighter) -> None:
         self.highlighter: SyntaxHighlighter = highlighter
 
     def __call__(self, master_table: MasterTable) -> str:
-        languages = master_table.languages
-        rows = master_table.rows
         table = ""
         return f"{header}{table}{footer}"

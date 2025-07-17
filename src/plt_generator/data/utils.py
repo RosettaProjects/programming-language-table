@@ -1,10 +1,13 @@
-from typing import Literal, Self, TypeAlias
 import re
+from typing import Literal, cast
 
-from .constants import LANGUAGE_ABBREVS
+type Language = str
+type Row = str
 
-Language: TypeAlias = str
-Row: TypeAlias = str
+
+def len_non_none(t: tuple) -> int:
+    """Count the number of non-None elements in a tuple."""
+    return sum(1 for x in t if x is not None)
 
 
 class RowID:
@@ -15,37 +18,37 @@ class RowID:
         sub: int | None,
         subsub: int | None,
         text: str,
-        original: str,
+        octothorpes: str,
     ) -> None:
         self.main = main
         self.sub = sub
         self.subsub = subsub
         self.text = text
-        self.original = original
+        self.octothorpes = octothorpes
 
-    @classmethod
-    def from_md(cls, s: str) -> Self:
-        parsed = re.search(cls.parser, s)
-        assert parsed
-        gd = parsed.groupdict()
-        main = gd["main"]
-        sub = gd["sub"] or None
-        subsub = gd["subsub"] or None
-        text = gd["text"]
-        return cls(
-            original=s,
-            main=main,
-            sub=sub,
-            subsub=subsub,
-            text=text,
-        )
+    # @classmethod
+    # def from_md(cls, s: str) -> Self:
+    #     parsed = re.search(cls.parser, s)
+    #     assert parsed
+    #     gd = parsed.groupdict()
+    #     main = gd["main"]
+    #     sub = gd["sub"] or None
+    #     subsub = gd["subsub"] or None
+    #     text = gd["text"]
+    #     return cls(
+    #         original=s,
+    #         main=main,
+    #         sub=sub,
+    #         subsub=subsub,
+    #         text=text,
+    #     )
 
     def __str__(self) -> str:
         return f"{self.main}.{self.sub}.{self.subsub} {self.text}"
-    
+
     def __repr__(self) -> str:
         return f"RowInfo('{self.main}.{self.sub}.{self.subsub} {self.text}', level={self.level})"
-    
+
     def __hash__(self) -> int:
         return hash((self.main, self.sub, self.subsub))
 
@@ -65,7 +68,8 @@ class RowID:
 
     @property
     def level(self) -> Literal[1, 2, 3]:
-        return sum(map(lambda val: int(bool(val)), (self.main, self.sub, self.subsub)))
+        _sum = sum(map(lambda val: int(bool(val)), (self.main, self.sub, self.subsub)))
+        return cast(Literal[1, 2, 3], _sum)
 
 
 def standardize(s: str) -> str:
