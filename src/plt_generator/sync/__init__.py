@@ -11,9 +11,10 @@ from ..data.master_table import MasterTable
 from ..utils.diff import DiffDict, get_dictionary_diff, get_list_diff
 from .bidirectional_sync import sync_bidirectional
 
-print(DiffDict)  # TODO
-print(get_dictionary_diff)  # TODO
-print(sync_bidirectional)  # TODO
+if False:
+    print(DiffDict)  # TODO
+    print(get_dictionary_diff)  # TODO
+    print(sync_bidirectional)  # TODO
 
 
 def get_recent(featview: FeatView, langview: LangView) -> dict:

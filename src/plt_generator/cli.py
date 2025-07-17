@@ -51,13 +51,17 @@ def generate() -> None:
     """
     Creates the .html file, with embedded CSS and JavaScript.
     """
-    print(root)
-    print(generated)
-    print(langview_root)
-    print(featview_root)
-    FeatView.from_directory(featview_root)
-    # print(fv["0.0.0"])
-    # print(fv["0.0.0"]["python"])
+    # print(f"root:          {root}")
+    # print(f"generated:     {generated}")
+    # print(f"langview_root: {langview_root}")
+    # print(f"featview_root: {featview_root}")
+    fv = FeatView.from_directory(featview_root)
+    lv = LangView.from_directory(langview_root)
+    print()
+    print(fv)
+    print()
+    print(lv)
+    print()
     save_timestamp("generated", metadata / "timestamp.json")
 
 

@@ -1,11 +1,12 @@
 from pathlib import Path
 
+from ..utils.language import ProgLang
+
 # from ..sync import sync_bidirectional
 from ..validation import validate_view_objects
 from . import FeatView, LangView
 from .illustration import Illustration
 from .utils import RowID
-from .utils.language import ProgLang
 
 
 class MasterTable:
@@ -19,7 +20,7 @@ class MasterTable:
         self.featview = featview
         self.langview = langview
         self.composite = self.build_master_table(self.featview, self.langview)
-        self._rows: list[str]
+        self._rows: list[RowID]
         self._langs: list[str]
 
     @property

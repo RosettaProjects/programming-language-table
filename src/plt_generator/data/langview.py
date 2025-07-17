@@ -115,8 +115,8 @@ class LangView:
         self.languages: list[Language] = list(lang_dict.keys())
 
     def __repr__(self) -> str:
-        return "\n".join(
-            (f"{lang:<10} ::: {lang_item}" for lang, lang_item in self._lang_dict.items())
+        return "LangView:\n    " + "\n    ".join(
+            (f"{lang:<15} ::: {lang_item}" for lang, lang_item in self._lang_dict.items())
         )
 
     @property
