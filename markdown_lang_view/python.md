@@ -2,31 +2,32 @@
 
 ## 0. Basics
 
-### 0.0 Console Output
+### 0.0. Console Output
 
-#### 0.0.0 Hello, world!
+#### 0.0.0. Hello, world!
 
-> Note
+Note
+and more note
 
-Snippet:
+> Snippet:
 
 ```py
-
+print("Hello, World!")
 ```
 
-Output:
+> Output:
 
 ```txt
-
+Hello, World!
 ```
 
-Full:
+> Full:
 
 ```py
-
+print("Hello, World!")
 ```
 
-Output:
+> Output:
 
 ```txt
 ❯ Hello, world!
@@ -34,33 +35,36 @@ Output:
 
 ### 0.1. Primitive Types
 
-#### 0.1.0 Boolean
+#### 0.1.0. Boolean
 
-> Note
+Note
 
-Full:
+> Snippet:
 
 ```py
-
+bool1 = True
+bool2 = False
+print(f"{bool1=}, {bool2=}")
 ```
 
-Output:
+> Output:
 
 ```txt
 bool1=true, bool2=false
 ```
 
-#### 0.1.1 Integer
+#### 0.1.1. Integer
 
-> Note
+Note to come...
 
-Full:
+> Snippet:
 
 ```py
-
+int_a = 5
+int_b = -112
 ```
 
-Output:
+> Output:
 
 ```txt
 

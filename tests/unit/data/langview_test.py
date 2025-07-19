@@ -1,4 +1,3 @@
-
 class TestSingleLanguage:
     def test_dunder_repr(self): ...
 
@@ -16,7 +15,6 @@ class TestSingleLanguage:
 
 
 class TestLangView:
-
     def test_dunder_repr(self): ...
 
     def test_rows(self): ...

@@ -2,27 +2,27 @@
 
 ## 0. Basics
 
-### 0.0 Console Output
+### 0.0. Console Output
 
-#### 0.0.0 Hello, world!
+#### 0.0.0. Hello, world!
 
-> Note
+Note
 
-##### Snippet:
-
-```hs
-main :: IO ()
-main = putStrLn "Hello, world!"
-```
-
-##### Full:
+> Snippet:
 
 ```hs
 main :: IO ()
 main = putStrLn "Hello, world!"
 ```
 
-##### Output:
+> Full:
+
+```hs
+main :: IO ()
+main = putStrLn "Hello, world!"
+```
+
+> Output:
 
 ```txt
 ❯ Hello, world!
@@ -30,11 +30,11 @@ main = putStrLn "Hello, world!"
 
 ### 0.1. Primitive Types
 
-#### 0.1.0 Boolean
+#### 0.1.0. Boolean
 
-> Note
+Note
 
-Full:
+> Snippet:
 
 ```hs
 bool1 :: Bool
@@ -47,18 +47,18 @@ main :: IO ()
 main = putStrLn $ "bool1=" ++ show bool1 ++ ", bool2=" ++ show bool2
 ```
 
-Output:
+> Output:
 
 ```txt
 ❯ bool1=true, bool2=false
 ```
 
-#### 0.1.1 Integer
+#### 0.1.1. Integer
 
-> Integer is unbounded. Int is architecture-specific, most likely 64-bit. As such, we can't
-  view its internal representation the same way we can for Int.
+Integer is unbounded. Int is architecture-specific, most likely 64-bit. As such, we can't
+    view its internal representation the same way we can for Int.
 
-Full:
+> Snippet:
 
 ```hs
 import Data.Typeable (typeOf)
@@ -85,7 +85,7 @@ main = putStrLn $
     ++ ",\nBinary representation of integerA:\n  " ++ toBinary integerA
 ```
 
-Output:
+> Output:
 
 ```txt
 integerA=42, integerB=-345,

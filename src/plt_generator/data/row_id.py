@@ -17,6 +17,15 @@ class RowID:
         self.text = text
         self.octothorpes = octothorpes
 
+    @property
+    def numbers(self) -> tuple[int] | tuple[int, int] | tuple[int, int, int]:
+        if self.subsub is not None:
+            return (self.main, self.sub, self.subsub)
+        elif self.sub is not None:
+            return (self.main, self.sub)
+        else:
+            return self.main
+
     # @classmethod
     # def from_md(cls, s: str) -> Self:
     #     parsed = re.search(cls.parser, s)

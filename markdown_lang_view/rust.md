@@ -2,19 +2,25 @@
 
 ## 0. Basics
 
-### 0.0 Console Output
+### 0.0. Console Output
 
-#### 0.0.0 Hello, world!
+#### 0.0.0. Hello, world!
 
-> Note
+Note
 
-##### Snippet:
+> Snippet:
 
 ```rs
 println!("Hello, world!");
 ```
 
-##### Full:
+> Output:
+
+```txt
+
+```
+
+> Full:
 
 ```rs
 fn main() {
@@ -22,7 +28,7 @@ fn main() {
 }
 ```
 
-##### Output:
+> Output:
 
 ```txt
 ❯ Hello, world!
@@ -30,11 +36,11 @@ fn main() {
 
 ### 0.1. Primitive Types
 
-#### 0.1.0 Boolean
+#### 0.1.0. Boolean
 
-> Note
+Note
 
-Snippet:
+> Snippet:
 
 ```rs
 let bool1 = true;
@@ -42,13 +48,13 @@ let bool2 = false;
 println!("bool1={bool1}, bool2={bool2}");
 ```
 
-##### Output:
+> Output:
 
 ```txt
 ❯ bool1=true, bool2=false
 ```
 
-##### Full:
+> Full:
 
 ```rs
 fn main() {
@@ -58,11 +64,11 @@ fn main() {
 }
 ```
 
-#### 0.1.1 Integer
+#### 0.1.1. Integer
 
-> Note
+Note
 
-Snippet:
+> Snippet:
 
 ```rs
 let signed_8bit: i8 = 27;
@@ -78,7 +84,7 @@ let unsigned_64bit: u64 = 1234567;
 let unsigned_128bit: u128 = 123456789;
 ```
 
-Full:
+> Full:
 
 ```rs
 use std::any::type_name;
@@ -124,7 +130,7 @@ fn main() {
 }
 ```
 
-Output:
+> Output:
 
 ```txt
 signed_16bit: type 'i16'

@@ -52,7 +52,7 @@
         in {
             packages = {
                 default = uvEnv.package;
-                plt_generator = uvEnv.package;
+                plt-generator = uvEnv.package;
             };
             apps = {};
             devShells = {

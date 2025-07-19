@@ -8,7 +8,7 @@ Imperative, Procedural, Concurrent
 
 ### Main applications
 
-Application, web, server-side 
+Application, web, server-side
 
 ### Compiled?
 
@@ -23,8 +23,6 @@ Application, web, server-side
 Sort of...
 
 ### Language Standard
-
-
 
 ### Generic?
 
@@ -42,11 +40,11 @@ Sort of...
 
 [link](https://go101.org/article/keywords-and-identifiers.html)
 
-break     default      func    interface  select
-case      defer        go      map        struct
-chan      else         goto    package    switch
-const     fallthrough  if      range      type
-continue  for          import  return     var
+break default func interface select
+case defer go map struct
+chan else goto package switch
+const fallthrough if range type
+continue for import return var
 
 ## First Steps
 
@@ -69,4 +67,3 @@ func main() {
 ### Arithetic Operators
 
 `+ - * / %`
-

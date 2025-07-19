@@ -6,7 +6,7 @@ from ..utils.language import ProgLang
 from ..validation import validate_view_objects
 from . import FeatView, LangView
 from .illustration import Illustration
-from .utils import RowID
+from .row_id import RowID
 
 
 class MasterTable:

@@ -1,6 +1,3 @@
-
-
-
 class TestSingleFeature:
     def test_languages(self): ...
 
@@ -10,8 +7,8 @@ class TestSingleFeature:
 
     def test_from_file(self): ...
 
-class TestFeatView:
 
+class TestFeatView:
     def test_rows(self): ...
 
     def test_cells(self): ...

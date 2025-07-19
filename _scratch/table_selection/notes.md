@@ -1,6 +1,7 @@
 Yes, you can use JavaScript to dynamically change CSS variables. CSS variables (also known as custom properties) are defined in stylesheets or inline styles using the -- prefix and can be accessed and modified with JavaScript through the style property or the setProperty method of the style object.
 
 Example of Changing CSS Variables with JavaScript
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -73,12 +74,12 @@ Dynamic Layouts: Adjust spacings, sizes, or colors based on user interaction.
 Animations: Update variables during animations for smooth transitions.
 Let me know if you'd like an example for a specific use case!
 
-----
+______________________________________________________________________
 
 Here's a solution using JavaScript to filter an HTML table so only certain rows and columns are displayed, based on categories selected via a dropdown menu.
 
 Steps:
-Create an HTML table with data-* attributes for rows and columns.
+Create an HTML table with data-\* attributes for rows and columns.
 Add two multi-select dropdown menus: one for rows and one for columns.
 Use JavaScript to update the table's visibility based on the selected categories.
 Example Code:
@@ -86,7 +87,9 @@ HTML:
 html
 Copy
 Edit
+
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -110,21 +113,21 @@ Edit
 <body>
   <h1>Filter Table by Categories</h1>
 
-  <label for="rowFilter">Select Row Categories:</label>
-  <select id="rowFilter" multiple>
+<label for="rowFilter">Select Row Categories:</label>
+<select id="rowFilter" multiple>
     <option value="A">A</option>
     <option value="B">B</option>
     <option value="C">C</option>
-  </select>
+</select>
 
-  <label for="columnFilter">Select Column Categories:</label>
-  <select id="columnFilter" multiple>
+<label for="columnFilter">Select Column Categories:</label>
+<select id="columnFilter" multiple>
     <option value="D">D</option>
     <option value="E">E</option>
     <option value="F">F</option>
-  </select>
+</select>
 
-  <table id="categoryTable">
+<table id="categoryTable">
     <thead>
       <tr>
         <th>Row/Col</th>
@@ -155,7 +158,7 @@ Edit
     </tbody>
   </table>
 
-  <script>
+<script>
     const rowFilter = document.getElementById("rowFilter");
     const columnFilter = document.getElementById("columnFilter");
     const table = document.getElementById("categoryTable");
@@ -195,6 +198,7 @@ Edit
     // Initialize filter
     filterTable();
   </script>
+
 </body>
 </html>
 Explanation:

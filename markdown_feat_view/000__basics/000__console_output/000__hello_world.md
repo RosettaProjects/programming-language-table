@@ -2,43 +2,68 @@
 
 ## Python
 
-> Note
+Note
 
-##### Full:
+> Snippet:
 
 ```py
 print("Hello, world!")
 ```
 
-##### Output:
+> Output:
 
 ```txt
 ❯ Hello, world!
+
+## Haskell
+
+> Snippet:
+
+```hs
+
+main :: IO ()
+main = putStrLn "Hello, world!"
+```
+
+> Full:
+
+```hs
+main :: IO ()
+main = putStrLn "Hello, world!"
+```
+
+> Output:
+
+```txt
+❯ Hello, world!
+```
 ```
 
 ## Rust
 
-##### Full:
+Note
+
+> Snippet:
 
 ```rs
-...
+println!("Hello, world!");
 ```
 
-##### Output:
+> Output:
 
 ```txt
 ❯ Hello, world!
 ```
 
-## Haskell
+> Full:
 
-##### Full:
-
-```hs
-...
+```rs
+fn main() {
+    println!("Hello, world!");
+}
 ```
 
-##### Output:
+> Output:
 
 ```txt
 ❯ Hello, world!

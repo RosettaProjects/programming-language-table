@@ -2,42 +2,7 @@ import re
 from typing import Self
 
 from .constants import ABBREV2LANG, LANGUAGE_ABBREVS
-from .utils import RowID
-
-# ROW_INFO_REGEX: re.Pattern = re.compile(r"^(?P<main>\d+)\.?(?P<sub>\d*)
-#         \.?(?P<subsub>\d*) +(?P<text>.+)$")
-# section_regex_raw: str = (
-#     r" *\n*((?P<note>.+?)\n\n)?"
-#     r"(> Snippet:\n\n```(?P<lang>[a-z]+)\n(?P<snippet>.+?)\n```\n\n)?"
-#     r"(> Output:\n\n```txt\n(?P<snippet_output>.+?)\n```\n\n)?"
-#     r"(> Full:\n\n```(?P<lang2>[a-z]+)\n(?P<full>.+?)\n```\n\n)"
-#     r"(> Output:\n\n```txt\n(?P<full_output>.+?)\n```)?"
-# )
-# SECTION_BODY_REGEX: re.Pattern = re.compile(r"^\n*" + section_regex_raw, re.DOTALL)
-# SECTION_FULL_REGEX: re.Pattern = re.compile(
-#     r"^(?P<octothorpes>#+) +"
-#     r"(?P<number>[\d\.]+) +"
-#     r"(?P<title>[^\n]+)\n+"
-#     f"{section_regex_raw}",
-#     re.DOTALL
-# )
-# SECTION_TITLE_REGEX = re.compile(
-#     r"\n(?P<octothorpes>#+) +"
-#     r"(?P<number>[\d\.]+) +"
-#     r"(?P<title>[^\n]+)\n+"
-# )
-SECTION_REGEX: re.Pattern = re.compile(
-    r"\n(?P<octothorpes>#+) +"
-    r"((?P<id0>\d+)\.)((?P<id1>\d+)\.)?((?P<id2>\d+)\.)? +"
-    r"(?P<title>[^\n]+)"
-    r"\n(\n*(?P<note>[^\n#].+?)\n\n)?"
-    r"(\n*> Snippet:\n\n```(?P<lang>[a-z]+)\n(?P<snippet>.*?)\n```\n\n)?"
-    r"(\n*> Output:\n\n```txt\n(?P<snippet_output>.*?)\n```\n\n)?"
-    r"(\n*> Full:\n\n```(?P<lang_full>[a-z]+)\n(?P<full_code>.*?)\n```\n\n)?"
-    r"(\n*> Output:\n\n```txt\n(?P<full_output>.*?)\n```)?",
-    re.DOTALL,
-)
-
+from .row_id import RowID
 
 """
 Cases:
@@ -66,7 +31,7 @@ class Illustration:
     def __init__(
         self,
         *,
-        row: RowID,
+        row: RowID | None,
         note: str,
         snippet: str,
         full: str | None,
@@ -84,6 +49,8 @@ class Illustration:
 
     @property
     def name(self) -> str:
+        if not self.row:
+            return "<NO_NAME>"
         return self.row.text
 
     def __str__(self):
@@ -93,15 +60,53 @@ class Illustration:
             f"\n\nSnippet:"
             f"\n\n```\n{LANGUAGE_ABBREVS[self.language]}\n```{self.snippet}\n```"
             f"\n\nOutput:"
-            f"\n\n```\ntxt\n```{self.output}\n```"
+            f"\n\n```\ntxt\n```{self.snippet_output}\n```"
             f"\n\nFull"
             f"\n\n```\n{LANGUAGE_ABBREVS[self.language]}\n```{self.snippet}\n```"
             f"\n\nOutput:"
-            f"\n\n```\ntxt\n```{self.output}\n```"
+            f"\n\n```\ntxt\n```{self.full_output}\n```"
         )
 
     def __repr__(self):
         return str(self).replace("\n", "\n    ")
+    
+    @classmethod
+    def from_dict_rowless(
+        cls,
+        note: str | None,
+        lang: str | None,
+        snippet: str | None,
+        snippet_output: str | None,
+        lang_full: str | None,
+        full_code: str | None,
+        full_output: str | None,
+        **kwargs,
+    ) -> Self:
+
+        snippet = snippet or full_code
+        full_code = full_code or snippet
+        snippet_output = snippet_output or full_output
+        full_output = full_output or snippet_output
+
+        cls._check_validity(
+            note,
+            snippet,
+            snippet_output,
+            full_code,
+            full_output,
+            lang,
+            lang_full,
+        )
+
+        return cls(
+            row=None,
+            note=(note or ""),
+            snippet=(snippet or ""),
+            snippet_output=(snippet_output or ""),
+            full=(full_code or ""),
+            full_output=(full_output or ""),
+            language=ABBREV2LANG[lang] if lang else "unknown",
+        )
 
     @classmethod
     def from_dict(
@@ -126,14 +131,53 @@ class Illustration:
             text=title,
             octothorpes=octothorpes,
         )
+        snippet = snippet or full_code
+        full_code = full_code or snippet
+        snippet_output = snippet_output or full_output
+        full_output = full_output or snippet_output
+
+        cls._check_validity(
+            note,
+            snippet,
+            snippet_output,
+            full_code,
+            full_output,
+            lang,
+            lang_full,
+        )
+
+        return cls(
+            row=row_id,
+            note=(note or ""),
+            snippet=(snippet or ""),
+            snippet_output=(snippet_output or ""),
+            full=(full_code or ""),
+            full_output=(full_output or ""),
+            language=ABBREV2LANG[lang] if lang else "unknown",
+        )
+    
+    @classmethod
+    def _check_validity(
+        cls,
+        note: str | None,
+        snippet: str | None,
+        snippet_output: str | None,
+        full_code: str | None,
+        full_output: str | None,
+        lang: str | None,
+        lang_full: str | None,
+    ) -> None:
         combination = (
             note is not None,
             snippet is not None,
             snippet_output is not None,
             full_code is not None,
-            full_output is not None,
+            bool(full_output),
         )
         valid_combinations = {
+            (True, True, True, True, True),
+            (True, True, True, True, False),
+            (True, True, False, True, True),
             (False, False, False, False, False),  # no content
             (False, True, False, False, False),  # only snippet
             (False, True, True, False, False),  # snippet with output
@@ -149,48 +193,8 @@ class Illustration:
         }
         if combination not in valid_combinations:
             raise ValueError(
-                f"Invalid combination:{note=}{snippet=}{snippet_output=}{full_code=}{full_output=}"
+                f"Invalid combination: {combination}\n  {note=}\n  {snippet=}\n  {snippet_output=}\n  {full_code=}\n  {full_output=}"
             )
-        if lang != lang_full:
+        
+        if lang != (lang_full or lang):
             raise ValueError(f"Language mismatch: {lang=}, {lang_full=}")
-
-        return cls(
-            row=row_id,
-            note=(note or ""),
-            snippet=(snippet or ""),
-            snippet_output=(snippet_output or ""),
-            full=(full_code or ""),
-            full_output=(full_output or ""),
-            language=ABBREV2LANG[lang] if lang else "unknown",
-        )
-
-
-def split_file(raw_md: str) -> list[str]:
-    """
-    Splits the raw markdown file into sections based on the octothorpes.
-    """
-    return re.split(r"\n(?=#)", raw_md.strip())
-
-
-def parse_file(raw_md_block: str) -> list[RowID | Illustration]:
-    """
-    Parses the raw markdown file and returns a list of Illustration objects.
-    """
-    sections: list[RowID | Illustration] = []
-    result = re.search(SECTION_REGEX, "\n" + raw_md_block)
-    if not result:
-        raise ValueError(f"Invalid block:\n{raw_md_block}")
-    groups = result.groupdict()
-    if not groups["snippet"]:
-        row = RowID(
-            main=int(groups["id0"]),
-            sub=int(groups["id1"]) if groups["id1"] else None,
-            subsub=int(groups["id2"]) if groups["id2"] else None,
-            text=groups["title"],
-            octothorpes=groups["octothorpes"],
-        )
-        sections.append(row)
-    else:
-        illustration = Illustration.from_dict(**groups)
-    sections.append(illustration)
-    return sections

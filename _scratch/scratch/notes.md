@@ -2,7 +2,6 @@
 
 [Table column selection](https://stackoverflow.com/questions/16802510/display-only-certain-columns-in-a-table)
 
-
 [Hiding columns](https://stackoverflow.com/questions/7754013/hiding-columns-in-table-javascript?rq=3)
 
 [JQuery](https://stackoverflow.com/questions/17816603/displaying-the-data-in-a-table-using-jquery?rq=3)
@@ -18,6 +17,5 @@ http://loudev.com/
 https://www.jqueryscript.net/blog/best-multiple-select.html
 
 https://tom-select.js.org/
-
 
 https://stackoverflow.com/questions/56968976/creating-multiselect-checkbox

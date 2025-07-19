@@ -97,14 +97,14 @@
 
     editableOverlay = workspace.mkEditablePyprojectOverlay {
         root = "$REPO_ROOT";
-        members = ["plt_generator"];
+        members = ["plt-generator"];
     };
 
     editablePythonSet = pythonSet.overrideScope editableOverlay;
 
     virtualenvPure = editablePythonSet.mkVirtualEnv
     "plt_generator-dev-env"
-    {plt_generator = ["test" "dev"];};
+    {plt-generator = ["test" "dev"];};
 
     defaultPackage = pythonSet.mkVirtualEnv
     "plt_generator-pkg-env"

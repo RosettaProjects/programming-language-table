@@ -1,8 +1,5 @@
-
-
-
-class TestMasterTable
-    def test_rows(self): ...(self): ...
+class TestMasterTable:
+    def test_rows(self): ...
 
     def test_languages(self): ...
 

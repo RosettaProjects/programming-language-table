@@ -3,10 +3,11 @@ from itertools import chain
 from pathlib import Path
 from typing import Self
 
-from plt_generator.utils.recency import time_modified_readable
-
+from ..utils.recency import time_modified_readable
 from ..utils.diff import NestedDict
+from .row_id import RowID
 from .illustration import Illustration
+from .md_parsing import parse_lang_file
 from .utils import Language, Row
 
 # class FeatureSubsection:
@@ -39,17 +40,19 @@ from .utils import Language, Row
 
 
 class SingleLanguage:
-    def __init__(self, language: str, raw_md: str, parsed: dict, recency: str):
+    def __init__(
+        self, language: str, raw_md: str, parsed: dict[tuple, RowID | Illustration], recency: str
+    ):
         self.language: str = language
         self.raw = raw_md
         self.parsed = parsed
         self.recency = recency
 
     def __repr__(self):
-        return f"rows: {', '.join(self.rows)}; last modified {self.recency}"
+        return f"rows: {', '.join(map(repr, self.rows))}; last modified {self.recency}"
 
-    def __getitem__(self, name: str) -> Illustration:
-        return self.parsed.get(name, "NOT_FOUND")
+    # def __getitem__(self, name: str) -> Illustration:
+    #     return self.parsed.get(name, "NOT_FOUND")
 
     @property
     def dictionary(self) -> NestedDict:
@@ -57,52 +60,53 @@ class SingleLanguage:
         return nd
 
     @property
-    def rows(self) -> list[tuple[str, ...]]:
+    def rows(self) -> list[RowID]:
         # print(list(self.parsed.values()))[0]
-        return [ill.row for ill in self.parsed.values() if ill.level == 3]
+        return [illu.row for illu in self.parsed.values() if isinstance(illu, Illustration)]
 
     @classmethod
-    def from_markdown(cls, raw_md: str) -> Self:
-        ...  # TODO
+    def from_markdown(cls, md: Path) -> Self:
+        raw_md = md.read_text()
         s = re.search(r"(?<=# )[^\n]+", raw_md)
         if not s:
             raise ValueError("Invalid markdown format: missing language name")
+        title = s.group(0)
         return cls(
-            language=s.group(0),
+            language=title,
             raw_md=raw_md,
-            parsed=cls.parse_md(raw_md),
-            recency=time_modified_readable(Path("dummy_path")),  # Placeholder
+            parsed=parse_lang_file(raw_md),
+            recency=time_modified_readable(md),  # Placeholder
         )
 
-    @classmethod
-    def from_file(cls, p: Path) -> Self:
-        recency = time_modified_readable(p)
-        with open(p, encoding="utf-8") as f:
-            raw_page = f.read()
-            lang_name = p.name.replace(".md", "")
+    # @classmethod
+    # def from_file(cls, p: Path) -> Self:
+    #     recency = time_modified_readable(p)
+    #     with open(p, encoding="utf-8") as f:
+    #         raw_page = f.read()
+    #         lang_name = p.name.replace(".md", "")
 
-        sections = cls.parse_md(raw_page)
+    #     sections = cls.parse_md(raw_page)
 
-        return cls(lang_name, raw_page, sections, recency)
+    #     return cls(lang_name, raw_page, sections, recency)
 
-    @staticmethod
-    def parse_md(raw_md: str) -> dict[str, Illustration]:
-        # regex = re.compile(r"(?P<section_type>\n####) (?P<number>[\d\.]+)
-        #     (?P<title>[^\n]+)\n+(?P<main>[^\n]+)", re.DOTALL)
-        # sections = re.findall(regex, raw_md)
-        # s = re.search(r"(?<=# )[^\n]+", raw_md)
-        # if not s:
-        #     raise ValueError("Invalid markdown format: missing language name")
-        # language = s.group(0)
-        # sections = list(
-        #     map(
-        #         lambda md: Illustration.from_langview(md, language=language),
-        #         re.split(r"\n#(?=#{1,3} )", raw_md)[1:],
-        #     )
-        # )
-        # print(sections)
-        # return {illustr.row: illustr for illustr in sections}
-        return {}
+    # @staticmethod
+    # def parse_md(raw_md: str) -> dict[str, Illustration]:
+    #     # regex = re.compile(r"(?P<section_type>\n####) (?P<number>[\d\.]+)
+    #     #     (?P<title>[^\n]+)\n+(?P<main>[^\n]+)", re.DOTALL)
+    #     # sections = re.findall(regex, raw_md)
+    #     # s = re.search(r"(?<=# )[^\n]+", raw_md)
+    #     # if not s:
+    #     #     raise ValueError("Invalid markdown format: missing language name")
+    #     # language = s.group(0)
+    #     # sections = list(
+    #     #     map(
+    #     #         lambda md: Illustration.from_langview(md, language=language),
+    #     #         re.split(r"\n#(?=#{1,3} )", raw_md)[1:],
+    #     #     )
+    #     # )
+    #     # print(sections)
+    #     # return {illustr.row: illustr for illustr in sections}
+    #     return {}
 
 
 class LangView:
@@ -142,7 +146,7 @@ class LangView:
     def from_directory(cls, langview_root: Path) -> "LangView":
         lang_dict = {}
         for md_path in langview_root.iterdir():
-            single_feature = SingleLanguage.from_file(md_path)
+            single_feature = SingleLanguage.from_markdown(md_path)
             lang_dict.update({single_feature.language: single_feature})
         return cls(lang_dict)
 

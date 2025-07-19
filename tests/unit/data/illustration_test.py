@@ -1,5 +1,3 @@
-
-
 class TestIllustration:
     def test_name(self): ...
 
@@ -8,7 +6,6 @@ class TestIllustration:
     def test_dunder_repr(self): ...
 
     def test_from_dict(self): ...
-
 
 
 def test_split_file(): ...

@@ -3,10 +3,12 @@ from itertools import chain
 from pathlib import Path
 from typing import Self
 
-from plt_generator.utils.recency import time_modified_readable
+from ..utils.recency import time_modified_readable
+from .md_parsing import parse_feat_file, split_file
 
 from .illustration import Illustration
-from .utils import Language, Row, RowID, len_non_none, standardize
+from .row_id import RowID
+from .utils import Language, Row, len_non_none, standardize
 
 FeatWalk = dict[tuple[int, int | None, int | None], tuple[Row, Path, str, str]]
 
@@ -19,8 +21,7 @@ class SingleFeature:
         row: Row,
         name: str,
         path: Path,
-        level: int,
-        content: dict[Language, Illustration] = {},
+        content: dict[Language, Illustration],
         recency: str = "",
     ):
         self.index = index
@@ -36,6 +37,7 @@ class SingleFeature:
 
     def __repr__(self) -> str:
         ind = ".".join(map(str, filter(lambda x: x is not None, self.index))) + "."
+        # return str(self._lang_dict)
         return (
             "SingleFeature(\n"
             f"        {ind:<10} {self.row:<15} {self.name:<15} (from {self.path})\n"
@@ -49,40 +51,22 @@ class SingleFeature:
     @classmethod
     def from_file(
         cls,
-        path: Path,
+        file_path: Path,
         *,
         index: tuple[int, int | None, int | None],
         row: Row,
-        level: int,
     ) -> Self:
-        content: dict[Language, Illustration] = {}
-        raw = path.read_text()
-        name = raw.split("\n")[0].replace("# ", "")
-        for section in raw.split("\n## ")[1:]:
-            language, illustration_raw = section.split("\n", maxsplit=1)
-            # print(section)
-            # TODO
-            # content.update(
-            #     {
-            #         language.lower(): Illustration(
-            #             illustration_raw,
-            #             row=standardize(name),
-            #             name=name,
-            #             language=language,
-            #             level=level,
-            #         )
-            #     }
-            # )
 
-        recency = time_modified_readable(path)
+        recency = time_modified_readable(file_path)
+        lang_dict = parse_feat_file(file_path.read_text())
+        print(lang_dict)
 
         return cls(
             index=index,
             row=row,
-            name=name,
-            level=level,
-            path=path,
-            content=content,
+            name=row,
+            path=file_path,
+            content=lang_dict,
             recency=recency,
         )
 
@@ -117,7 +101,7 @@ class FeatView:
 
     def __repr__(self) -> str:
         return "FeatView:\n    " + "\n    ".join(
-            (f"{k!r:<45} :: {v!r}" for k, v in self._row_dict.items())
+            (f"{k!r:<45}\n    ↳ {v!r}" for k, v in self._row_dict.items())
         )
 
     def __getitem__(self, row_id: RowID) -> SingleFeature:
@@ -127,7 +111,7 @@ class FeatView:
     def from_directory(cls, featview_root: Path) -> "FeatView":
         _row_dict: dict[RowID, SingleFeature] = {}
         walk = cls.walk_directory(featview_root).items()
-        print("\n".join(map(str, walk)))
+        # print("\n".join(map(str, walk)))
         for index, (_row, path, name, typ) in walk:
             row_id = RowID(
                 main=index[0],
@@ -137,23 +121,33 @@ class FeatView:
                 octothorpes="#" * (len_non_none(index) + 1),
             )
             if typ == "md":
-                single_feature = SingleFeature(
+                single_feature = SingleFeature.from_file(
+                    path,
                     index=index,
-                    row=_row,
-                    name=re.sub("^#+ ", "", path.read_text().split("\n")[0]),
-                    path=path,
-                    level=len(index),
+                    row=_row
                 )
-            else:
-                single_feature = SingleFeature(
-                    index=index,
-                    row=_row,
-                    name=name,
-                    path=path,
-                    level=len(index),
-                )
+                
+                # SingleFeature(
+                #     index=index,
+                #     row=_row,
+                #     name=re.sub("^#+ ", "", path.read_text().split("\n")[0]),
+                #     path=path,
+                #     level=len(index),
+                # )
+            # else:
+            #     single_feature = SingleFeature(
+            #         index=index,
+            #         row=_row,
+            #         name=name,
+            #         path=path,
+            #         level=len(index),
+            #     )
 
-            _row_dict.update({row_id: single_feature})
+                _row_dict.update({row_id: single_feature})
+        for k, v in _row_dict.items():
+            print(k)
+            print(type(v), v)
+            print()
         return cls(_row_dict)
 
     def update_from_diff(self, lv, diff) -> Self:
